@@ -12,14 +12,14 @@ export function BottomSectionA() {
                         <h1 className='text-slate-950 text-[26px] font-bold'>Archon S3</h1>
                         <p className='text-slate-200 text-[24px] font-light'>Short distance, Extremly fast speed</p>
                     </div>
-                    <img src="/icons8-menu-100.png" className="absolute bottom-4 right-4 size-8"></img>
+                    <img src="/icons8-menu-100.png" className="absolute bottom-4 right-4 size-8" loading="lazy"></img>
                     </div>
                     <div className="relative w-[33%] h-[92%] bg-[url('/mitch-nielsen-pWtNPCpvVA8-unsplash.jpg'))] bg-cover bg-center flex items-start justify-center">
                     <div className="size-fit relative top-[5%] flex flex-col items-center">
                         <h3 className="text-slate-900/90 text-[18px] font-medium">Archon Series B</h3>
                         <h1 className='text-slate-950 text-[26px] font-bold'>Archon S1</h1>
                     </div>
-                    <img src="/icons8-menu-100.png" className="absolute bottom-4 right-4 size-8"></img>
+                    <img src="/icons8-menu-100.png" className="absolute bottom-4 right-4 size-8" loading="lazy"></img>
                     </div>
                     <div className="relative w-[33%] h-[92%] bg-[url('/yitzhak-rodriguez-mVI7sD0nTlA-unsplash.jpg'))] bg-cover bg-center flex items-start justify-center">
                     <div className="size-fit relative top-[5%] flex flex-col items-center">
@@ -27,7 +27,7 @@ export function BottomSectionA() {
                         <h1 className='text-slate-950 text-[26px] font-bold'>Archon S2</h1>
                         <p className='text-slate-200 text-[24px] font-light'>Ergonomic, safe and comfortable</p>
                     </div>
-                     <img src="/icons8-menu-100.png" className="absolute bottom-4 right-4 size-8"></img>
+                     <img src="/icons8-menu-100.png" className="absolute bottom-4 right-4 size-8" loading="lazy"></img>
                     </div>
                 </div>
             </div>

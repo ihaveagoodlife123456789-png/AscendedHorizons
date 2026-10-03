@@ -7,11 +7,11 @@ export function WholeSectionD() {
 
                     </div>
                     <div className="relative right-14 flex justify-center items-center gap-6">
-                        <img src="/icons8-discord-50.png" className="w-10 h-10"/>
-                        <img src="/icons8-facebook-50.png" className="w-10 h-10"/>
-                        <img src="/icons8-in-100.png" className="w-10 h-10"/>
-                        <img src="/icons8-x-100.png" className="w-10 h-10"/>
-                        <img src="/icons8-youtube-50.png" className="w-10 h-10"/>
+                        <img src="/icons8-discord-50.png" className="w-10 h-10" loading="lazy"/>
+                        <img src="/icons8-facebook-50.png" className="w-10 h-10" loading="lazy"/>
+                        <img src="/icons8-in-100.png" className="w-10 h-10" loading="lazy"/>
+                        <img src="/icons8-x-100.png" className="w-10 h-10" loading="lazy"/>
+                        <img src="/icons8-youtube-50.png" className="w-10 h-10" loading="lazy"/>
                     </div>
                 </div>
                 <div className="relative w-full h-[20%] flex justify-between items-center">
@@ -21,7 +21,7 @@ export function WholeSectionD() {
                     <div className="relative right-14 text-[26px]">info@ascendedhorizons.com</div>
                     <div className="absolute bottom-0 w-full h-[2px] bg-white"></div>
                 </div>
-                <img src="/icons8-wreath-64.png" className="w-16 h-16"/>
+                <img src="/icons8-wreath-64.png" className="w-16 h-16" loading="lazy"/>
                 <div className="w-full flex justify-between">
                     <h2 className="relative left-14">2000 Road Mountains Behind, Blue</h2>
                     <h2>© AscendedHorizons 2026, All rights reserved.</h2>

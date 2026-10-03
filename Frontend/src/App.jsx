@@ -2,7 +2,7 @@ import { Home } from './sections/Home'
 import { SectionAB } from './sections/SectionAB'
 import { SectionCD } from './sections/SectionCD'
 
-import { Login } from './sections/Login'
+import { Register } from './sections/Register'
 
 export function Lobby() {
   return (
@@ -15,5 +15,5 @@ export function Lobby() {
 }
 
 export function Registration() {
-  return <Login />
+  return <Register />
 }

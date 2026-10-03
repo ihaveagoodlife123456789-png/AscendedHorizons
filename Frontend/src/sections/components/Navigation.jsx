@@ -18,7 +18,7 @@ export function Navigation() {
               <div className="font-semibold">Ascended Horizons</div>
               <div className="relative left-8 size-fit flex items-center gap-2">
                 <motion.div whileHover={{ color: '	hsl(226, 79%, 55%)' }} onMouseEnter={() => setProducts(true)} onMouseLeave={() => setProducts(false)}>Products</motion.div>
-                <img src="\icons8-menu-50.png" className="w-[16px] h-[16px]" onMouseEnter={() => setProducts(true)} onMouseLeave={() => setProducts(false)}/>
+                <img src="\icons8-menu-50.png" className="w-[16px] h-[16px]" onMouseEnter={() => setProducts(true)} onMouseLeave={() => setProducts(false)} loading="lazy"/>
                 <motion.div 
                 variants={variants} 
                 animate={ products ? 'onProducts' : null} 
