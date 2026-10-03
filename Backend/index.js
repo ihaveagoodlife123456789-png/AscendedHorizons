@@ -1,16 +1,7 @@
-import express from "express";
+import { Pool } from 'pg';
 
-import session from "express-session";
-import pgSession from "connect-pg-simple";
-
-const app = express();
-app.use(express.json());
-
-app.use(session({
-    
-}))
-
-const PORT = process.env.PORT || 10000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production'
+    ? { rejectUnauthorized: false } : false
+})
