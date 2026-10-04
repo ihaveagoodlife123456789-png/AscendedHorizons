@@ -58,13 +58,17 @@ passport.deserializeUser(async (id, done) => {
 })
 
 passport.use(new LocalStrategy(
+  {
+    usernameField: 'email',
+    passwordField: 'password'
+  },
   async function(email, password, done) {
     try {
       const searchUserQuery = `SELECT * FROM users WHERE email = $1`;
       const { rows } = await pool.query(searchUserQuery, [email.toLowerCase()]);
       const user = rows[0];
       if(!user) {
-        return done(null, false, { message: 'Incorrect username.'});
+        return done(null, false, { message: 'Incorrect email.'});
       }
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if(!isPasswordValid) {

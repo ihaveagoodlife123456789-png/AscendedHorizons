@@ -67,7 +67,7 @@ export function Register() {
                 </div>
                 <form onSubmit={handleSubmit(RegisterSubmit)}>
                     <fieldset disabled={isSubmitSuccessful} className="flex flex-col justify-center items-center gap-3">
-                    <div className="flex">
+                    <div className="flex gap-2">
                     <div className="flex flex-col items-center">
                     <h2 className="text-[18px] font-medium">First Name</h2>
                     <input {...register('firstName')} disabled={isSubmitting} type="text" placeholder='First Name'></input>
