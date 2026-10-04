@@ -30,7 +30,8 @@ export function Login() {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(data),
+                    credentials: 'include'
                 })
                 const result = await response.json()
                 if(!response.ok) {
@@ -55,10 +56,10 @@ export function Login() {
                         <fieldset disabled={isSubmitSuccessful} className="flex flex-col justify-center items-center gap-3">
                             <h2 className="text-[18px] font-medium">Email</h2>
                             <input {...register('email')} disabled={isSubmitting} type="text" placeholder='Email'></input>
-                            {errors.firstName ? <h4 className="text-red-700">{errors.firstName.message}</h4> : null}
+                            {errors.email ? <h4 className="text-red-700">{errors.email.message}</h4> : null}
                             <h2 className="text-[18px] font-medium">Password</h2>
                             <input {...register('password')} disabled={isSubmitting} type="password" placeholder='Password'></input>
-                            {errors.firstName ? <h4 className="text-red-700">{errors.firstName.message}</h4> : null}
+                            {errors.password ? <h4 className="text-red-700">{errors.password.message}</h4> : null}
                             <button type="submit" disabled={isSubmitting || isSubmitSuccessful} className="border-green-600 border-2 hover:bg-green-600 px-1">{isSubmitSuccessful ? 'Logged In!' : isSubmitting ? 'Submitting...' : 'Login'}</button>
                         </fieldset>
                     </form>

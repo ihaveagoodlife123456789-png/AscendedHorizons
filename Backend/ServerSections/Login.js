@@ -10,7 +10,7 @@ loginRouter.post('/', (req, res, next) => {
         }
         if (!user) {
             const message = information?.message || "Invalid username or password."
-            return res.status(401).json({ information: message });
+            return res.status(401).json({ message });
         }
         req.logIn(user, (err) => {
             if (err) {
