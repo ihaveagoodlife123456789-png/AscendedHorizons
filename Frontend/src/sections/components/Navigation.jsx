@@ -49,7 +49,7 @@ export function Navigation() {
                 <motion.div onMouseEnter={() => setCart(true)} onMouseLeave={() => setTimeout(() => setCart(false), 400 )} whileHover={{ color: 'hsl(305, 50%, 53%)' }} className='font-medium'>Cart</motion.div>
                 <motion.img variants={variants} animate={ cart ? 'onCart' : null } transition={{ duration: .4 }} src="/icons8-cart-90.png" className="w-[30px] h-[30px]"></motion.img>
               </div>
-              <motion.div whileHover={{ backgroundColor: '#abb1c0', color: '#030712'}} className="font-bold text-[22px] border-1 border-blue-300 rounded-[8px] py-[1px] px-2"><Link to="/register">Register</Link></motion.div>
+              <motion.div whileHover={{ backgroundColor: '#abb1c0', color: '#030712'}} className="font-bold text-[22px] border-1 border-blue-300 rounded-[8px] py-[1px] px-2"><Link to="/access">Login</Link></motion.div>
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { Lobby } from './App.jsx';
 import { Registration } from './App.jsx';
+import { Access } from './App.jsx';
 
 const AppRouter = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const AppRouter = createBrowserRouter([
   {
     path: '/register',
     element: <Registration />
+  },
+  {
+    path: '/access',
+    element: <Access />
   },
 ])
 

@@ -46,7 +46,7 @@ export function Register() {
                 throw new Error(result.message || 'Something went wrong')
             }
             console.log(result)
-            toast.success('Your message has been submitted!')
+            toast.success("You've successfully created your Account!")
         } catch (err) {
             setError("root", {
                 message: err.message
@@ -83,13 +83,16 @@ export function Register() {
                     <input {...register('email')} disabled={isSubmitting} type="text" placeholder='Email'></input>
                     {errors.email ? <h4 className="text-red-700">{errors.email.message}</h4> : null}
                     <h2 className="text-[18px] font-medium">Password</h2>
-                    <input {...register('password')} disabled={isSubmitting} type="text" placeholder='Password'></input>
+                    <input {...register('password')} disabled={isSubmitting} type="password" placeholder='Password'></input>
                     {errors.password ? <h4 className="text-red-700">{errors.password.message}</h4> : null}
-                    <button className="border-green-700 border-2 font-bold bg-green-700 hover:bg-transparent rounded-[8px] px-1" type="submit" disabled={isSubmitting || isSubmitSuccessful}>{isSubmitSuccessful ? 'Submitted!' : isSubmitting ? 'Submitting...' : 'Submit'}</button>
+                    <button className="border-green-700 border-2 font-bold bg-green-700 hover:bg-transparent rounded-[8px] px-1" type="submit" disabled={isSubmitting || isSubmitSuccessful}>{isSubmitSuccessful ? 'Signed In!' : isSubmitting ? 'Submitting...' : 'Sign in'}</button>
                     </fieldset>
                 </form>
                 {errors.root ? <h4 className="text-red-700">{errors.root.message}</h4> : null}
-                {isSubmitSuccessful ? <h3 className="text-green-700 font-bold absolute bottom-7">You can go back home and login!</h3> : null}
+                {isSubmitSuccessful ? <h3 className="text-green-700 font-bold">You can go back home and login!</h3> : null}
+                {
+                    !isSubmitSuccessful ?
+                    <>
                 <div>
                     <h3 className="text-[15px] font-light">Must contain 1 lowercase letter</h3>
                     <h3 className="text-[15px] font-light">Must contain 1 uppercare letter</h3>
@@ -99,6 +102,10 @@ export function Register() {
                 <div>or</div>
                 <div className="w-full h-[2px] bg-slate-700/90"></div>
                 <button className="border-blue-400 bg-blue-400 border-[2px] hover:bg-transparent rounded-[8px] px-1 font-medium">Register with Google</button>
+                </>
+                :
+                null
+                }
                 <Link to="/" className="border-mist-700 bg-mist-400 border-[2px] hover:bg-transparent rounded-[8px] px-1 font-bold">Back</Link>
                 </div>
             </div>

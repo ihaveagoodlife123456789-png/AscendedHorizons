@@ -58,10 +58,10 @@ passport.deserializeUser(async (id, done) => {
 })
 
 passport.use(new LocalStrategy(
-  async function(username, password, done) {
+  async function(email, password, done) {
     try {
-      const searchUserQuery = `SELECT * FROM users WHERE username = $1`;
-      const { rows } = await pool.query(searchUserQuery, [username.toLowerCase()]);
+      const searchUserQuery = `SELECT * FROM users WHERE email = $1`;
+      const { rows } = await pool.query(searchUserQuery, [email.toLowerCase()]);
       const user = rows[0];
       if(!user) {
         return done(null, false, { message: 'Incorrect username.'});

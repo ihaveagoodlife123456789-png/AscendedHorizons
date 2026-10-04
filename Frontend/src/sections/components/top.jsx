@@ -1,5 +1,6 @@
-import { motion } from 'motion/react'
-import { Exposition } from './Expo.jsx'
+import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { Exposition } from './Expo.jsx';
 
 export function Top() {
     return (
@@ -25,7 +26,9 @@ export function Top() {
           initial={{ color: '#51a2ff '}} whileHover={{ color: 'white', duration: 2 }}
           className="text-blue-400"
           >
-            New here? Sign in
+            <Link to="/register">
+            New here? Register
+            </Link>
           </motion.div>
 
           <Exposition />
