@@ -11,6 +11,7 @@ import bcrypt from 'bcrypt';
 
 import { loginRouter } from "./ServerSections/Login.js";
 import { registerRouter } from "./ServerSections/Register.js"
+import { userRouter } from "./ServerSections/User.js"
 
 const app = express();
 app.use(express.json());
@@ -87,6 +88,7 @@ const __dirname = path.dirname(__filename);
 
 app.use('/api/login', loginRouter);
 app.use('/api/register', registerRouter)
+app.use('/api/user', userRouter)
 
 
 const distPath = path.join(__dirname, '../Frontend/dist');

@@ -1,15 +1,43 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Exposition } from './Expo.jsx';
+import { useEffect, useState } from 'react'
 
 export function Top() {
+  const [ user, setUser ] = useState(null)
+  useEffect(() => {
+    async function getUser() {
+      try {
+      const response = await fetch('/api/user', {
+        method: 'GET'
+      })
+      const result = await response.json()
+      if(!response) {
+        return
+      }
+      setUser(result)
+    } catch (err) {
+      setUser(null)
+    }
+    }
+    getUser()
+  }, [])
     return (
         <div className="relative left-[8%] top-[4%] text-white w-full h-[90%] flex flex-col items-start gap-10">
+          { user 
+          ? 
+          <h1 className="text-[62px] font-extrabold leading-[85px]">
+          Welcome Back<br />
+          <span className="text-green-800/80">{user.firstname}</span> <br />
+          Begins
+          </h1>
+          :
           <h1 className="text-[62px] font-extrabold leading-[85px]">
           Where every <br />
           <span className="text-green-800/80">Journey</span> <br />
           Begins
           </h1>
+          }
           <p className="font-light leading-[40px] text-[20px]">
             Amidst a moutain far far away <br />
             A concealed euphoric realm <br />
@@ -31,7 +59,7 @@ export function Top() {
             </Link>
           </motion.div>
 
-          <Exposition />
+         {/*<Exposition />*/}
 
         </div>
     )

@@ -1,16 +1,33 @@
 import { motion } from 'motion/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Link } from 'react-router-dom'
 
 export function Navigation() {
   const [ cart, setCart ] = useState(null)
   const [ products, setProducts ] = useState(null)
+  const [ user, setUser ] = useState(null)
   const variants = {
     onCart: { translateY: [0, -10, 0] },
     onProducts: { width: '160px', height: '220px', opacity: 1, translateX: -75}
   }
-
+  useEffect(() => {
+    async function getUser() {
+      try {
+      const response = await fetch('/api/user', {
+        method: 'GET'
+      })
+      const result = await response.json()
+      if(!response) {
+        return;
+      }
+      setUser(true)
+    } catch (err) {
+      setUser(null)
+    }
+    }
+    getUser()
+  }, [])
     return (
         <div className="text-white sticky top-0 z-10 w-full h-[10%] bg-black/90 flex items-center justify-center">
             <div className="absolute left-[2%] w-12 h-12 flex items-center gap-5">
@@ -41,6 +58,7 @@ export function Navigation() {
                   <motion.div whileHover={{ color: 'orange' }}>Foundation</motion.div>
                   <motion.div whileHover={{ color: 'orange' }}>Activities</motion.div>
                   <motion.div whileHover={{ color: 'orange' }}>Featured</motion.div>
+                  <motion.div whileHover={{ color: 'orange' }}><Link to="/dashboard">Dashboard</Link></motion.div>
                 </div>
 
             <div className="absolute size-fit flex right-[5%] gap-6">
@@ -49,7 +67,11 @@ export function Navigation() {
                 <motion.div onMouseEnter={() => setCart(true)} onMouseLeave={() => setTimeout(() => setCart(false), 400 )} whileHover={{ color: 'hsl(305, 50%, 53%)' }} className='font-medium'>Cart</motion.div>
                 <motion.img variants={variants} animate={ cart ? 'onCart' : null } transition={{ duration: .4 }} src="/icons8-cart-90.png" className="w-[30px] h-[30px]"></motion.img>
               </div>
+              { user ? 
+              <motion.div className="font-medium text-[16px] text-white hover:text-red-500 flex items-center">Logout</motion.div>
+              : 
               <motion.div whileHover={{ backgroundColor: '#abb1c0', color: '#030712'}} className="font-bold text-[22px] border-1 border-blue-300 rounded-[8px] py-[1px] px-2"><Link to="/access">Login</Link></motion.div>
+              }
             </div>
         </div>
     )

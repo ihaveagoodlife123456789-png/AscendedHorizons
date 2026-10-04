@@ -3,6 +3,7 @@ import { SectionAB } from './sections/SectionAB'
 import { SectionCD } from './sections/SectionCD'
 import { Register } from './sections/Register'
 import { Login } from './sections/Login'
+import { UserDashboard } from './sections/Dashboard';
 
 export function Lobby() {
   return (
@@ -21,5 +22,11 @@ export function Registration() {
 export function Access() {
   return (
     <Login />
+  )
+}
+
+export function Dashboard() {
+  return (
+    <UserDashboard />
   )
 }
