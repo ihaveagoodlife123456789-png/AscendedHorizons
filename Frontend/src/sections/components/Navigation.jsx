@@ -41,6 +41,7 @@ export function Navigation() {
       }
       toast.success(`${result.message}`, { style: { color: 'green' }})
       setUser(null)
+      window.location.reload()
     } catch (err) {
       toast.error(`${'Something went wrong.'}`, { style: { color: 'red' }})
     }
