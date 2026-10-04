@@ -48,7 +48,7 @@ export function Navigation() {
   }
     return (
         <div className="text-white sticky top-0 z-10 w-full h-[10%] bg-black/90 flex items-center justify-center">
-          <Toaster position='bottom-left' />
+          {user || !user? <Toaster position='bottom-left' /> : null}
             <div className="absolute left-[2%] w-12 h-12 flex items-center gap-5">
               <img src="/icons8-wreath-64.png"></img>
               <div className="font-semibold">Ascended Horizons</div>
