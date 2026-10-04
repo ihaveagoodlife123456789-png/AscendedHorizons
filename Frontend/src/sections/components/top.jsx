@@ -28,7 +28,7 @@ export function Top() {
           ? 
           <h1 className="text-[62px] font-extrabold leading-[85px]">
           Welcome Back<br />
-          <span className="text-green-800/80">{user.firstname}</span> <br />
+          <span className="text-green-800/80">{user.firstName + ' ' + user.lastName}</span> <br />
           Begins
           </h1>
           :
