@@ -68,11 +68,11 @@ passport.use(new LocalStrategy(
       const { rows } = await pool.query(searchUserQuery, [email.toLowerCase()]);
       const user = rows[0];
       if(!user) {
-        return done(null, false, { message: 'Incorrect email.'});
+        return done(null, false, { message: 'Invalid username or password.'});
       }
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if(!isPasswordValid) {
-        return done(null, false, { message: 'Incorrect password.'});
+        return done(null, false, { message: 'Invalid username or password.'});
       }
       return done(null, user);
     } catch (err) {
