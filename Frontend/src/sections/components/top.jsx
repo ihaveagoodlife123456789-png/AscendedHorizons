@@ -12,7 +12,7 @@ export function Top() {
         method: 'GET'
       })
       const result = await response.json()
-      if(!response) {
+      if(!response.ok) {
         return
       }
       setUser(result)

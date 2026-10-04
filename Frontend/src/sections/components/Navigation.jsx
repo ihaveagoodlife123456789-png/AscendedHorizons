@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { useState, useEffect } from 'react'
-
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { Toaster, toast } from 'sonner'
 
 export function Navigation() {
   const [ cart, setCart ] = useState(null)
@@ -28,8 +28,25 @@ export function Navigation() {
     }
     getUser()
   }, [])
+  async function logoutFunction() {
+    try {
+      const response = fetch('/api/logout', {
+        method: 'POST',
+        credentials: 'include'
+      })
+      const result = await response.json()
+      if(!response.ok) {
+        toast.error(`${result.message}`, { style: { color: 'red' }})
+        return
+      }
+      toast.success(`${result.message}`, { style: { color: 'green' }})
+    } catch (err) {
+      toast.error(`${'Something went wrong.'}`, { style: { color: 'red' }})
+    }
+  }
     return (
         <div className="text-white sticky top-0 z-10 w-full h-[10%] bg-black/90 flex items-center justify-center">
+          <Toaster position='bottom-left' />
             <div className="absolute left-[2%] w-12 h-12 flex items-center gap-5">
               <img src="/icons8-wreath-64.png"></img>
               <div className="font-semibold">Ascended Horizons</div>
@@ -68,7 +85,7 @@ export function Navigation() {
                 <motion.img variants={variants} animate={ cart ? 'onCart' : null } transition={{ duration: .4 }} src="/icons8-cart-90.png" className="w-[30px] h-[30px]"></motion.img>
               </div>
               { user ? 
-              <motion.div className="font-medium text-[16px] text-white hover:text-red-500 flex items-center">Logout</motion.div>
+              <motion.div className="font-medium text-[16px] text-white hover:text-red-500 flex items-center" onClick={() => logoutFunction()}>Logout</motion.div>
               : 
               <motion.div whileHover={{ backgroundColor: '#abb1c0', color: '#030712'}} className="font-bold text-[22px] border-1 border-blue-300 rounded-[8px] py-[1px] px-2"><Link to="/access">Login</Link></motion.div>
               }
