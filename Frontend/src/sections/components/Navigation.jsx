@@ -18,7 +18,7 @@ export function Navigation() {
         method: 'GET'
       })
       const result = await response.json()
-      if(!response) {
+      if(!response.ok) {
         return;
       }
       setUser(true)
@@ -30,7 +30,7 @@ export function Navigation() {
   }, [])
   async function logoutFunction() {
     try {
-      const response = fetch('/api/logout', {
+      const response = await fetch('/api/logout', {
         method: 'POST',
         credentials: 'include'
       })
