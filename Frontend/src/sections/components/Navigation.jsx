@@ -7,6 +7,7 @@ export function Navigation() {
   const [ cart, setCart ] = useState(null)
   const [ products, setProducts ] = useState(null)
   const [ user, setUser ] = useState(null)
+  const [ toaster, setToaster ] = useState(null)
   const variants = {
     onCart: { translateY: [0, -10, 0] },
     onProducts: { width: '160px', height: '220px', opacity: 1, translateX: -75}
@@ -35,6 +36,7 @@ export function Navigation() {
         credentials: 'include'
       })
       const result = await response.json()
+      setToaster(true)
       if(!response.ok) {
         toast.error(`${result.message}`, { style: { color: 'red' }})
         return
@@ -48,7 +50,7 @@ export function Navigation() {
   }
     return (
         <div className="text-white sticky top-0 z-10 w-full h-[10%] bg-black/90 flex items-center justify-center">
-          {user || !user? <Toaster position='bottom-left' /> : null}
+          { toaster ? <Toaster position='bottom-left' /> : null}
             <div className="absolute left-[2%] w-12 h-12 flex items-center gap-5">
               <img src="/icons8-wreath-64.png"></img>
               <div className="font-semibold">Ascended Horizons</div>
