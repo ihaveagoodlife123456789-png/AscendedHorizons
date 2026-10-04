@@ -23,7 +23,7 @@ const PostgresStore = pgSession(session)
 app.use(session({
   store: new PostgresStore({
     pool: pool,
-    tableName: 'UserSession',
+    tableName: 'usersession',
     createTableIfMissing: true
   }),
   secret: process.env.SESSION_SECRET ? process.env.SESSION_SECRET : 'default_secret',
