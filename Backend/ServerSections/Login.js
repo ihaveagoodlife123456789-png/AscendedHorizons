@@ -9,14 +9,15 @@ loginRouter.post('/', (req, res, next) => {
             return next(err);
         }
         if (!user) {
-            return res.status(401).json({ information: information.message });
+            const message = information?.message || "Invalid username or password."
+            return res.status(401).json({ information: message });
         }
         req.logIn(user, (err) => {
             if (err) {
                 return(next(err));
             }
             console.log(user)
-            return res.redirect('/')
+            return res.status(200).send({ message: 'Successfully logged in!', user: user})
         })
     })(req, res, next);
 })
