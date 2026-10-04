@@ -1,6 +1,6 @@
 import { Navigation } from './components/Navigation'
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { toast, Toaster } from 'sonner';
 import { z } from 'zod';
@@ -13,6 +13,7 @@ const loginSchema = z.object({
 })
 
 export function Login() {
+    const navigate = useNavigate()
     const {
             register,
             handleSubmit,
@@ -37,8 +38,7 @@ export function Login() {
                 if(!response.ok) {
                     throw new Error(result.message || 'Something went wrong')
                 }
-                console.log(result)
-
+                navigate('/')
             } catch (err) {
                 setError("root", {
                     message: err.message
@@ -60,7 +60,7 @@ export function Login() {
                             <h2 className="text-[18px] font-medium">Password</h2>
                             <input {...register('password')} disabled={isSubmitting} type="password" placeholder='Password'></input>
                             {errors.password ? <h4 className="text-red-700">{errors.password.message}</h4> : null}
-                            <button type="submit" disabled={isSubmitting || isSubmitSuccessful} className="border-green-600 border-2 hover:bg-green-600 px-1">{isSubmitSuccessful ? 'Logged In!' : isSubmitting ? 'Submitting...' : 'Login'}</button>
+                            <button type="submit" disabled={isSubmitting || isSubmitSuccessful} className="border-green-600 border-2 hover:bg-green-600 px-1">{isSubmitting ? 'Submitting...' : 'Login' }</button>
                         </fieldset>
                     </form>
                     <h2 className='hover:text-red-600 font-medium'>Forgot password?</h2>
