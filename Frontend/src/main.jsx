@@ -25,6 +25,10 @@ const AppRouter = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard />
   },
+  {
+    path: '/shop',
+    element: <Dashboard />
+  },
 ])
 
 createRoot(document.getElementById('root')).render(

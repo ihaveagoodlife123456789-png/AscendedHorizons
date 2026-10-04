@@ -4,6 +4,7 @@ import { SectionCD } from './sections/SectionCD'
 import { Register } from './sections/Register'
 import { Login } from './sections/Login'
 import { UserDashboard } from './sections/Dashboard';
+import { DroneShop } from './sections/shop'
 
 export function Lobby() {
   return (
@@ -28,5 +29,11 @@ export function Access() {
 export function Dashboard() {
   return (
     <UserDashboard />
+  )
+}
+
+export function Shop() {
+  return (
+    <DroneShop />
   )
 }

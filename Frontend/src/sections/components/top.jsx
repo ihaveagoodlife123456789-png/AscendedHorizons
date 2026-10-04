@@ -48,7 +48,9 @@ export function Top() {
           initial={{ scale: 1, color: 'white', backgroundColor: '#1d4ed8', borderColor: '#2563eb' }} whileHover={{ scale: 1.08, color: '#1d4ed8', backgroundColor: 'white', borderColor: 'none' }}
           className="border-2 font-bold bg-blue-700 border-blue-600 rounded-[8px] py-1 px-1 text-[22px] font-sans"
           >
+            <Link to="/shop">
             Shop Now
+            </Link>
           </motion.button>
           <motion.div
           initial={{ color: '#51a2ff '}} whileHover={{ color: 'white', duration: 2 }}
