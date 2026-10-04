@@ -5,7 +5,7 @@ export function DroneShop() {
         <div className="size-full">
             <Navigation />
             <div className="h-[90%] w-full flex justify-center items-center">
-                <h1 className="text-[42px] font-medium">Buy drones here!</h1>
+                <h1 className="text-[42px] font-medium text-black">Buy drones here!</h1>
             </div>
         </div>
     )
