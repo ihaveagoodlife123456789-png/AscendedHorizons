@@ -86,7 +86,7 @@ export function Navigation() {
             <div className="absolute size-fit flex right-[5%] gap-6">
               <motion.img src="\icons8-settings-96.png" whileHover={{ rotate: -60 }} className="relative top-1 right-2 w-8 h-8"></motion.img>
               <div className="flex gap-2 items-center">
-                <motion.div onMouseEnter={() => setCart(true)} onMouseLeave={() => setTimeout(() => setCart(false), 400 )} whileHover={{ color: 'hsl(305, 50%, 53%)' }} className='font-medium'>Cart</motion.div>
+                <motion.div onMouseEnter={() => setCart(true)} onMouseLeave={() => setTimeout(() => setCart(false), 400 )} whileHover={{ color: 'hsl(305, 50%, 53%)' }} className='font-medium'><Link to="/cart">Cart</Link></motion.div>
                 <motion.img variants={variants} animate={ cart ? 'onCart' : null } transition={{ duration: .4 }} src="/icons8-cart-90.png" className="w-[30px] h-[30px]"></motion.img>
               </div>
               { user ? 

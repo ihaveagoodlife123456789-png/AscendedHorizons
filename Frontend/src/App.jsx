@@ -5,6 +5,7 @@ import { Register } from './sections/Register'
 import { Login } from './sections/Login'
 import { UserDashboard } from './sections/Dashboard';
 import { DroneShop } from './sections/shop'
+import { ShopCart } from './sections/cart'
 
 export function Lobby() {
   return (
@@ -35,5 +36,11 @@ export function Dashboard() {
 export function Shop() {
   return (
     <DroneShop />
+  )
+}
+
+export function Cart() {
+  return (
+    <ShopCart />
   )
 }

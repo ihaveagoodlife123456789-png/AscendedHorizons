@@ -8,6 +8,7 @@ import { Registration } from './App.jsx';
 import { Access } from './App.jsx';
 import { Dashboard } from './App.jsx';
 import { Shop } from './App.jsx';
+import { Cart } from './App.jsx'
 
 const AppRouter = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const AppRouter = createBrowserRouter([
   {
     path: '/shop',
     element: <Shop />
+  },
+  {
+    path: '/cart',
+    element: <Cart />
   },
 ])
 

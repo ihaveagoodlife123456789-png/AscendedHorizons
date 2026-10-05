@@ -14,6 +14,7 @@ import { registerRouter } from "./ServerSections/Register.js"
 import { userRouter } from "./ServerSections/User.js"
 import { logoutRouter } from "./ServerSections/Logout.js"
 import { itemsRouter } from "./ServerSections/Items.js"
+import { cartRouter } from "./ServerSections/Cart.js"
 
 const app = express();
 app.use(express.json());
@@ -93,6 +94,7 @@ app.use('/api/register', registerRouter)
 app.use('/api/user', userRouter)
 app.use('/api/logout', logoutRouter)
 app.use('/api/items', itemsRouter)
+app.use('/api/cart', cartRouter)
 
 
 const distPath = path.join(__dirname, '../Frontend/dist');
