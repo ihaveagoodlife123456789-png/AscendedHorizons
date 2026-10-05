@@ -33,6 +33,7 @@ registerRouter.post('/', async (req, res) => {
         const query = `INSERT INTO users (password, email, firstname, lastname) VALUES ($1, $2, $3, $4) RETURNING *`;
         const values = [ hashedPassword, validEmail, firstName, lastName];
         const result = await pool.query(query, values);
+        console.log(result)
         const getUser = `SELECT cart FROM users WHERE email = 1$`
         const userEmail = [validEmail]
         const userCartId = await pool.query(getUser, userEmail)
