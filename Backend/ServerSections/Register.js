@@ -36,6 +36,7 @@ registerRouter.post('/', async (req, res) => {
         const getUser = `SELECT cart FROM users WHERE email = 1$`
         const userEmail = [validEmail]
         const userCartId = await pool.query(getUser, userEmail)
+        console.log(userCartId)
         const queryCart = `INSERT INTO carts (id, items) VALUES ($1, $2) RETURNING *`;
         const cartId = [userCartId, ARRAY[1]]
         const newCartId = await pool.query(queryCart, cartId)
