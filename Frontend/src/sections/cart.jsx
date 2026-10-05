@@ -36,7 +36,11 @@ export function ShopCart() {
                         </div>
                         <div className='w-full h-[85%] bg-green-500 flex justify-center items-center'>
                             { cart ? 
-                            <div className='text-[32px]'>{cart.message[0]}</div>
+                            cart.map((item) => {
+                                return (
+                                    <div className="text-[40px] text-blue-600">{item}</div>
+                                )
+                            })
                             :
                             <h1 className='text-[32px]'>Something went wrong</h1>
                             }
