@@ -10,7 +10,7 @@ export function Navigation() {
   const [ toaster, setToaster ] = useState(null)
   const variants = {
     onCart: { translateY: [0, -10, 0] },
-    onProducts: { width: '160px', height: '220px', opacity: 1},
+    onProducts: { width: '160px', height: '220px', opacity: 1, translateX: -75},
     scale: { scale: 1 }
   }
   useEffect(() => {
