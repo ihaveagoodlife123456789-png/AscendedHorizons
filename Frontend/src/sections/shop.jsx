@@ -50,10 +50,10 @@ export function DroneShop() {
             throw new Error(response.message)
         }
         console.log(result)
-        toast.success("Item added to cart", { style: { color: 'green', position: 'relative', top: '100px', left: '150px', width: '200px' }})
+        toast.success("Item added to cart", { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         } catch (error) {
             console.log('Server Error')
-            toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', top: '100px', left: '150px', width: '200px' }})
+            toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
 
@@ -80,7 +80,7 @@ export function DroneShop() {
         <div className="size-full overflow-hidden flex flex-col">
             <Navigation />
             <div className="h-[90%] w-full flex flex-col justify-start items-center">
-                 <Toaster position="top-right" />
+                 <Toaster position="bottom-left" />
                 <div className="h-[13%] w-full bg-slate-500 text-[38px] flex justify-center items-center gap-20">
                     <div className="flex gap-4 flex-wrap">
                     <h2 className="text-[22px] font-medium hover:font-bold hover:text-lime-600">Drones</h2>
