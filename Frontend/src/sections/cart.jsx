@@ -44,7 +44,7 @@ export function ShopCart() {
                 }
                 setCart(result)
                 const total = result.reduce((x, y) => {
-                    return x + y.mockprice
+                    return x + y.price
                 }, 0)
                 setTotalPrice(total)
                 console.log(result)
