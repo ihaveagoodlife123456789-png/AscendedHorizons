@@ -34,7 +34,7 @@ registerRouter.post('/', async (req, res) => {
         const values = [ hashedPassword, validEmail, firstName, lastName];
         const result = await pool.query(query, values);
         console.log(result)
-        const getUser = `SELECT cart FROM users WHERE email = 1$`
+        const getUser = `SELECT cart FROM users WHERE email = $1`
         const userEmail = [validEmail]
         const userCartId = await pool.query(getUser, userEmail)
         console.log(userCartId)
