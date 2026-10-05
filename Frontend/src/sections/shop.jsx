@@ -59,11 +59,11 @@ export function DroneShop() {
                                 items.map((e) => {
                                     return (
                                         <motion.div className="w-[90%] h-[450px] overflow-hidden">
-                                            <motion.div whileHover={{ scale: 1.05 }} className="size-full bg-center bg-cover flex justify-end items-center" style={{ backgroundImage: `url(${e.imgUrl})`}}>
+                                            <motion.div whileHover={{ scale: 1.05 }} className="size-full bg-center bg-cover flex justify-end items-center" style={{ backgroundImage: `url(${e.imgurl})`}}>
                                             <div className="h-[90%] w-[35%] bg-slate-900/70 rounded-[12px] relative right-[8%] flex flex-col justify-center items-center gap-8">
                                             <h2 className="text-white text-[18px] font-bold">{e.name}</h2>
                                             <p className="text-white text-[20px] font-thin text-center">{e.description}</p>
-                                            <h3 className='text-white text-[20px] font-medium'>{e.mockPrice}$</h3>
+                                            <h3 className='text-white text-[20px] font-medium'>{e.mockprice}$</h3>
                                             <h4 className="text-white text-[24px] font-thin">o o o o o</h4>
                                             <button className="text-white flex gap-1 text-[18px] font-thin border-slate-200 border-2 rounded-[10px] px-1 py-1 hover:bg-slate-800">Add<img src="/icons8-add-50.png" className="h-[25px]" /></button>
                                             </div>
