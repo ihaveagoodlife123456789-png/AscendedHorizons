@@ -31,6 +31,7 @@ const mockitems = [
 export function ShopCart() {
     const [ cart, setCart ] = useState(null)
     const [ totalPrice, setTotalPrice ] = useState(null)
+    const [ totalItem, setTotalItem ] = useState(null)
     useEffect(() => {
         async function getUserCart() {
             try {
@@ -46,6 +47,13 @@ export function ShopCart() {
                 const total = result.reduce((x, y) => {
                     return x + y.price
                 }, 0)
+                const totalItems = result.reduce((x, y) => {
+                    const id = y.id
+                    x[amount]++
+                    return x
+                }, [])
+                console.log(totalItems)
+                setTotalItem(totalItems)
                 setTotalPrice(total)
                 console.log(result)
             } catch (error) {
