@@ -107,8 +107,8 @@ export function DroneShop() {
                     </div>
                         <div className="relative w-[80%] bg-white grid grid-rows-auto grid-cols-1 justify-items-center items-between grid-flow-row overflow-scroll gap-2 relative top-6 scrollbar-thin">
                             {
-                                mockitems ? 
-                                mockitems.map((e) => {
+                                items ? 
+                                items.map((e) => {
                                     return (
                                         <motion.div key={e.id} className="w-[90%] h-[450px] overflow-hidden">
                                             <motion.div whileHover={{ scale: 1.05 }} className="size-full bg-center bg-cover flex justify-end items-center" style={{ backgroundImage: `url(${e.imgurl})`}}>
