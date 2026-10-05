@@ -13,7 +13,7 @@ export function DroneShop() {
                     method: 'GET'
                 })
                 const result = await response.json()
-                if (!result.ok) {
+                if (!response.ok) {
                     setItems(null)
                     return;
                 }
