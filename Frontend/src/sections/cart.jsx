@@ -55,13 +55,14 @@ export function ShopCart() {
         <div className="size-full">
             <Navigation />
             <div className='h-[90%] w-full'>
-                <div className="h-[13%] w-full bg-slate-400">
-
+                <div className="h-[8%] w-full bg-slate-400 flex justify-start">
+                    <h1 className='text-[42px] font-medium relative left-[5%]'>Shopping cart</h1>
                 </div>
-                <div className="h-[87%] w-full bg-white flex">
+                <div className="h-[92%] w-full bg-white flex">
                     <div className="h-[100%] w-[65%] bg-white flex flex-col items-center">
-                        <div className='h-[15%] w-[92%] bg-slate-300 relative rounded-[12px] top-[2%]'>
-
+                        <div className='h-[15%] w-[92%] bg-slate-300 relative rounded-[12px] top-[2%] flex justify-start items-center gap-15'>
+                            <h1 className='text-[36px] font-bold relative left-[5%]'>Order</h1>
+                            <h1 className='text-[28px] font-thin'>Get free delivery on 250$ purchases or more!</h1>
                         </div>
                         <div className='w-full h-[80%] bg-white grid grid-rows-auto grid-cols-1 justify-items-center items-around grid-flow-row overflow-scroll gap-5 relative top-6 scrollbar-thin overflow-x-hidden'>
                             { cart ? 
@@ -85,8 +86,8 @@ export function ShopCart() {
                             }
                         </div>
                     </div>
-                    <div className="h-[100%] w-[35%] bg-sky-500 flex justify-center">
-                        <div className='w-[85%] h-[75%] bg-purple-500 relative top-[5%]'>
+                    <div className="h-[100%] w-[35%] bg-white flex justify-center">
+                        <div className='w-[85%] h-[75%] bg-slate-200 relative top-[5%] rounded-[2px]'>
                             <div>Total:{}</div>
                             <button className="bg-green-700 border-green-800 border-2 rounded-[6px]">Pay</button>
                         </div>
