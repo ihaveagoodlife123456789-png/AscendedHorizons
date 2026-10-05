@@ -67,7 +67,17 @@ export function ShopCart() {
                             { cart ? 
                             cart.map((item) => {
                                 return (
-                                    <div className="text-[40px] text-blue-600 border w-[92%] h-[370px]">{item.id}</div>
+                                    <div className="text-[40px] text-blue-600 border w-[92%] h-[370px] flex">
+                                        <div className='w-[35%] h-full flex justify-center items-center'>
+                                            <div className="w-[90%] h-[70%] bg-center bg-hover" style={{ backgroundImage: `url(${item.imgurl})`}}></div>
+                                        </div>
+                                        <div className='w-[45%] h-full flex flex-col justify-center items-center'>
+                                            <h2 className="text-[38px] font-medium">{item.name}</h2>
+                                            <p className="text-[24px] font-thin">{item.description}</p>
+                                            <div className="text-[18px] font-medium"><button>-</button>NaN<button></button>+</div>
+                                        </div>
+                                        <div className='w-[20%] h-full text-[28px] font-medium'>{item.price}$/item</div>
+                                    </div>
                                 )
                             })
                             :
