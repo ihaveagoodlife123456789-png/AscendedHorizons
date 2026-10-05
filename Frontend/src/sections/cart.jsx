@@ -75,7 +75,7 @@ export function ShopCart() {
                                         <div className='w-[45%] h-full flex flex-col justify-center items-center gap-6'>
                                             <h2 className="text-[38px] font-medium">{item.name}</h2>
                                             <p className="text-[24px] font-thin text-center">{item.description}</p>
-                                            <div className="text-[18px] font-bold"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] py-2 py-4'>-</button>1<button className='border-slate-200 border-2 rounded-[20px] text-[28px] py-2 py-4'>+</button></div>
+                                            <div className="text-[18px] font-bold"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] py-2 px-3'>-</button>1<button className='border-slate-200 border-2 rounded-[20px] text-[28px] py-2 py-4'>+</button></div>
                                         </div>
                                         <div className='w-[20%] h-full text-[28px] font-medium relative top-[5%]'>{item.price}$/item</div>
                                     </div>
@@ -89,7 +89,7 @@ export function ShopCart() {
                     <div className="h-[100%] w-[35%] bg-white flex justify-center">
                         <div className='w-[85%] h-[75%] bg-slate-200 relative top-[5%] rounded-[2px] flex flex-col justify-center items-center'>
                             <div className="text-[32px] font-medium">Total:{}</div>
-                            <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] py-2 py-4">Pay</button>
+                            <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] py-2 px-3">Pay</button>
                         </div>
                     </div>
                 </div>
