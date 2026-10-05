@@ -47,10 +47,14 @@ export function ShopCart() {
                 const total = result.reduce((x, y) => {
                     return x + y.price
                 }, 0)
-                const totalItems = result.reduce((x, y) => {
-                    const id = y.id
-                    x[id] = (x[id] || 0) + 1 
-                    return x
+                const totalItems = result.reduce((acc, currentItem) => {
+                    const existingItem = acc.find(item => item.id === currentItem.id)
+                    if (existingItem) {
+                    existingItem.quantity += 1
+                    } else {
+                    acc.push({ ...currentItem, quantity: 1 })
+          }
+          return acc
                 }, [])
                 console.log(totalItems)
                 setTotalItem(totalItems)
@@ -78,19 +82,17 @@ export function ShopCart() {
                         <div className='w-full h-[80%] bg-white grid grid-rows-auto grid-cols-1 justify-items-center items-around grid-flow-row overflow-scroll gap-5 relative top-6 scrollbar-thin overflow-x-hidden'>
                             { totalItem ? 
                             totalItem.map((item) => {
-                                const foundItem = cart.find(item => item.id === item)
-                                console.log(foundItem)
                                 return (
                                     <div className="text-[40px] bg-slate-300 text-blue-600 border-blue-700 border-2 w-[92%] h-[370px] flex">
                                         <div className='w-[35%] h-full flex justify-center items-center'>
-                                            <div className="w-[90%] h-[70%] bg-center bg-cover rounded-[6px]" style={{ backgroundImage: `url(${foundItem.imgurl})`}}></div>
+                                            <div className="w-[90%] h-[70%] bg-center bg-cover rounded-[6px]" style={{ backgroundImage: `url(${item.imgurl})`}}></div>
                                         </div>
                                         <div className='w-[45%] h-full flex flex-col justify-center items-center gap-6'>
-                                            <h2 className="text-[38px] font-medium">{foundItem.name}</h2>
-                                            <p className="text-[24px] font-thin text-center">{foundItem.description}</p>
-                                            <div className="text-[18px] font-bold"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4'>-</button>{item}<button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4'>+</button></div>
+                                            <h2 className="text-[38px] font-medium">{item.name}</h2>
+                                            <p className="text-[24px] font-thin text-center">{item.description}</p>
+                                            <div className="text-[18px] font-bold"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4'>-</button>{item.quantity}<button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4'>+</button></div>
                                         </div>
-                                        <div className='w-[20%] h-full text-[28px] font-medium relative top-[5%]'>{foundItem.price}$/item</div>
+                                        <div className='w-[20%] h-full text-[28px] font-medium relative top-[5%]'>{item.price}$/item</div>
                                     </div>
                                 )
                             })
