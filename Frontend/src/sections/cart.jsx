@@ -36,7 +36,7 @@ export function ShopCart() {
                         </div>
                         <div className='w-full h-[85%] bg-green-500 flex justify-center items-center'>
                             { cart ? 
-                            <div className='text-[32px]'>{cart.message}</div>
+                            <div className='text-[32px]'>{cart.message[0]}</div>
                             :
                             <h1 className='text-[32px]'>Something went wrong</h1>
                             }
