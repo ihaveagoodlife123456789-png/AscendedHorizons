@@ -81,7 +81,7 @@ export function ShopCart() {
                                 )
                             })
                             :
-                            <h1 className='text-[32px]'>{cart.message}</h1>
+                            <h1 className='text-[32px]'>{cart.message ? cart.message : 'Something went wrong...'}</h1>
                             }
                         </div>
                     </div>
