@@ -49,7 +49,7 @@ export function ShopCart() {
                 }, 0)
                 const totalItems = result.reduce((x, y) => {
                     const id = y.id
-                    x[amount]++
+                    x[id]++
                     return x
                 }, [])
                 console.log(totalItems)
