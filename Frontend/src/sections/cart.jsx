@@ -41,7 +41,7 @@ export function ShopCart() {
                     setCart(null)
                     return
                 }
-                setCart(result.items)
+                setCart(result)
                 console.log(result)
             } catch (error) {
                 setCart(null)

@@ -45,7 +45,8 @@ cartRouter.get('/', async (req, res) => {
         if(!userCart.rows.length > 0) {
             res.status(400).json({ message: 'Your cart is empty. :(' })            
         }
-        res.status(200).json(userCart.rows[0])
+        const items = userCart.rows[0].items
+        res.status(200).json(items)
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error.' })  
     }
