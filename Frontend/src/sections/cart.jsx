@@ -79,6 +79,7 @@ export function ShopCart() {
                             { totalItem ? 
                             totalItem.map((item) => {
                                 const foundItem = cart.find(item => item.id === item)
+                                console.log(foundItem)
                                 return (
                                     <div className="text-[40px] bg-slate-300 text-blue-600 border-blue-700 border-2 w-[92%] h-[370px] flex">
                                         <div className='w-[35%] h-full flex justify-center items-center'>
