@@ -65,7 +65,7 @@ export function ShopCart() {
                             { cart ? 
                             cart.map((item) => {
                                 return (
-                                    <div className="text-[40px] text-blue-600 border w-[92%] h-[370px]">{mockitems}</div>
+                                    <div className="text-[40px] text-blue-600 border w-[92%] h-[370px]">{item}</div>
                                 )
                             })
                             :
