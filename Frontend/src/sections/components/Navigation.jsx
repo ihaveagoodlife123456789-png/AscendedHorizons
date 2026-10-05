@@ -10,7 +10,8 @@ export function Navigation() {
   const [ toaster, setToaster ] = useState(null)
   const variants = {
     onCart: { translateY: [0, -10, 0] },
-    onProducts: { width: '160px', height: '220px', opacity: 1, translateX: -75}
+    onProducts: { width: '160px', height: '220px', opacity: 1, translateX: -75},
+    scale: { scale: 1 }
   }
   useEffect(() => {
     async function getUser() {
@@ -59,18 +60,18 @@ export function Navigation() {
                 <img src="\icons8-menu-50.png" className="w-[16px] h-[16px]" onMouseEnter={() => setProducts(true)} onMouseLeave={() => setProducts(false)} loading="lazy"/>
                 <motion.div 
                 variants={variants} 
-                animate={ products ? 'onProducts' : null} 
+                animate={ products ? 'onProducts' : null}
                 transition={{ duration: .2 }} 
                 onMouseEnter={() => setProducts(true)} 
                 onMouseLeave={() => setProducts(false)} 
                 className="absolute top-[120%] left-[50%] w-0 h-0 bg-gray-900 border-black border-t-0 opacity-0 flex flex-col justify-center items-center text-white font-normal text-[16px] gap-2"
                 >
-                  <motion.h2 whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Drones</motion.h2>
-                  <motion.h2 whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Cameras</motion.h2>
-                  <motion.h2 whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Compasses</motion.h2>
-                  <motion.h2 whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Watches</motion.h2>
-                  <motion.h2 whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Backpacks</motion.h2>
-                  <motion.h2 whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Gear</motion.h2>
+                  <motion.h2 variants={variants} initial={{ scale: 0 }} animate={ products ? 'scale' : null } whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Drones</motion.h2>
+                  <motion.h2 variants={variants} initial={{ scale: 0 }} animate={ products ? 'scale' : null } whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Cameras</motion.h2>
+                  <motion.h2 variants={variants} initial={{ scale: 0 }} animate={ products ? 'scale' : null } whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Compasses</motion.h2>
+                  <motion.h2 variants={variants} initial={{ scale: 0 }} animate={ products ? 'scale' : null } whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Watches</motion.h2>
+                  <motion.h2 variants={variants} initial={{ scale: 0 }} animate={ products ? 'scale' : null } whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Backpacks</motion.h2>
+                  <motion.h2 variants={variants} initial={{ scale: 0 }} animate={ products ? 'scale' : null } whileHover={{ fontWeight: 700}} transition={{ duration: .1}}>Gears</motion.h2>
                 </motion.div>
               </div>
             </div>

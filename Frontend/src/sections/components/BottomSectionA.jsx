@@ -18,6 +18,7 @@ export function BottomSectionA() {
                     <div className="size-fit relative top-[5%] flex flex-col items-center">
                         <h3 className="text-slate-900/90 text-[18px] font-medium">Archon Series B</h3>
                         <h1 className='text-slate-950 text-[26px] font-bold'>Archon S1</h1>
+                        <p className='text-slate-200 text-[24px] font-light'>Long distance, long lasting battery</p>
                     </div>
                     <img src="/icons8-menu-100.png" className="absolute bottom-4 right-4 size-8" loading="lazy"></img>
                     </div>

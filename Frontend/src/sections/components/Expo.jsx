@@ -18,7 +18,7 @@ export function Exposition() {
             <motion.div initial={{ scale: 1, zIndex: 2 }} animate={{}} whileHover={{ zIndex: 3, translateY: -40, scale: 1.1 }}
             className="absolute size-full bg-[url('/iewek-gnos-ZlkRrzJl20Q-unsplash.jpg')] bg-no-repeat bg-cover bg-center"
             >
-                <div className='absolute bottom-[10%] left-[21%] text-orange-700 font-bold text-[24px]'>Archan Series B</div>
+                <div className='absolute bottom-[10%] left-[21%] text-orange-700 font-bold text-[24px]'>Archon Series B</div>
             </motion.div>
             <motion.div initial={{ rotate: 0, translateX: 0, scale: 1, zIndex: 1 }} animate={{ rotate: 10, translateX: 160 }} whileHover={{ zIndex: 2, translateY: -40, scale: 1.1 }} 
             className="absolute size-full bg-[url('/joao-rocha-O0xam7DNJy4-unsplash.jpg')] bg-no-repeat bg-cover bg-center"

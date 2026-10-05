@@ -7,6 +7,7 @@ import { Lobby } from './App.jsx';
 import { Registration } from './App.jsx';
 import { Access } from './App.jsx';
 import { Dashboard } from './App.jsx';
+import { Shop } from './App.jsx';
 
 const AppRouter = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const AppRouter = createBrowserRouter([
   },
   {
     path: '/shop',
-    element: <Dashboard />
+    element: <Shop />
   },
 ])
 
