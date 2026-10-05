@@ -11,7 +11,7 @@ export function Navigation() {
   const variants = {
     onCart: { translateY: [0, -10, 0] },
     onProducts: { width: '160px', height: '220px', opacity: 1, translateX: -75},
-    scale: { scale: 1 }
+    scale: { scale: 1, translateX: 75 }
   }
   useEffect(() => {
     async function getUser() {

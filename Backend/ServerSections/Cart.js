@@ -33,6 +33,14 @@ cartRouter.post('/', async (req, res) => {
     }
 })
 
+cartRouter.post('/delete', (req, res) => {
+    try {
+        
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error'})
+    }
+})
+
 cartRouter.get('/', async (req, res) => {
     try {
         if(!req.user) {
