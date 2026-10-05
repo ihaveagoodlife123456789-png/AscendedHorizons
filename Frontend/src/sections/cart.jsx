@@ -15,7 +15,7 @@ export function ShopCart() {
                     return
                 }
                 setCart(result)
-                console.log(result.items)
+                console.log(result)
             } catch (error) {
                 setCart(null)
             }
@@ -34,7 +34,7 @@ export function ShopCart() {
                         <div className='h-[15%] w-[92%] bg-orange-400 relative top-[3%] rounded-[12px]'>
 
                         </div>
-                        <div className='w-full h-[85%] bg-green-500 flex justify-center items-center'>
+                        <div className='w-full h-[85%] bg-green-500 grid'>
                             { cart ? 
                             cart.map((item) => {
                                 return (
