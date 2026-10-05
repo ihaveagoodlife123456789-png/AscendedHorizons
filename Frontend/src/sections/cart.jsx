@@ -30,6 +30,7 @@ const mockitems = [
 
 export function ShopCart() {
     const [ cart, setCart ] = useState(null)
+    const [ totalPrice, setTotalPrice ] = useState(null)
     useEffect(() => {
         async function getUserCart() {
             try {
@@ -37,13 +38,15 @@ export function ShopCart() {
                     method: 'GET'
                 })
                 const result = await response.json()
-                console.log(result)
-                console.log(response)
                 if (!response.ok) {
                     setCart(null)
                     return
                 }
                 setCart(result)
+                const total = cart.reduce((x, y) => {
+                    return x + y.mockprice
+                }, 0)
+                setTotalPrice(total)
                 console.log(result)
             } catch (error) {
                 setCart(null)
@@ -88,7 +91,9 @@ export function ShopCart() {
                     </div>
                     <div className="h-[100%] w-[35%] bg-white flex justify-center">
                         <div className='w-[85%] h-[75%] bg-slate-200 relative top-[5%] rounded-[2px] flex flex-col justify-center items-center'>
-                            <div className="text-[32px] font-medium">Total:{}</div>
+                            <div className="text-[32px] font-medium">{
+                                totalPrice ? `Subtotal: ${totalPrice}` : 'No items yet'
+                                }</div>
                             <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] py-2 px-3">Pay</button>
                         </div>
                     </div>
