@@ -37,6 +37,8 @@ export function ShopCart() {
                     method: 'GET'
                 })
                 const result = await response.json()
+                console.log(result)
+                console.log(response)
                 if (!response.ok) {
                     setCart(null)
                     return
