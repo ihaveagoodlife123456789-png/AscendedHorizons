@@ -8,7 +8,7 @@ cartRouter.post('/', async (req, res) => {
     console.log(id)
     try {
         if(!req.user) {
-            res.status(401).json({ message: 'Please login first'})
+            return res.status(401).json({ message: 'Please login first'})
         }
         const query = `SELECT cart FROM users WHERE id = $1`
         const user = [req.user.id]
@@ -16,7 +16,7 @@ cartRouter.post('/', async (req, res) => {
         const result = await pool.query(query, user)
         console.log(result)
         if(!result) {
-           res.status(400).json({ message: 'Something went wrong.'}) 
+           return res.status(400).json({ message: 'Something went wrong.'}) 
         }
         const queryCart = `UPDATE carts
                            SET items = array_append(items, $1)
@@ -36,17 +36,25 @@ cartRouter.post('/', async (req, res) => {
 cartRouter.get('/', async (req, res) => {
     try {
         if(!req.user) {
-            res.status(401).json({ message: 'Please login first' })
+            return res.status(401).json({ message: 'Please login first' })
         }
         const queryUserCart = `SELECT items FROM carts WHERE id = $1`
         const userId = req.user.id
         const userCart = await pool.query(queryUserCart, [userId])
         console.log(userCart)
         if(!userCart.rows.length > 0) {
-            res.status(400).json({ message: 'Your cart is empty. :(' })            
+            return res.status(400).json({ message: 'Your cart is empty. :(' })            
         }
         const items = userCart.rows[0].items
-        res.status(200).json(items)
+        const getCartItems = await Promise.all(
+            items.map(async (id) => {
+            const getItem = `SELECT * FROM items WHERE id = $1`
+            const itemId = [id]
+            const result = await pool.query(getItem, itemId)
+            const itemObject = result.rows[0]
+            return itemObject
+        }))
+        res.status(200).json(getCartItems)
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error.' })  
     }
