@@ -34,7 +34,7 @@ cartRouter.post('/', async (req, res) => {
 })
 
 cartRouter.post('/delete', async (req, res) => {
-    const { itemId } = req.body
+    const itemId = Number(req.body.itemId)
     try {
         if(!req.user) {
             return res.status(400).json({ message: 'Please login first.'}) 
