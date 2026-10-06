@@ -98,10 +98,10 @@ export function ShopCart() {
                                         </div>
                                         <div className='w-[45%] h-full flex flex-col justify-center items-center gap-6'>
                                             <h2 className="text-[38px] font-medium">{item.name}</h2>
-                                            <p className="text-[24px] font-thin text-center">{item.description}</p>
-                                            <div className="text-[18px] font-bold flex gap-2"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white'>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white'>+</button></div>
+                                            <p className="text-[24px] font-thin text-center text-black">{item.description}</p>
+                                            <div className="text-[18px] font-bold flex gap-2 text-black"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white'>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white'>+</button></div>
                                         </div>
-                                        <div className='w-[20%] h-full text-[28px] font-medium relative top-[5%]'>{item.price}$/item</div>
+                                        <div className='w-[20%] h-full text-[28px] font-light relative top-[5%] text-black'>{item.price}$/item</div>
                                     </div>
                                 )
                             })
