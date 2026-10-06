@@ -110,6 +110,7 @@ export function ShopCart() {
         })
         const result = await response.json()
         if (!response.ok) {
+            console.log(response.message)
             throw new Error(response.message)
         }
         console.log(result)
@@ -117,7 +118,7 @@ export function ShopCart() {
         getUserCart()
         } catch (error) {
             console.log('Server Error')
-            toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
+            toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
     return (
