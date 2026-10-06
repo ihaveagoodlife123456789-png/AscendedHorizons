@@ -59,7 +59,7 @@ export function ShopCart() {
                  return acc
                 }, [])
                 const totalItemsCount =  totalItems.filter((x, y) => {
-                    return x + y[0].quantity
+                    return x + y.quantity
                 }, 0)
 
                 setTotalItemCount(totalItemsCount)
