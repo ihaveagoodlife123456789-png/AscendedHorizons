@@ -85,18 +85,18 @@ export function ShopCart() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: id })
+            body: JSON.stringify({ itemId: id })
         })
         const result = await response.json()
         if (!response.ok) {
-            throw new Error(response.message)
+            throw new Error(result.message)
         }
         console.log(result)
         toast.success("Item added to cart", { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
         } catch (error) {
             console.log('Server Error')
-            toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
+            toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
     async function removeItem(id) {
@@ -106,12 +106,12 @@ export function ShopCart() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: id })
+            body: JSON.stringify({ itemId: id })
         })
         const result = await response.json()
         if (!response.ok) {
             console.log(response.message)
-            throw new Error(response.message)
+            throw new Error(result.message)
         }
         console.log(result)
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
