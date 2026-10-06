@@ -62,7 +62,7 @@ export function ShopCart() {
                     return x + y.quantity
                 }, 0)
 
-                setTotalItemCount(totalItemCount)
+                setTotalItemCount(totalItemsCount)
                 setTotalItem(totalItems)
                 setTotalPrice(total)
                 console.log(totalItems)
