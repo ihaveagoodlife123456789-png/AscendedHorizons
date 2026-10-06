@@ -27,7 +27,7 @@ cartRouter.post('/', async (req, res) => {
     }
 })
 
-cartRouter.post('/delete', async (req, res) => {
+/*cartRouter.post('/delete', async (req, res) => {
     const itemId = Number(req.body.itemId)
     try {
         if(!req.user) {
@@ -52,7 +52,7 @@ cartRouter.post('/delete', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server Error'})
     }
-})
+})*/
 
 cartRouter.get('/', async (req, res) => {
     try {

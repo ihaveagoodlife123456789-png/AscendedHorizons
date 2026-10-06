@@ -156,7 +156,7 @@ export function ShopCart() {
                                 )
                             })
                             :
-                            <h1 className='text-[32px]'>{'Please login first'}</h1>
+                            <h1 className='text-[32px]'>{'Please login first.'}</h1>
                             }
                         </div>
                     </div>
