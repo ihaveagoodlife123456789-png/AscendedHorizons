@@ -49,7 +49,7 @@ export function DroneShop() {
         })
         const result = await response.json()
         if (!response.ok) {
-            throw new Error(response.message)
+            throw new Error(result.message)
         }
         console.log(result)
         toast.success("Item added to cart", { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
