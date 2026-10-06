@@ -4,7 +4,7 @@ import { pool } from '../index.js'
 export const cartRouter = express.Router()
 
 cartRouter.post('/', async (req, res) => {
-    const { id } = req.body
+    const { itemId } = req.body
     console.log(id)
     try {
         if(!req.user) {
@@ -34,7 +34,7 @@ cartRouter.post('/', async (req, res) => {
 })
 
 cartRouter.post('/delete', async (req, res) => {
-    const itemId = Number(req.body.itemId)
+    const { itemId } = req.body
     try {
         if(!req.user) {
             return res.status(400).json({ message: 'Please login first.'}) 
