@@ -41,7 +41,6 @@ cartRouter.post('/delete', async (req, res) => {
         }
         const items = [...rows[0].items]
         console.log(items)
-        console.log(itemId)
         const index = items.indexOf(id)
         if (index === -1) {
             return res.status(400).json({ message: 'Item already removed.'})
