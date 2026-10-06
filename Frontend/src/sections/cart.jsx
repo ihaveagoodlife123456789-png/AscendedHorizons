@@ -99,6 +99,27 @@ export function ShopCart() {
             toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
+    async function removeItem(id) {
+        try {
+        const response = await fetch('/api/cart/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: id })
+        })
+        const result = await response.json()
+        if (!response.ok) {
+            throw new Error(response.message)
+        }
+        console.log(result)
+        toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
+        getUserCart()
+        } catch (error) {
+            console.log('Server Error')
+            toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
+        }
+    }
     return (
         <div className="size-full">
             <Navigation />
@@ -126,7 +147,7 @@ export function ShopCart() {
                                         <div className='w-[45%] h-full flex flex-col justify-center items-center gap-6'>
                                             <h2 className="text-[38px] font-medium">{item.name}</h2>
                                             <p className="text-[24px] font-thin text-center text-black">{item.description}</p>
-                                            <div className="text-[18px] font-bold flex gap-2 text-black"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white'>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => addItem(item.id)}>+</button></div>
+                                            <div className="text-[18px] font-bold flex gap-2 text-black"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => removeItem()}>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => addItem(item.id)}>+</button></div>
                                         </div>
                                         <div className='w-[20%] h-full text-[28px] font-light relative top-[5%] text-black'>{item.price}$/item</div>
                                     </div>

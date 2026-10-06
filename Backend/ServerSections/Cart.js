@@ -25,7 +25,7 @@ cartRouter.post('/', async (req, res) => {
         const resultCart = await pool.query(queryCart, userCart)
         console.log(resultCart)
         if (!resultCart) {
-            res.status(400).json({ message: 'Something went wrong.'}) 
+           return res.status(400).json({ message: 'Something went wrong.'}) 
         }
         res.status(200).json({ message: resultCart}) 
     } catch (err) {
@@ -33,9 +33,29 @@ cartRouter.post('/', async (req, res) => {
     }
 })
 
-cartRouter.post('/delete', (req, res) => {
+cartRouter.post('/delete', async (req, res) => {
+    const { itemId } = req.body
     try {
-        
+        if(!req.user) {
+            return res.status(400).json({ message: 'Please login first.'}) 
+        }
+        const queryCarts = `SELECT items FROM carts WHERE id = $1`
+        const getUser = [req.user.id] 
+        const { rows } = await pool.query(queryCarts, getUser)
+        if (!rows[0]) {
+            return res.status(400).json({ message: 'Basket is empty.'})
+        }
+        const items = [rows[0].items]
+        const index = items.indexOf(itemId)
+        if (index === -1) {
+            return res.status(400).json({ message: 'Item already removed.'})
+        }
+        items.splice(index, 1)
+        const deleteItem = await pool.query(`UPDATE carts SET items = $1 WHERE id = $2`, [items, getUser])
+        if(!deleteItem) {
+            return res.status(400).json({ message: 'Something went wrong.'})
+        }
+        res.status(200).json({ message: 'Item deleted successfully.'})
     } catch (error) {
         res.status(500).json({ message: 'Server Error'})
     }
