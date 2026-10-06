@@ -36,7 +36,7 @@ cartRouter.post('/delete', async (req, res) => {
         const queryCarts = `SELECT items FROM carts WHERE id = $1`
         const getUser = [req.user.id] 
         const { rows } = await pool.query(queryCarts, getUser)
-        if (!rows[0].length > 0) {
+        if (!rows[0].items.length > 0) {
             return res.status(400).json({ message: 'Basket is empty.'})
         }
         const items = [...rows[0].items]
@@ -62,7 +62,7 @@ cartRouter.get('/', async (req, res) => {
         const queryUserCart = `SELECT items FROM carts WHERE id = $1`
         const userId = req.user.id
         const userCart = await pool.query(queryUserCart, [userId])
-        if(!rows[0] || rows[0].items.length === 0) {
+        if(!userCart.rows[0].items > 0) {
             return res.status(400).json({ message: 'Your cart is empty. :(' })            
         }
         const items = userCart.rows[0].items
