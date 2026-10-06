@@ -54,7 +54,7 @@ export function Navigation() {
           { toaster ? <Toaster position='bottom-left' /> : null}
             <div className="absolute left-[2%] w-12 h-12 flex items-center gap-5">
               <img src="/icons8-wreath-64.png"></img>
-              <div className="font-semibold"><Link to="/">Ascended Horizons</Link></div>
+              <Link to="/"><div className="font-semibold">Ascended Horizons</div></Link>
               <div className="relative left-8 size-fit flex items-center gap-2">
                 <motion.div whileHover={{ color: '	hsl(226, 79%, 55%)' }} onMouseEnter={() => setProducts(true)} onMouseLeave={() => setProducts(false)}>Products</motion.div>
                 <img src="\icons8-menu-50.png" className="w-[16px] h-[16px]" onMouseEnter={() => setProducts(true)} onMouseLeave={() => setProducts(false)} loading="lazy"/>
