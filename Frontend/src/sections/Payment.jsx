@@ -6,7 +6,7 @@ export function StripePayment() {
     return (
         <div className='size-full'>
             <Navigation />
-            <div className='realtive w-full h-[90%] bg-white'>
+            <div className='relative w-full h-[90%] bg-white'>
                 <div className='w-full h-[8%] bg-slate-500 absolute top-0'></div>
                 <div className='w-full h-[86%]'>
                     {/*<Elements></Elements>*/}
