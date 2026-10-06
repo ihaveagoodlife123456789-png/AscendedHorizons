@@ -77,8 +77,10 @@ export function ShopCart() {
         <div className="size-full">
             <Navigation />
             <div className='h-[90%] w-full'>
-                <div className="h-[8%] w-full bg-slate-400 flex justify-start">
+                <div className="h-[8%] w-full bg-slate-400 flex justify-between items-center">
                     <h1 className='text-[46px] font-bold relative left-[5%]'>Shopping cart</h1>
+                    <div className='flex gap-1 justify-center items-center font-medium relative left-[10%]'><img src="/icons8-canada-48.png" className='hover:size-[50px]'/><h2 className='hover:font-bold'>English</h2><div className='font-bold'>|</div><h2 className='hover:font-bold'>CAD</h2></div>
+                    <div className='text-red-700 text-[16px] flex font-medium decoration-2 hover:underline relative right-[5%]'><img src="/icons8-garbage-48.png" className='size-[25px]'/><h3>Remove all</h3></div>
                 </div>
                 <div className="h-[92%] w-full bg-white flex">
                     <div className="h-[100%] w-[65%] bg-white flex flex-col items-center">
