@@ -1,5 +1,7 @@
+import { Toaster, toast } from 'sonner'
 import { Navigation } from './components/Navigation'
 import { useState, useEffect } from 'react'
+import { useCallback } from 'react'
 
 const mockitems = [
     {
@@ -33,8 +35,8 @@ export function ShopCart() {
     const [ totalPrice, setTotalPrice ] = useState(null)
     const [ totalItem, setTotalItem ] = useState(null)
     const [ totalItemCount, setTotalItemCount ] = useState(null)
-    useEffect(() => {
-        async function getUserCart() {
+
+    const getUserCart = useCallback(async () => {
             try {
                 const response = await fetch('/api/cart', {
                     method: 'GET'
@@ -70,9 +72,11 @@ export function ShopCart() {
             } catch (error) {
                 setCart(null)
             }
-        }
-        getUserCart()
     }, [])
+
+    useEffect(() => {
+        getUserCart()
+    }, [getUserCart])
     async function addItem(id) {
         try {
         const response = await fetch('/api/cart', {
@@ -88,6 +92,7 @@ export function ShopCart() {
         }
         console.log(result)
         toast.success("Item added to cart", { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
+        getUserCart()
         } catch (error) {
             console.log('Server Error')
             toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
@@ -97,6 +102,7 @@ export function ShopCart() {
         <div className="size-full">
             <Navigation />
             <div className='h-[90%] w-full'>
+                <Toaster position='top-right'/>
                 <div className="h-[8%] w-full bg-slate-400 flex justify-between items-center">
                     <h1 className='text-[46px] font-bold relative left-[5%]'>Shopping cart</h1>
                     <div className='flex gap-1 justify-center items-center font-medium relative left-[10%]'><img src="/icons8-canada-48.png" className='hover:size-[50px]'/><h2 className='hover:font-bold'>English</h2><div className='font-bold'>|</div><h2 className='hover:font-bold'>CAD</h2></div>
