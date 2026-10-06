@@ -118,7 +118,7 @@ export function ShopCart() {
         })
         const result = await response.json()
         if (!response.ok) {
-            throw new Error(response.message)
+            throw new Error(result.message)
         }
         console.log(result)
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
@@ -137,7 +137,7 @@ export function ShopCart() {
         })
         const result = await response.json()
         if (!response.ok) {
-            throw new Error(response.message)
+            throw new Error(result.message)
         }
         console.log(result)
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
@@ -158,7 +158,7 @@ export function ShopCart() {
         })
         const result = await response.json()
         if (!response.ok) {
-            throw new Error(response.message)
+            throw new Error(result.message)
         }
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
