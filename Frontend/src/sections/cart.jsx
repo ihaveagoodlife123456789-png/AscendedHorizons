@@ -2,6 +2,7 @@ import { Toaster, toast } from 'sonner'
 import { Navigation } from './components/Navigation'
 import { useState, useEffect } from 'react'
 import { useCallback } from 'react'
+import { Link } from 'react-router-dom'
 
 const mockitems = [
     {
@@ -88,14 +89,35 @@ export function ShopCart() {
         })
         const result = await response.json()
         if (!response.ok) {
-            throw new Error(response.message)
+            throw new Error(result.message)
         }
         console.log(result)
-        toast.success("Item added to cart", { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
+        toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
         } catch (error) {
             console.log('Server Error')
-            toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
+            toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
+        }
+    }
+    async function removeItem(id) {
+        try {
+        const response = await fetch('/api/cart/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: id })
+        })
+        const result = await response.json()
+        if (!response.ok) {
+            throw new Error(response.message)
+        }
+        console.log(result)
+        toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
+        getUserCart()
+        } catch (error) {
+            console.log('Server Error')
+            toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
     return (
@@ -125,7 +147,7 @@ export function ShopCart() {
                                         <div className='w-[45%] h-full flex flex-col justify-center items-center gap-6'>
                                             <h2 className="text-[38px] font-medium">{item.name}</h2>
                                             <p className="text-[24px] font-thin text-center text-black">{item.description}</p>
-                                            <div className="text-[18px] font-bold flex gap-2 text-black"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white'>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => addItem(item.id)}>+</button></div>
+                                            <div className="text-[18px] font-bold flex gap-2 text-black"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => removeItem(item.id)}>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => addItem(item.id)}>+</button></div>
                                         </div>
                                         <div className='w-[20%] h-full text-[28px] font-light relative top-[5%] text-black'>{item.price}$/item</div>
                                     </div>
@@ -171,7 +193,7 @@ export function ShopCart() {
                                 <h2>Total</h2>
                                 <h2>{totalPrice ? ` $${totalPrice}` : 'No items yet'}</h2>
                             </div>
-                            <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-bold px-3 hover:bg-white">Checkout</button>
+                            <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-bold px-3 hover:bg-white"><Link to="/cart/checkout">Checkout</Link></button>
                             <div><img src="/icons8-leaf-50.png" className='size-[25px]'/><div className='font-light text-[18px]'>2% of sales will be donated to the <span className='font-normal text-green-700'>environment</span></div></div>
                         </div>
                     </div>

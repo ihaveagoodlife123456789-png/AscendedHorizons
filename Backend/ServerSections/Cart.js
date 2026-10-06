@@ -27,8 +27,8 @@ cartRouter.post('/', async (req, res) => {
     }
 })
 
-/*cartRouter.post('/delete', async (req, res) => {
-    const itemId = Number(req.body.itemId)
+cartRouter.post('/delete', async (req, res) => {
+    const { id } = req.body
     try {
         if(!req.user) {
             return res.status(400).json({ message: 'Please login first.'}) 
@@ -42,7 +42,7 @@ cartRouter.post('/', async (req, res) => {
         const items = [...rows[0].items]
         console.log(items)
         console.log(itemId)
-        const index = items.indexOf(itemId)
+        const index = items.indexOf(id)
         if (index === -1) {
             return res.status(400).json({ message: 'Item already removed.'})
         }
@@ -52,7 +52,7 @@ cartRouter.post('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server Error'})
     }
-})*/
+})
 
 cartRouter.get('/', async (req, res) => {
     try {
