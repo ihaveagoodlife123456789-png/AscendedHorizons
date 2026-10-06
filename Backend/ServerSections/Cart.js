@@ -42,10 +42,11 @@ cartRouter.post('/delete', async (req, res) => {
         const queryCarts = `SELECT items FROM carts WHERE id = $1`
         const getUser = [req.user.id] 
         const { rows } = await pool.query(queryCarts, getUser)
-        if (!rows[0]) {
+        if (!rows[0].length > 0) {
             return res.status(400).json({ message: 'Basket is empty.'})
         }
         const items = [...rows[0].items]
+        console.log(items)
         const index = items.indexOf(itemId)
         if (index === -1) {
             return res.status(400).json({ message: 'Item already removed.'})
