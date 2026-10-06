@@ -38,6 +38,7 @@ export function ShopCart() {
     const [ totalItemCount, setTotalItemCount ] = useState(null)
     const [ disabled, setDisabled ] = useState(null)
 
+
     const getUserCart = useCallback(async () => {
             try {
                 const response = await fetch('/api/cart', {
@@ -97,6 +98,8 @@ export function ShopCart() {
         console.log(result)
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
+            setDisableButton(true)
+            setTimeout(() => setDisableButton(false), 1000)
         } catch (error) {
             console.log('Server Error')
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
@@ -120,6 +123,27 @@ export function ShopCart() {
         console.log(result)
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
+            setDisableButton(true)
+            setTimeout(() => setDisableButton(false), 1000)
+        } catch (error) {
+            console.log('Server Error')
+            toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
+        }
+    }
+    async function deleteCart() {
+        try {
+        const response = await fetch('/api/cart/deleteCart', {
+            method: 'DELETE',
+        })
+        const result = await response.json()
+        if (!response.ok) {
+            throw new Error(response.message)
+        }
+        console.log(result)
+        toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
+        getUserCart()
+            setDisableButton(true)
+            setTimeout(() => setDisableButton(false), 1000)
         } catch (error) {
             console.log('Server Error')
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
