@@ -32,6 +32,7 @@ export function ShopCart() {
     const [ cart, setCart ] = useState(null)
     const [ totalPrice, setTotalPrice ] = useState(null)
     const [ totalItem, setTotalItem ] = useState(null)
+    const [ totalItemCount, setTotalItemCount ] = useState(null)
     useEffect(() => {
         async function getUserCart() {
             try {
@@ -57,7 +58,11 @@ export function ShopCart() {
                 }
                  return acc
                 }, [])
+                const totalItemsCount =  totalItems.filter((x, y) => {
+                    return x + y.quantity
+                }, 0)
 
+                setTotalItemCount(totalItemCount)
                 setTotalItem(totalItems)
                 setTotalPrice(total)
                 console.log(totalItems)
@@ -73,19 +78,19 @@ export function ShopCart() {
             <Navigation />
             <div className='h-[90%] w-full'>
                 <div className="h-[8%] w-full bg-slate-400 flex justify-start">
-                    <h1 className='text-[42px] font-medium relative left-[5%]'>Shopping cart</h1>
+                    <h1 className='text-[46px] font-bold relative left-[5%]'>Shopping cart</h1>
                 </div>
                 <div className="h-[92%] w-full bg-white flex">
                     <div className="h-[100%] w-[65%] bg-white flex flex-col items-center">
                         <div className='h-[15%] w-[92%] bg-slate-300 relative rounded-[12px] top-[2%] flex justify-start items-center gap-25'>
-                            <h1 className='text-[36px] font-bold relative left-[5%]'>Order</h1>
+                            <h1 className='text-[34px] font-medium relative left-[5%]'>Order</h1>
                             <h1 className='text-[26px] font-thin'>Get free delivery on 250$ purchases or more!</h1>
                         </div>
                         <div className='w-full h-[80%] bg-white grid grid-rows-auto grid-cols-1 justify-items-center items-around grid-flow-row overflow-scroll gap-5 relative top-6 scrollbar-thin overflow-x-hidden'>
                             { totalItem ? 
                             totalItem.map((item) => {
                                 return (
-                                    <div className="text-[40px] bg-slate-300 text-blue-600 border-blue-700 border-2 w-[92%] h-[370px] flex">
+                                    <div className="text-[40px] bg-slate-300 text-blue-700 border-green-800 border-2 w-[92%] h-[370px] flex">
                                         <div className='w-[35%] h-full flex justify-center items-center'>
                                             <div className="w-[90%] h-[70%] bg-center bg-cover rounded-[6px]" style={{ backgroundImage: `url(${item.imgurl})`}}></div>
                                         </div>
@@ -117,8 +122,8 @@ export function ShopCart() {
                             </div>
                             <p className='w-[90%] text-[16px] font-medium text-center'>Purchasing subscripton+ let's you have up to a 7% discount on selected items and faster deliveries</p>
                             <div className='flex gap-10 justify-center items-center'>
-                                <h2 className='font-medium text-[18px]'>Items total</h2>
-                                <h2>{`number`}</h2>
+                                <h2 className='font-medium text-[18px]'>Item(s) total{`(${totalItemCount})`}</h2>
+                                <h2>{totalPrice}</h2>
                             </div>
                             <div className="bg-slate-500 w-[88%] h-[2px]">{totalPrice}</div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
