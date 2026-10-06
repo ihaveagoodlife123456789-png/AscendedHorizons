@@ -4,7 +4,7 @@ import { pool } from '../index.js'
 export const cartRouter = express.Router()
 
 cartRouter.post('/', async (req, res) => {
-    const { itemId } = req.body
+    const { id } = req.body
     try {
         if(!req.user) {
             return res.status(401).json({ message: 'Please login first'})
@@ -19,7 +19,7 @@ cartRouter.post('/', async (req, res) => {
         const queryCart = `UPDATE carts
                            SET items = array_append(items, $1)
                            WHERE id = $2 RETURNING *`
-        const userCart = [itemId, req.user.id]
+        const userCart = [id, req.user.id]
         const resultCart = await pool.query(queryCart, userCart)
         res.status(200).json({ message: resultCart}) 
     } catch (err) {
