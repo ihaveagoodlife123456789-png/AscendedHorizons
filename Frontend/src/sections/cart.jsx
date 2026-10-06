@@ -104,25 +104,39 @@ export function ShopCart() {
                         </div>
                     </div>
                     <div className="h-[100%] w-[35%] bg-white flex justify-center">
-                        <div className='w-[85%] h-[75%] bg-slate-200 relative top-[5%] rounded-[2px] flex flex-col justify-center items-center'>
-                            <h2>Items total{`number`}</h2>
-                            <div className="bg-slate-500 w-[88%] h-[2px]">{totalPrice}</div>
-                            <div className="flex gap-10 font-[26px]">
-                                <h2>Subtotal</h2>
-                                <h2>{totalPrice}</h2>
+                        <div className='w-[85%] h-[75%] bg-slate-200 relative top-[5%] rounded-[2px] flex flex-col justify-end items-center gap-5'>
+                            <div className='flex flex-col gap-2 justify-center items-center'>
+                                <h2 className='text-[14px] font-extrabold text-slate-900/70'>Supported payment methods</h2>
+                                <div className='flex gap-2'>
+                                    <img src="/ma_symbol_opt_45_1x.png" className='w-[60px] h-[40px]'></img>
+                                    <img src="/icons8-apple-pay-30.png" className='size-[40px]'></img>
+                                    <img src="/icons8-paypal-48.png" className='size-[40px]'></img>
+                                    <img src="/049392458499ef321c2c4edd3104b601.png" className='size-[40px]'></img>
+                                    <img src="/Google_Pay_Logo.svg" className='size-[40px]'></img>
+                                </div>
                             </div>
-                            <div className="flex gap-10 font-[26px]">
-                                <h2>Shipping</h2>
+                            <p className='w-[90%] text-[16px] font-medium text-center'>Purchasing subscripton+ let's you have up to a 7% discount on selected items and faster deliveries</p>
+                            <div className='flex gap-10 justify-center items-center'>
+                                <h2 className='font-medium text-[18px]'>Items total</h2>
+                                <h2>{`number`}</h2>
+                            </div>
+                            <div className="bg-slate-500 w-[88%] h-[2px]">{totalPrice}</div>
+                            <div className="flex gap-10 font-[26px] justify-center items-center">
+                                <h2 className='font-medium text-[18px]'>Subtotal</h2>
+                                <h2>{totalPrice ? ` $${totalPrice}` : 'No items yet'}</h2>
+                            </div>
+                            <div className="flex gap-10 font-[26px] justify-center items-center">
+                                <h2 className='font-medium text-[18px]'>Shipping</h2>
                                 <h2>Enter adress</h2>
                             </div>
-                            <div className="flex gap-10 font-[26px]">
-                                <h2>Tax</h2>
+                            <div className="flex gap-10 font-[26px] justify-center items-center">
+                                <h2 className='font-medium text-[18px]'>Tax</h2>
                                 <h2>No tax</h2>
                             </div>
                             <div className="bg-slate-500 w-[88%] h-[2px]"></div>
                             <div className="text-[26px] font-medium flex gap-10">
                                 <h2>Total</h2>
-                                <h2>{totalPrice ? ` ${totalPrice}` : 'No items yet'}</h2>
+                                <h2>{totalPrice ? ` $${totalPrice}` : 'No items yet'}</h2>
                             </div>
                             <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-bold px-3 hover:bg-white">Checkout</button>
                             <div><img src="\icons8-leaf-50.png" className='size-[25px]'/><div className='font-light text-[18px]'>2% of sales will be donated to the <span className='font-normal text-green-700'>environment</span></div></div>
