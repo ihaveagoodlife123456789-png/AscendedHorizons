@@ -92,7 +92,7 @@ export function ShopCart() {
                                         <div className='w-[45%] h-full flex flex-col justify-center items-center gap-6'>
                                             <h2 className="text-[38px] font-medium">{item.name}</h2>
                                             <p className="text-[24px] font-thin text-center">{item.description}</p>
-                                            <div className="text-[18px] font-bold flex gap-2"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4'>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4'>+</button></div>
+                                            <div className="text-[18px] font-bold flex gap-2"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white'>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white'>+</button></div>
                                         </div>
                                         <div className='w-[20%] h-full text-[28px] font-medium relative top-[5%]'>{item.price}$/item</div>
                                     </div>
@@ -105,10 +105,27 @@ export function ShopCart() {
                     </div>
                     <div className="h-[100%] w-[35%] bg-white flex justify-center">
                         <div className='w-[85%] h-[75%] bg-slate-200 relative top-[5%] rounded-[2px] flex flex-col justify-center items-center'>
-                            <div className="text-[32px] font-medium">{
-                                totalPrice ? `Subtotal: ${totalPrice}` : 'No items yet'
-                                }</div>
-                            <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-medium px-3 hover:bg-white">Pay</button>
+                            <h2>Items total{`number`}</h2>
+                            <div className="bg-slate-500 w-[88%] h-[2px]">{totalPrice}</div>
+                            <div className="flex gap-10 font-[26px]">
+                                <h2>Subtotal</h2>
+                                <h2>{totalPrice}</h2>
+                            </div>
+                            <div className="flex gap-10 font-[26px]">
+                                <h2>Shipping</h2>
+                                <h2>Enter adress</h2>
+                            </div>
+                            <div className="flex gap-10 font-[26px]">
+                                <h2>Tax</h2>
+                                <h2>No tax</h2>
+                            </div>
+                            <div className="bg-slate-500 w-[88%] h-[2px]"></div>
+                            <div className="text-[26px] font-medium flex gap-10">
+                                <h2>Total</h2>
+                                <h2>{totalPrice ? ` ${totalPrice}` : 'No items yet'}</h2>
+                            </div>
+                            <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-bold px-3 hover:bg-white">Checkout</button>
+                            <div><img src="\icons8-leaf-50.png" className='size-[25px]'/><div className='font-light text-[18px]'>2% of sales will be donated to the <span className='font-normal text-green-700'>environment</span></div></div>
                         </div>
                     </div>
                 </div>
