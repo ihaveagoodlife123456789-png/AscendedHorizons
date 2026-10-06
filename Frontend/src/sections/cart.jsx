@@ -62,6 +62,7 @@ export function ShopCart() {
                 }
                  return acc
                 }, [])
+                console.log(totalItem)
                 const totalItemsCount =  totalItems.reduce((x, y) => {
                     return x + y.quantity
                 }, 0)
