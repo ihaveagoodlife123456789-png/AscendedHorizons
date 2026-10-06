@@ -5,7 +5,6 @@ export const cartRouter = express.Router()
 
 cartRouter.post('/', async (req, res) => {
     const { itemId } = req.body
-    console.log(id)
     try {
         if(!req.user) {
             return res.status(401).json({ message: 'Please login first'})
