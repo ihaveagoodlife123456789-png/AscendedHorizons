@@ -53,6 +53,25 @@ cartRouter.post('/delete', async (req, res) => {
     }
 })
 
+cartRouter.delete('/deleteAll', async (req, res) => {
+    try {
+        if(!req.user) {
+            return res.status(400).json({ message: 'Please login first.'}) 
+        }
+        const queryCarts = `SELECT items FROM carts WHERE id = $1`
+        const getUser = [req.user.id] 
+        const { rows } = await pool.query(queryCarts, getUser)
+        if (!rows[0].items.length > 0) {
+            return res.status(400).json({ message: 'Basket is already empty.'})
+        }
+        const deleteCart = await pool.query(`UPDATE carts SET items = $1 WHERE id = $2`, [[], req.user.id])
+        res.status(200).json({ message: 'All items removed successfully.'})
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error :('})
+    }
+})
+
+
 cartRouter.get('/', async (req, res) => {
     try {
         if(!req.user) {

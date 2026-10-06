@@ -36,6 +36,7 @@ export function ShopCart() {
     const [ totalPrice, setTotalPrice ] = useState(null)
     const [ totalItem, setTotalItem ] = useState(null)
     const [ totalItemCount, setTotalItemCount ] = useState(null)
+    const [ disabled, setDisabled ] = useState(null)
 
     const getUserCart = useCallback(async () => {
             try {
@@ -79,6 +80,8 @@ export function ShopCart() {
         getUserCart()
     }, [getUserCart])
     async function addItem(id) {
+        setDisabled(true)
+        setTimeout(() => setDisabled(false), 1500)
         try {
         const response = await fetch('/api/cart', {
             method: 'POST',
@@ -100,6 +103,8 @@ export function ShopCart() {
         }
     }
     async function removeItem(id) {
+        setDisabled(true)
+        setTimeout(() => setDisabled(false), 1500)
         try {
         const response = await fetch('/api/cart/delete', {
             method: 'POST',
@@ -120,6 +125,24 @@ export function ShopCart() {
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
+    async function removeAll() {
+        setDisabled(true)
+        setTimeout(() => setDisabled(false), 1500)
+        try {
+        const response = await fetch('/api/cart/deleteAll', {
+            method: 'DELETE',
+        })
+        const result = await response.json()
+        if (!response.ok) {
+            throw new Error(response.message)
+        }
+        toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
+        getUserCart()
+        } catch (error) {
+            console.log('Server Error')
+            toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
+        }
+    }
     return (
         <div className="size-full">
             <Navigation />
@@ -128,7 +151,7 @@ export function ShopCart() {
                 <div className="h-[8%] w-full bg-slate-400 flex justify-between items-center">
                     <h1 className='text-[46px] font-bold relative left-[5%]'>Shopping cart</h1>
                     <div className='flex gap-1 justify-center items-center font-medium relative left-[10%]'><img src="/icons8-canada-48.png" className='hover:size-[50px]'/><h2 className='hover:font-bold'>English</h2><div className='font-bold'>|</div><h2 className='hover:font-bold'>CAD</h2></div>
-                    <div className='text-red-700 text-[16px] flex font-medium decoration-2 hover:underline relative right-[5%]'><img src="/icons8-garbage-48.png" className='size-[25px]'/><h3>Remove all</h3></div>
+                    <button className='text-red-700 text-[16px] flex font-medium decoration-2 hover:underline relative right-[5%]' onClick={() => removeAll()}><img src="/icons8-garbage-48.png" className='size-[25px]'/><h3>Remove all</h3></button>
                 </div>
                 <div className="h-[92%] w-full bg-white flex">
                     <div className="h-[100%] w-[65%] bg-white flex flex-col items-center">
@@ -147,7 +170,7 @@ export function ShopCart() {
                                         <div className='w-[45%] h-full flex flex-col justify-center items-center gap-6'>
                                             <h2 className="text-[38px] font-medium">{item.name}</h2>
                                             <p className="text-[24px] font-thin text-center text-black">{item.description}</p>
-                                            <div className="text-[18px] font-bold flex gap-2 text-black"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => removeItem(item.id)}>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => addItem(item.id)}>+</button></div>
+                                            <div className="text-[18px] font-bold flex gap-2 text-black"><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => removeItem(item.id)} disabled={disabled}>-</button><h3 className="text-[24px]">{item.quantity}</h3><button className='border-slate-200 border-2 rounded-[20px] text-[28px] px-4 hover:bg-white' onClick={() => addItem(item.id)} disabled={disabled}>+</button></div>
                                         </div>
                                         <div className='w-[20%] h-full text-[28px] font-light relative top-[5%] text-black'>{item.price}$/item</div>
                                     </div>
