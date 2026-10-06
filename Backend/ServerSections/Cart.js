@@ -21,7 +21,7 @@ cartRouter.post('/', async (req, res) => {
                            WHERE id = $2 RETURNING *`
         const userCart = [id, req.user.id]
         const resultCart = await pool.query(queryCart, userCart)
-        res.status(200).json({ message: resultCart}) 
+        res.status(200).json({ message: 'Item added successfully!'})
     } catch (err) {
         res.status(400).json({ message: 'Something went wrong.'})
     }
