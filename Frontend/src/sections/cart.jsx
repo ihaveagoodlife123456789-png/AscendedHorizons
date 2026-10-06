@@ -58,7 +58,7 @@ export function ShopCart() {
                 }
                  return acc
                 }, [])
-                const totalItemsCount =  totalItems.filter((x, y) => {
+                const totalItemsCount =  totalItems.reduce((x, y) => {
                     return x + y.quantity
                 }, 0)
 
@@ -73,7 +73,7 @@ export function ShopCart() {
         }
         getUserCart()
     }, [])
-    async function addItem() {
+    async function addItem(id) {
         try {
         const response = await fetch('/api/cart', {
             method: 'POST',
@@ -147,7 +147,7 @@ export function ShopCart() {
                                 <h2 className='font-medium text-[18px]'>Item(s) total{`(${totalItemCount})`}</h2>
                                 <h2>${totalPrice}</h2>
                             </div>
-                            <div className="bg-slate-500 w-[88%] h-[2px]">{totalPrice}</div>
+                            <div className="bg-slate-500 w-[88%] h-[2px]"></div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
                                 <h2 className='font-medium text-[18px]'>Subtotal</h2>
                                 <h2>{totalPrice ? ` $${totalPrice}` : 'No items yet'}</h2>
@@ -166,7 +166,7 @@ export function ShopCart() {
                                 <h2>{totalPrice ? ` $${totalPrice}` : 'No items yet'}</h2>
                             </div>
                             <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-bold px-3 hover:bg-white">Checkout</button>
-                            <div><img src="\icons8-leaf-50.png" className='size-[25px]'/><div className='font-light text-[18px]'>2% of sales will be donated to the <span className='font-normal text-green-700'>environment</span></div></div>
+                            <div><img src="/icons8-leaf-50.png" className='size-[25px]'/><div className='font-light text-[18px]'>2% of sales will be donated to the <span className='font-normal text-green-700'>environment</span></div></div>
                         </div>
                     </div>
                 </div>
