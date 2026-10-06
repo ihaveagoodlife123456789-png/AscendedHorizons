@@ -9,6 +9,7 @@ import { Access } from './App.jsx';
 import { Dashboard } from './App.jsx';
 import { Shop } from './App.jsx';
 import { Cart } from './App.jsx'
+import { Payment } from './App.jsx'
 
 const AppRouter = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const AppRouter = createBrowserRouter([
   {
     path: '/cart',
     element: <Cart />
+  },
+  {
+    path: '/cart/payment',
+    element: <Payment />
   },
 ])
 

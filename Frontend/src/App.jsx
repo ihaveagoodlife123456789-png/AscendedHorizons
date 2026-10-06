@@ -6,6 +6,7 @@ import { Login } from './sections/Login'
 import { UserDashboard } from './sections/Dashboard';
 import { DroneShop } from './sections/shop'
 import { ShopCart } from './sections/cart'
+import { StripePayment } from './sections/Payment'
 
 export function Lobby() {
   return (
@@ -42,5 +43,11 @@ export function Shop() {
 export function Cart() {
   return (
     <ShopCart />
+  )
+}
+
+export function Payment() {
+  return (
+    <StripePayment />
   )
 }
