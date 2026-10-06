@@ -20,7 +20,7 @@ cartRouter.post('/', async (req, res) => {
         const queryCart = `UPDATE carts
                            SET items = array_append(items, $1)
                            WHERE id = $2 RETURNING *`
-        const userCart = [id, req.user.id]
+        const userCart = [itemId, req.user.id]
         const resultCart = await pool.query(queryCart, userCart)
         if (!resultCart) {
            return res.status(400).json({ message: 'Something went wrong.'}) 
