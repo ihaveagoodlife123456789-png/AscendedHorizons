@@ -34,9 +34,11 @@ const mockitems = [
 
 export function DroneShop() {
     const [ items, setItems ] = useState(null)
+    const [ disabled, setDisabled ] = useState(null)
 
     async function sonner(id) {
-
+        setDisabled(false)
+        setTimeout(() => setDisabled(true), 1000)
         try {
         const response = await fetch('/api/cart', {
             method: 'POST',
@@ -117,7 +119,7 @@ export function DroneShop() {
                                             <p className="text-white text-[20px] font-thin text-center">{e.description}</p>
                                             <h3 className='text-white text-[20px] font-medium'>{e.mockprice}$</h3>
                                             <h4 className="text-white text-[24px] font-thin">o o o o o</h4>
-                                            <motion.button className="relative z-10 text-white flex gap-1 text-[18px] font-thin border-slate-200 border-2 rounded-[10px] px-1 py-1 hover:bg-slate-800" onClick={() => sonner(e.id)}>Add<img src="/icons8-add-50.png" className="relative z-10 h-[25px]" /></motion.button>
+                                            <motion.button disabled={disabled} className="relative z-10 text-white flex gap-1 text-[18px] font-thin border-slate-200 border-2 rounded-[10px] px-1 py-1 hover:bg-slate-800" onClick={() => sonner(e.id)}>Add<img src="/icons8-add-50.png" className="relative z-10 h-[25px]" /></motion.button>
                                             </div>
                                             </motion.div>
                                             <div>{e.message ? e.message : null}</div>
