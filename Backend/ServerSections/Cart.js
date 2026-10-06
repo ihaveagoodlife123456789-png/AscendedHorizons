@@ -21,9 +21,6 @@ cartRouter.post('/', async (req, res) => {
                            WHERE id = $2 RETURNING *`
         const userCart = [itemId, req.user.id]
         const resultCart = await pool.query(queryCart, userCart)
-        if (!resultCart) {
-           return res.status(400).json({ message: 'Something went wrong.'}) 
-        }
         res.status(200).json({ message: resultCart}) 
     } catch (err) {
         res.status(400).json({ message: 'Something went wrong.'})
@@ -51,9 +48,6 @@ cartRouter.post('/delete', async (req, res) => {
         }
         items.splice(index, 1)
         const deleteItem = await pool.query(`UPDATE carts SET items = $1 WHERE id = $2`, [items, req.user.id])
-        if(!deleteItem) {
-            return res.status(400).json({ message: 'Something went wrong.'})
-        }
         res.status(200).json({ message: 'Item deleted successfully.'})
     } catch (error) {
         res.status(500).json({ message: 'Server Error'})
