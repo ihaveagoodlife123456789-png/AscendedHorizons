@@ -14,7 +14,6 @@ cartRouter.post('/', async (req, res) => {
         const user = [req.user.id]
         console.log(req.user)
         const result = await pool.query(query, user)
-        console.log(result)
         if(!result) {
            return res.status(400).json({ message: 'Something went wrong.'}) 
         }
@@ -23,7 +22,6 @@ cartRouter.post('/', async (req, res) => {
                            WHERE id = $2 RETURNING *`
         const userCart = [id, req.user.id]
         const resultCart = await pool.query(queryCart, userCart)
-        console.log(resultCart)
         if (!resultCart) {
            return res.status(400).json({ message: 'Something went wrong.'}) 
         }
@@ -71,12 +69,10 @@ cartRouter.get('/', async (req, res) => {
         const queryUserCart = `SELECT items FROM carts WHERE id = $1`
         const userId = req.user.id
         const userCart = await pool.query(queryUserCart, [userId])
-        console.log(userCart)
         if(!userCart.rows.length > 0) {
             return res.status(400).json({ message: 'Your cart is empty. :(' })            
         }
         const items = userCart.rows[0].items
-        console.log(items)
         const getCartItems = await Promise.all(
             items.map(async (id) => {
             const getItem = `SELECT * FROM items WHERE id = $1`
@@ -85,7 +81,6 @@ cartRouter.get('/', async (req, res) => {
             const itemObject = result.rows[0]
             return itemObject
         }))
-        console.log(getCartItems)
         res.status(200).json(getCartItems)
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error.' })  
