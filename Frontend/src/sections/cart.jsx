@@ -59,7 +59,7 @@ export function ShopCart() {
                  return acc
                 }, [])
                 const totalItemsCount =  totalItems.filter((x, y) => {
-                    return x + y.quantity
+                    return x + y[0].quantity
                 }, 0)
 
                 setTotalItemCount(totalItemsCount)
@@ -125,7 +125,7 @@ export function ShopCart() {
                             <p className='w-[90%] text-[16px] font-medium text-center'>Purchasing subscripton+ let's you have up to a 7% discount on selected items and faster deliveries</p>
                             <div className='flex gap-10 justify-center items-center'>
                                 <h2 className='font-medium text-[18px]'>Item(s) total{`(${totalItemCount})`}</h2>
-                                <h2>{totalPrice}</h2>
+                                <h2>${totalPrice}</h2>
                             </div>
                             <div className="bg-slate-500 w-[88%] h-[2px]">{totalPrice}</div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
