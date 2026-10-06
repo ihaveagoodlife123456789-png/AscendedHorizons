@@ -140,7 +140,7 @@ export function ShopCart() {
                             { totalItem ? 
                             totalItem.map((item) => {
                                 return (
-                                    <div className="text-[40px] bg-slate-300 text-blue-700 border-green-800 border-2 w-[92%] h-[370px] flex">
+                                    <div key={item.id} className="text-[40px] bg-slate-300 text-blue-700 border-green-800 border-2 w-[92%] h-[370px] flex">
                                         <div className='w-[35%] h-full flex justify-center items-center'>
                                             <div className="w-[90%] h-[70%] bg-center bg-cover rounded-[6px]" style={{ backgroundImage: `url(${item.imgurl})`}}></div>
                                         </div>
