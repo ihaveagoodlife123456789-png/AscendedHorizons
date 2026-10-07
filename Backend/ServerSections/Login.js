@@ -16,7 +16,6 @@ loginRouter.post('/', (req, res, next) => {
             if (err) {
                 return(next(err));
             }
-            console.log(user)
             return res.status(200).send({ message: 'Successfully logged in!', user: user})
         })
     })(req, res, next);

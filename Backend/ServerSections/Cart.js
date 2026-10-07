@@ -11,7 +11,6 @@ cartRouter.post('/', async (req, res) => {
         }
         const query = `SELECT cart FROM users WHERE id = $1`
         const user = [req.user.id]
-        console.log(req.user)
         const result = await pool.query(query, user)
         if(!result) {
            return res.status(400).json({ message: 'Something went wrong.'}) 
@@ -40,7 +39,6 @@ cartRouter.post('/delete', async (req, res) => {
             return res.status(400).json({ message: 'Basket is empty.'})
         }
         const items = [...rows[0].items]
-        console.log(items)
         const index = items.indexOf(id)
         if (index === -1) {
             return res.status(400).json({ message: 'Item already removed.'})

@@ -70,8 +70,6 @@ export function ShopCart() {
                 setTotalItemCount(totalItemsCount)
                 setTotalItem(totalItems)
                 setTotalPrice(total)
-                console.log(totalItems)
-                console.log(result)
             } catch (error) {
                 setCart(null)
             }
@@ -95,13 +93,11 @@ export function ShopCart() {
         if (!response.ok) {
             throw new Error(result.message)
         }
-        console.log(result)
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
             setDisableButton(true)
             setTimeout(() => setDisableButton(false), 1000)
         } catch (error) {
-            console.log('Server Error')
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
@@ -120,13 +116,11 @@ export function ShopCart() {
         if (!response.ok) {
             throw new Error(result.message)
         }
-        console.log(result)
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
             setDisableButton(true)
             setTimeout(() => setDisableButton(false), 1000)
         } catch (error) {
-            console.log('Server Error')
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
@@ -139,13 +133,11 @@ export function ShopCart() {
         if (!response.ok) {
             throw new Error(result.message)
         }
-        console.log(result)
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
             setDisableButton(true)
             setTimeout(() => setDisableButton(false), 1000)
         } catch (error) {
-            console.log('Server Error')
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
@@ -163,7 +155,6 @@ export function ShopCart() {
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
         } catch (error) {
-            console.log('Server Error')
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }

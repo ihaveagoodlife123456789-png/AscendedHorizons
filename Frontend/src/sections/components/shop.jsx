@@ -49,10 +49,8 @@ export function DroneShop() {
         if (!response.ok) {
             throw new Error(response.message)
         }
-        console.log(result)
         toast.success("Item added to cart", { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         } catch (error) {
-            console.log('Server Error')
             toast.error(`${error.message}`, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
@@ -69,7 +67,6 @@ export function DroneShop() {
                     return;
                 }
                 setItems(result)
-                console.log(result)
             } catch (err) {
                 console.log('Server Error')
             }
