@@ -14,14 +14,18 @@ paymentRouter.post('/', async (req, res) => {
         if(!req.user) {
             return res.status(400).json({ message: 'Please login first.' })
         }
+        console.log(req.user)
         const { rows } = await pool.query(`SELECT items FROM carts WHERE id = $1`, [req.user.id])
+        console.log(rows)
         if(!rows[0].items > 0) {
-            res.status(400).json({ message: 'Cart empty.' })
+            return res.status(400).json({ message: 'Cart empty.' })
         }
         const cartArray = rows[0].items
+        console.log(cartArray)
         const totalCost = cartArray.reduce((previous, current) => {
             return previous + current
         }, 0)
+        console.log(totalCost)
         const paymentIntent = await stripe.paymentIntents.create({
         amount: totalCost,
         currency: 'cad'
@@ -32,6 +36,7 @@ paymentRouter.post('/', async (req, res) => {
         client_secret: paymentIntent.client_secret
     })
     } catch (error) {
+        console.log(error)
          return res.status(500).json({ message: 'Cannot initialize checkout.' })
     }
 })
