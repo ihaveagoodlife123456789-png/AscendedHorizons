@@ -3,6 +3,8 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import { useEffect, useState } from 'react'
 
+import { PaymentForm } from './PaymentElement'
+
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 
 export function StripePayment() {
@@ -44,7 +46,7 @@ export function StripePayment() {
                 <div className='w-full h-[86%] flex'>
                     <div className='w-[65%] h-full flex justify-center items-center'>
                         <Elements stripe={stripePromise} options={{ clientSecret, appearance}}>
-
+                            <PaymentForm />
                         </Elements>
                     </div>
                     <div className='w-[35%] h-full flex justify-center items-center'>
