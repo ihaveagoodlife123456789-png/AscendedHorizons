@@ -35,7 +35,7 @@ paymentRouter.post('/', async (req, res) => {
 
     }
 })
-
+/*
 // Update a Payment Intent
 paymentRouter.post('/update', async (req, res) => {
     try {
@@ -72,7 +72,7 @@ paymentRouter.post('/cancel', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
-
+*/
 // Confirm a Payment Intent
 paymentRouter.post('/confirm', async (req, res) => {
     try {
