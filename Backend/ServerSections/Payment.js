@@ -37,7 +37,7 @@ paymentRouter.post('/', async (req, res) => {
 })
 
 // Update a Payment Intent
-stripePayment.post('/update', async (req, res) => {
+paymentRouter.post('/update', async (req, res) => {
     try {
         const { paymentIntentId, newAmount  } = req.body
         const paymentUpdate = await stripe.paymentIntents.update(
@@ -52,7 +52,7 @@ stripePayment.post('/update', async (req, res) => {
 })
 
 // Retrieve a Payment Intent
-stripePayment.post('/retrieve', async (req, res) => {
+paymentRouter.post('/retrieve', async (req, res) => {
     try {
         const { paymentIntentId } = req.body
         const paymentRetrieve = await stripe.paymentIntents.retrieve(paymentIntentId);
@@ -63,7 +63,7 @@ stripePayment.post('/retrieve', async (req, res) => {
 });
 
 // Cancel a Payment Intent
-stripePayment.post('/cancel', async (req, res) => {
+paymentRouter.post('/cancel', async (req, res) => {
     try {
         const { paymentIntentId } = req.body;
         await stripe.paymentIntents.cancel(paymentIntentId);
@@ -74,7 +74,7 @@ stripePayment.post('/cancel', async (req, res) => {
 });
 
 // Confirm a Payment Intent
-stripePayment.post('/confirm', async (req, res) => {
+paymentRouter.post('/confirm', async (req, res) => {
     try {
         const { paymentIntentId, paymentMethodId } = req.body;
         
