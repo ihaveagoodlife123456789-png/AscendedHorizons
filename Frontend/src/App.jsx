@@ -7,6 +7,7 @@ import { UserDashboard } from './sections/Dashboard';
 import { DroneShop } from './sections/shop'
 import { ShopCart } from './sections/cart'
 import { StripePayment } from './sections/Payment'
+import { StripePaymentConfirmation } from './sections/Confirmation'
 
 export function Lobby() {
   return (
@@ -49,5 +50,11 @@ export function Cart() {
 export function Payment() {
   return (
     <StripePayment />
+  )
+}
+
+export function Confirmation() {
+  return (
+    <StripePaymentConfirmation />
   )
 }

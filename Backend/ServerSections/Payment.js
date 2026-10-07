@@ -26,6 +26,7 @@ paymentRouter.post('/', async (req, res) => {
         amount: totalCost,
         currency: 'cad'
     })
+    console.log(paymentIntent)
     res.json({
         id: paymentIntent.id,
         client_secret: paymentIntent.client_secret
@@ -34,3 +35,58 @@ paymentRouter.post('/', async (req, res) => {
 
     }
 })
+
+// Update a Payment Intent
+stripePayment.post('/update', async (req, res) => {
+    try {
+        const { paymentIntentId, newAmount  } = req.body
+        const paymentUpdate = await stripe.paymentIntents.update(
+            paymentIntentId,
+            { amount: newAmount }
+        )
+        console.log(paymentUpdate)
+    res.json({client_amount: paymentUpdate.amount})
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+})
+
+// Retrieve a Payment Intent
+stripePayment.post('/retrieve', async (req, res) => {
+    try {
+        const { paymentIntentId } = req.body
+        const paymentRetrieve = await stripe.paymentIntents.retrieve(paymentIntentId);
+        res.json({ client_amount: paymentRetrieve.amount });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Cancel a Payment Intent
+stripePayment.post('/cancel', async (req, res) => {
+    try {
+        const { paymentIntentId } = req.body;
+        await stripe.paymentIntents.cancel(paymentIntentId);
+        res.json({ client_status: 'Cancelled' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Confirm a Payment Intent
+stripePayment.post('/confirm', async (req, res) => {
+    try {
+        const { paymentIntentId, paymentMethodId } = req.body;
+        
+        const paymentConfirm = await stripe.paymentIntents.confirm(paymentIntentId, {
+            payment_method: paymentMethodId,
+        });
+        
+        res.json({
+            client_status: paymentConfirm.status,
+            client_payment_method: paymentConfirm.payment_method
+        });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});

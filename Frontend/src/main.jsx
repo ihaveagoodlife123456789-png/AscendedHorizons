@@ -10,6 +10,7 @@ import { Dashboard } from './App.jsx';
 import { Shop } from './App.jsx';
 import { Cart } from './App.jsx'
 import { Payment } from './App.jsx'
+import { Confirmation } from './App.jsx'
 
 const AppRouter = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const AppRouter = createBrowserRouter([
   {
     path: '/cart/checkout',
     element: <Payment />
+  },
+  {
+    path: '/cart/checkout/confirmation',
+    element: <Confirmation />
   },
 ])
 
