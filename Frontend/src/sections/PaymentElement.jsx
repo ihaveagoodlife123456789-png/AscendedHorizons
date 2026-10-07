@@ -42,7 +42,7 @@ export function PaymentForm() {
     setLoading(false);
   };
 return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4">
+    <form onSubmit={handleSubmit} className="size-full p-4">
       <PaymentElement options={{layout: 'tabs'}}/>
       <button 
         type="submit" 
