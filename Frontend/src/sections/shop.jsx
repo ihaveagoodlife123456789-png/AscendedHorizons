@@ -37,8 +37,8 @@ export function DroneShop() {
     const [ disabled, setDisabled ] = useState(null)
 
     async function sonner(id) {
-        setDisabled(false)
-        setTimeout(() => setDisabled(true), 1000)
+        setDisabled(true)
+        setTimeout(() => setDisabled(false), 1000)
         try {
         const response = await fetch('/api/cart', {
             method: 'POST',
