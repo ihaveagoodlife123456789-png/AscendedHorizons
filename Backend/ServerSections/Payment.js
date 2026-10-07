@@ -27,7 +27,7 @@ paymentRouter.post('/', async (req, res) => {
         }, 0)
         console.log(totalCost)
         const paymentIntent = await stripe.paymentIntents.create({
-        amount: totalCost,
+        amount: totalCost * 100,
         currency: 'cad'
     })
     console.log(paymentIntent)
