@@ -95,8 +95,6 @@ export function ShopCart() {
         }
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
-            setDisableButton(true)
-            setTimeout(() => setDisableButton(false), 1000)
         } catch (error) {
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
@@ -118,8 +116,6 @@ export function ShopCart() {
         }
         toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
         getUserCart()
-            setDisableButton(true)
-            setTimeout(() => setDisableButton(false), 1000)
         } catch (error) {
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
