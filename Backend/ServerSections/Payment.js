@@ -5,16 +5,16 @@ import { pool } from '../index.js'
 export const paymentRouter = express.Router()
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-const domain = await stripe.paymentMethodDomains.create({
+/*const domain = await stripe.paymentMethodDomains.create({
     domain_name: 'ascendedhorizons.com'
-})
+})*/
 
 paymentRouter.post('/', async (req, res) => {
     try {
         if(!req.user) {
-            res.status(400).json({ message: 'Please login first.' })
+            return res.status(400).json({ message: 'Please login first.' })
         }
-        const { rows } = pool.query(`SELECT items FROM carts WHERE id = $1`, [req.user.id])
+        const { rows } = await pool.query(`SELECT items FROM carts WHERE id = $1`, [req.user.id])
         if(!rows[0].items > 0) {
             res.status(400).json({ message: 'Cart empty.' })
         }
@@ -32,7 +32,7 @@ paymentRouter.post('/', async (req, res) => {
         client_secret: paymentIntent.client_secret
     })
     } catch (error) {
-
+         return res.status(500).json({ message: 'Cannot initialize checkout.' })
     }
 })
 /*
