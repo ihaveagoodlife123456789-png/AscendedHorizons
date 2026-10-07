@@ -78,20 +78,4 @@ paymentRouter.post('/cancel', async (req, res) => {
     }
 });
 */
-// Confirm a Payment Intent
-paymentRouter.post('/confirm', async (req, res) => {
-    try {
-        const { paymentIntentId, paymentMethodId } = req.body;
-        
-        const paymentConfirm = await stripe.paymentIntents.confirm(paymentIntentId, {
-            payment_method: paymentMethodId,
-        });
-        
-        res.json({
-            client_status: paymentConfirm.status,
-            client_payment_method: paymentConfirm.payment_method
-        });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-});
+
