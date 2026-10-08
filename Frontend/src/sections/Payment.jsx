@@ -44,7 +44,7 @@ export function StripePayment() {
             <div className='relative w-full h-[90%] bg-white'>
                 <div className='w-full h-[8%] bg-slate-500 absolute top-0'></div>
                 <div className='w-full h-[86%] flex'>
-                    <div className='w-[65%] h-full flex justify-center items-center'>
+                    <div className='w-[65%] h-full flex justify-center items-center overflow-scroll'>
                         <Elements stripe={stripePromise} options={{ clientSecret, appearance}}>
                             <PaymentForm />
                         </Elements>
