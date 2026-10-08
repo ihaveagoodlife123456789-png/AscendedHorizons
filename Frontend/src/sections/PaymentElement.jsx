@@ -1,4 +1,4 @@
-import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
+import { useStripe, useElements, PaymentElemen, AddressElement } from '@stripe/react-stripe-js';
 import { useState } from 'react';
 
 export function PaymentForm() {
