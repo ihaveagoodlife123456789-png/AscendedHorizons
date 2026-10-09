@@ -43,10 +43,10 @@ paymentRouter.post('/', async (req, res) => {
 
 // Retrieve a Payment Intent
 paymentRouter.post('/retrieve', async (req, res) => {
+    const { paymentIntentId } = req.body
     try {
-        const { paymentIntentId } = req.body
         const paymentRetrieve = await stripe.paymentIntents.retrieve(paymentIntentId);
-        res.json({ client_amount: paymentRetrieve.amount });
+        res.json({ client_paymentIntents: paymentRetrieve });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
