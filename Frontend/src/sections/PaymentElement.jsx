@@ -43,7 +43,7 @@ export function PaymentForm() {
   };
 return (
     <form onSubmit={handleSubmit} className="size-[80%] p-4">
-      <PaymentElement options={{layout: 'accordion'}}/>
+      <PaymentElement options={{layout: 'tabs'}} />
       <AddressElement options={{mode: 'shipping'}} />
       <button 
         type="submit" 

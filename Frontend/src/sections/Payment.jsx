@@ -40,9 +40,10 @@ export function StripePayment() {
         }
         getPaymentIntent()
     }, [])
-    const appearance = {
-    theme: 'night'
-  }
+    const appearance = { 
+        theme: 'stripe',
+        variables: { colorText: '#111827', colorBackground: '#ffffff' }
+     }
   if (paymentIntentMessage) {
     return <div className='bg-red-300 p-4 text-red-800'>Failed to load checkout session.</div>;
   }
@@ -54,7 +55,7 @@ export function StripePayment() {
         <div className='size-full'>
             <Navigation />
             <div className='relative w-full h-[90%] bg-white'>
-                <div className='w-full h-[8%] bg-slate-500 absolute top-0 text-[42px] font-bold flex justify-center'>Checkout</div>
+                <div className='w-full h-[8%] bg-slate-500 absolute top-0 text-[42px] font-bold flex justify-start'>Checkout</div>
                 <div className='w-full h-[86%] flex'>
                     <div className='w-[65%] h-full flex justify-center items-center overflow-scroll'>
                         <Elements stripe={stripePromise} options={{ clientSecret, appearance}}>
@@ -67,9 +68,9 @@ export function StripePayment() {
                                 userCart ?
                                 userCart.map((item) => {
                                     return (
-                                        <div className='flex flex-col justify-center items-center w-[93%] h-[200px] border-blue-800' border-2>
+                                        <div className='flex flex-col justify-center items-center w-[93%] h-[200px] border-blue-800 border-2 rounded-[8px] bg-center bg-cover' style={{ backgroundImage: `${item.bgurl}` }}>
                                             <h1 className='text-[32px] font-medium'>{item.name}</h1>
-                                            <h1 className='text-[24px] font-light'>{item.price}</h1>
+                                            <h1 className='text-[24px] font-light'>${item.price}</h1>
                                             <h2>{userCart?.message}</h2>
                                         </div>
                                     )
