@@ -14,8 +14,6 @@ paymentRouter.post('/', async (req, res) => {
         if(!req.user) {
             return res.status(400).json({ message: 'Please login first.' })
         }
-        //if()
-        console.log(req.user)
         const { rows } = await pool.query(`SELECT items FROM carts WHERE id = $1`, [req.user.id])
         console.log(rows)
         if(!rows[0].items > 0) {
@@ -26,7 +24,16 @@ paymentRouter.post('/', async (req, res) => {
         const totalCost = cartArray.reduce((previous, current) => {
             return previous + current
         }, 0)
-        console.log(totalCost)
+        const { paymentIntentsId } = await pool.query(`SELECT orders FROM orders WHERE id = $1`, [req.user.id])
+        const existingPaymentId = await stripe.paymentIntents.retrieve(paymentIntentsId[0].orders[0])
+        const paymentStatusReusable = ['requires_payment_method', 'requires_confirmation'].includes(existingPaymentId.status)
+        if(paymentStatusReusable) {
+            res.status(200).json({
+                id: existingPaymentId.id,
+                client_secret: paymentIntent.client_secret
+            })
+            return
+        }
         const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(totalCost * 100),
         currency: 'cad'
