@@ -16,7 +16,7 @@ paymentRouter.post('/', async (req, res) => {
         }
         const { rows } = await pool.query(`SELECT items FROM carts WHERE id = $1`, [req.user.id])
         console.log(rows)
-        if(!rows[0].items > 0) {
+        if(!rows[0]?.items?.length) {
             return res.status(400).json({ message: 'Cart empty.' })
         }
         const cartArray = rows[0].items
@@ -24,22 +24,25 @@ paymentRouter.post('/', async (req, res) => {
         const totalCost = cartArray.reduce((previous, current) => {
             return previous + current
         }, 0)
-        const { paymentIntentsId } = await pool.query(`SELECT orders FROM orders WHERE id = $1`, [req.user.id])
-        const existingPaymentId = await stripe.paymentIntents.retrieve(paymentIntentsId[0]?.orders?.at(-1))
-        const paymentStatusReusable = ['requires_payment_method', 'requires_confirmation'].includes(existingPaymentId.status)
-        if(paymentStatusReusable) {
+        const { rows: orderRows } = await pool.query(`SELECT orders FROM orders WHERE id = $1`, [req.user.id])
+        const latestIntentId = orderRows[0]?.orders?.at(-1)
+        if(latestIntentId) {
+            const existingPaymentId = await stripe.paymentIntents.retrieve(latestIntentId)
+            const paymentStatusReusable = ['requires_payment_method', 'requires_confirmation'].includes(existingPaymentId.status)
+            if(paymentStatusReusable) {
+              await stripe.paymentIntents.update(existingPaymentId.id, { amount: Math.round(totalCost * 100) })
             res.status(200).json({
                 id: existingPaymentId.id,
-                client_secret: paymentIntent.client_secret
+                client_secret: existingPaymentId.client_secret
             })
-            return
+            return;
+            }
         }
         const paymentIntent = await stripe.paymentIntents.create({
-        amount: Math.round(totalCost * 100),
-        currency: 'cad'
-    })
-    console.log(paymentIntent)
-    const pushOrderTodatabase = await pool.query(`UPDATE orders SET orders = array_append(orders, $1) WHERE id = $2`, [paymentIntent.id, req.user.id])
+          amount: Math.round(totalCost * 100),
+          currency: 'cad'
+        })
+        const pushOrderTodatabase = await pool.query(`UPDATE orders SET orders = array_append(orders, $1) WHERE id = $2`, [paymentIntent.id, req.user.id])
     res.json({
         id: paymentIntent.id,
         client_secret: paymentIntent.client_secret
