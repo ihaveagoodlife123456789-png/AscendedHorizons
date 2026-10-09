@@ -25,7 +25,7 @@ paymentRouter.post('/', async (req, res) => {
             return previous + current
         }, 0)
         const { paymentIntentsId } = await pool.query(`SELECT orders FROM orders WHERE id = $1`, [req.user.id])
-        const existingPaymentId = await stripe.paymentIntents.retrieve(paymentIntentsId[0].orders[0])
+        const existingPaymentId = await stripe.paymentIntents.retrieve(paymentIntentsId[0]?.orders?.at(-1))
         const paymentStatusReusable = ['requires_payment_method', 'requires_confirmation'].includes(existingPaymentId.status)
         if(paymentStatusReusable) {
             res.status(200).json({
