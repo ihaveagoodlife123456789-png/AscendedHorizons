@@ -8,6 +8,10 @@ export function StripePaymentConfirmation() {
     useEffect(() => {
         async function getPaymentIntentsInfo() {
             const getUserPaymentIntentsId = searchParams.get('payment_intent')
+            if (!getUserPaymentIntentsId) {
+             setUserPaymentIntents('No payment found.')
+              return
+            }
         console.log(getUserPaymentIntentsId)
         try {
             const response = await fetch('/api/cart/checkout/retrieve', {
@@ -15,18 +19,22 @@ export function StripePaymentConfirmation() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ paymentIntentId: getUserPaymentIntentsId })
             })
-            const result = response.json()
+            const result = await response.json()
             if(!response.ok) {
                 setUserPaymentIntents("Cannot get user payment info.")
+                return
             }
             setUserPaymentIntents(result.client_paymentIntents)
-            console.log(userPaymentIntents)
         } catch (error) {
             
         }
         }
         getPaymentIntentsInfo()
-    }, [])
+    }, [searchParams])
+
+    useEffect(() => {
+  console.log(userPaymentIntents)
+}, [userPaymentIntents])
     return (
         <div className='size-full'>
             <Navigation />
