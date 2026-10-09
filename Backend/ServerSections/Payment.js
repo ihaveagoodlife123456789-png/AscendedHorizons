@@ -40,6 +40,18 @@ paymentRouter.post('/', async (req, res) => {
          return res.status(500).json({ message: 'Cannot initialize checkout.' })
     }
 })
+
+// Retrieve a Payment Intent
+paymentRouter.post('/retrieve', async (req, res) => {
+    try {
+        const { paymentIntentId } = req.body
+        const paymentRetrieve = await stripe.paymentIntents.retrieve(paymentIntentId);
+        res.json({ client_amount: paymentRetrieve.amount });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
 /*
 // Update a Payment Intent
 paymentRouter.post('/update', async (req, res) => {
@@ -55,17 +67,6 @@ paymentRouter.post('/update', async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 })
-
-// Retrieve a Payment Intent
-paymentRouter.post('/retrieve', async (req, res) => {
-    try {
-        const { paymentIntentId } = req.body
-        const paymentRetrieve = await stripe.paymentIntents.retrieve(paymentIntentId);
-        res.json({ client_amount: paymentRetrieve.amount });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-});
 
 // Cancel a Payment Intent
 paymentRouter.post('/cancel', async (req, res) => {
