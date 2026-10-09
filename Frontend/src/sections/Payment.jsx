@@ -69,8 +69,8 @@ export function StripePayment() {
                                 userCart.map((item) => {
                                     return (
                                         <div className='flex flex-col justify-center items-center w-[93%] h-[200px] border-blue-800 border-2 rounded-[8px] bg-center bg-cover' style={{ backgroundImage: `url(${item.imgurl})` }}>
-                                            <h1 className='text-[32px] font-medium'>{item.name}</h1>
-                                            <h1 className='text-[24px] font-light'>${item.price}</h1>
+                                            <h1 className='text-[32px] font-medium text-white'>{item.name}</h1>
+                                            <h1 className='text-[24px] font-light text-green-700'>${item.price}</h1>
                                             <h2>{userCart?.message}</h2>
                                         </div>
                                     )
