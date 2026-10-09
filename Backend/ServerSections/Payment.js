@@ -14,6 +14,7 @@ paymentRouter.post('/', async (req, res) => {
         if(!req.user) {
             return res.status(400).json({ message: 'Please login first.' })
         }
+        //if()
         console.log(req.user)
         const { rows } = await pool.query(`SELECT items FROM carts WHERE id = $1`, [req.user.id])
         console.log(rows)
@@ -31,6 +32,7 @@ paymentRouter.post('/', async (req, res) => {
         currency: 'cad'
     })
     console.log(paymentIntent)
+    const pushOrderTodatabase = await pool.query(`UPDATE orders SET orders = array_append(orders, $1) WHERE id = $2`, [paymentIntent.id, req.user.id])
     res.json({
         id: paymentIntent.id,
         client_secret: paymentIntent.client_secret
