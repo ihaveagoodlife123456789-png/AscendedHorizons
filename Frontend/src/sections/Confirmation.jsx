@@ -13,17 +13,23 @@ export function StripePaymentConfirmation() {
               return
             }
         try {
-            const response = await fetch('/api/cart/checkout/retrieve', {
+            const [ responsePaymentIntents, responseDeleteCart ] = Promise.All([
+                await fetch('/api/cart/checkout/retrieve', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ paymentIntentId: getUserPaymentIntentsId })
-            })
-            const result = await response.json()
-            if(!response.ok) {
+            }),
+                await fetch('/api/cart/deleteAll', {
+                method: 'DELETE'
+                })
+            ])
+            const resultPaymentIntents = await responsePaymentIntents.json()
+            const resultDeleteCart = await responseDeleteCart.json()
+            if(!resultPaymentIntents.ok) {
                 setUserPaymentIntents("Cannot get user payment info.")
                 return
             }
-            setUserPaymentIntents(result.client_paymentIntents)
+            setUserPaymentIntents(resultPaymentIntents.client_paymentIntents)
         } catch (error) {
             console.log(error.message)
         }
