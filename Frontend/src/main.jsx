@@ -11,7 +11,7 @@ import { Shop } from './App.jsx';
 import { Cart } from './App.jsx'
 import { Payment } from './App.jsx'
 import { Confirmation } from './App.jsx'
-import { Traking } from './App.jsx'
+import { Tracking } from './App.jsx'
 
 const AppRouter = createBrowserRouter([
   {
@@ -47,8 +47,8 @@ const AppRouter = createBrowserRouter([
     element: <Confirmation />
   },
   {
-    path: '/cart/checkout/confirmation/traking',
-    element: <Traking />
+    path: '/cart/checkout/confirmation/tracking',
+    element: <Tracking />
   },
 ])
 
