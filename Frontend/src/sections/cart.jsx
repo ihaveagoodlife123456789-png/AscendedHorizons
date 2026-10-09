@@ -120,23 +120,6 @@ export function ShopCart() {
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
-    async function deleteCart() {
-        try {
-        const response = await fetch('/api/cart/deleteCart', {
-            method: 'DELETE',
-        })
-        const result = await response.json()
-        if (!response.ok) {
-            throw new Error(result.message)
-        }
-        toast.success(result.message, { style: { color: 'green', position: 'relative', left: '100px', width: '200px' }})
-        getUserCart()
-            setDisableButton(true)
-            setTimeout(() => setDisableButton(false), 1000)
-        } catch (error) {
-            toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
-        }
-    }
     async function removeAll() {
         setDisabled(true)
         setTimeout(() => setDisabled(false), 1500)
