@@ -11,4 +11,4 @@ shipmentRouter.get('/', (req, res) => {
   }
 })
 
-//Shippo apiKey header = process.env.SHIPPO_TEST_KEY
+//Shippo apiTestKey = process.env.SHIPPO_TEST_KEY
