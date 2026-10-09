@@ -20,7 +20,7 @@ export function StripePaymentConfirmation() {
                 body: JSON.stringify({ paymentIntentId: getUserPaymentIntentsId })
             })
                 await fetch('/api/cart/deleteAll', {
-                method: 'GET'
+                method: 'DELETE'
                 })
             ])
             const resultPaymentIntents = await responsePaymentIntents.json()
