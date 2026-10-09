@@ -55,7 +55,7 @@ export function StripePayment() {
         <div className='size-full'>
             <Navigation />
             <div className='relative w-full h-[90%] bg-white'>
-                <div className='w-full h-[8%] bg-slate-500 absolute top-0 text-[42px] font-bold flex justify-start'><h1 className='relative left-[3%]'>Checkout</h1></div>
+                <div className='z-2 w-full h-[8%] bg-slate-500 absolute top-0 text-[42px] font-bold flex justify-start'><h1 className='relative left-[3%]'>Checkout</h1></div>
                 <div className='w-full h-[86%] flex overflow-hidden'>
                     <div className='w-[65%] h-full flex justify-center items-center overflow-scroll'>
                         <Elements stripe={stripePromise} options={{ clientSecret, appearance}}>
@@ -67,6 +67,7 @@ export function StripePayment() {
                             {
                                 userCart ?
                                 userCart.map((item) => {
+                                    console.log(item.bgurl)
                                     return (
                                         <div className='flex flex-col justify-center items-center w-[93%] h-[200px] border-blue-800 border-2 rounded-[8px] bg-center bg-cover' style={{ backgroundImage: `url(${item.bgurl})` }}>
                                             <h1 className='text-[32px] font-medium'>{item.name}</h1>
