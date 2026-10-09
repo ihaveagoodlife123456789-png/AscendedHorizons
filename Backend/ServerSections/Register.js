@@ -39,7 +39,7 @@ registerRouter.post('/', async (req, res) => {
         const queryCart = `INSERT INTO carts (id, items) VALUES ($1, $2) RETURNING *`;
         const cartId = [userCartId.rows[0].cart, []]
         const newCartId = await pool.query(queryCart, cartId)
-        const createUserPaymentIntents = await(`INSERT INTO orders (id, orders) VALUES ($1, $2) RETURNING *`, [userCartId.rows[0].cart, []])   
+        const createUserPaymentIntents = await pool.query(`INSERT INTO orders (id, orders) VALUES ($1, $2) RETURNING *`, [userCartId.rows[0].cart, []])   
         return res.status(201).json({ message: 'User registered successfully.', user: result.rows[0] });
     } catch (error) {
         res.status(500).json({ message: 'Server Error'})

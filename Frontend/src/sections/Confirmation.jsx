@@ -12,7 +12,6 @@ export function StripePaymentConfirmation() {
              setUserPaymentIntents('No payment found.')
               return
             }
-        console.log(getUserPaymentIntentsId)
         try {
             const response = await fetch('/api/cart/checkout/retrieve', {
                 method: 'POST',
@@ -26,7 +25,7 @@ export function StripePaymentConfirmation() {
             }
             setUserPaymentIntents(result.client_paymentIntents)
         } catch (error) {
-            
+            console.log(error.message)
         }
         }
         getPaymentIntentsInfo()
