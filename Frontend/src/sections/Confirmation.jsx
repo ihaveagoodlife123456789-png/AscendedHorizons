@@ -18,7 +18,7 @@ export function StripePaymentConfirmation() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ paymentIntentId: getUserPaymentIntentsId })
-            })
+            }),
                 await fetch('/api/cart/deleteAll', {
                 method: 'DELETE'
                 })
