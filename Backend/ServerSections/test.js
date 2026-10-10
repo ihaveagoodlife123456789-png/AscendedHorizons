@@ -1,6 +1,6 @@
 import {Shippo} from "shippo"
 
-const shippo = new Shippo({apiKeyHeader: 'shippo_test_5fe9ac57d4e0e42b5a888ef602552b1c2d7ec327' })
+const shippo = new Shippo({apiKeyHeader: process.env.SHIPPO_TEST_KEY })
 const addressFrom = {
     name: "Shawn Ippotle",
     street1: "215 Clayton St.",
