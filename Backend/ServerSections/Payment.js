@@ -58,7 +58,7 @@ paymentRouter.post('/retrieve', async (req, res) => {
     const { paymentIntentId } = req.body
     try {
         const paymentRetrieve = await stripe.paymentIntents.retrieve(paymentIntentId);
-        const { rows } = await pool.query(`SELECT items FROM carts WHERE id = $1`, [req.user])
+        const { rows } = await pool.query(`SELECT items FROM carts WHERE id = $1`, [req.user.id])
         const items = rows[0].items
         const queryDetails = await pool.query(`INSERT INTO orderdetails (id, details) VALUES ($1, $2)`, [paymentIntentId, items])
         res.json({ client_paymentIntents: paymentRetrieve });
