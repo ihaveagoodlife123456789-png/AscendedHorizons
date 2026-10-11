@@ -1,6 +1,6 @@
 import {Shippo} from "shippo"
 
-const shippo = new Shippo({apiKeyHeader: process.env.SHIPPO_TEST_KEY })
+const shippo = new Shippo({apiKeyHeader: 'shippo_live_6c3b8a0b9cfafa52abc899689edf578f570b79f6'})
 const addressFrom = {
     name: "Shawn Ippotle",
     street1: "215 Clayton St.",
@@ -46,10 +46,12 @@ const shipment = await shippo.shipments.create({
 
 console.log(shipment)
 
-const rate = shipment.rates[0]
+const rates = shipment.rates
+
+const bestRate = Math.min(Number(rates.amount))
 
 const transaction = await shippo.transactions.create({
-    rate: rate?.objectId
+    rate: bestRate?.objectId
 })
 
 console.log(transaction)
