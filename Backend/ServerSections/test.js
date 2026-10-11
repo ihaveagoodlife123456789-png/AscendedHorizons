@@ -1,6 +1,6 @@
 import {Shippo} from "shippo"
 
-const shippo = new Shippo({apiKeyHeader: })
+const shippo = new Shippo({apiKeyHeader: ''})
 const addressFrom = {
     name: "Shawn Ippotle",
     street1: "215 Clayton St.",
