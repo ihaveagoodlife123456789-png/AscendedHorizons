@@ -58,10 +58,14 @@ export function StripePaymentConfirmation() {
                             <div className='w-[92%] h-[60%] grid grid-rows-auto grid-cols-1 justify-items-center items-around grid-flow-row overflow-scroll gap-5 relative top-6 scrollbar-thin overflow-x-hidden'>
                                 {
                                     userCart ?
-                                    <div className='w-full h-[250px] bg-slate-500 bg-cover bg-center' style={{ backgroundImage: `url(${userCart.imgurl})`}}>
-                                        <h1>{userCart.name}</h1>
-                                        <h2>{userCart.price}</h2>
-                                    </div>
+                                    userCart.map((item) => {
+                                        return (
+                                            <div className='w-full h-[250px] bg-cover bg-center' style={{ backgroundImage: `url(${userCart.imgurl})`}}>
+                                                <h1>{userCart.name}</h1>
+                                                <h2>{userCart.price}</h2>
+                                            </div>
+                                        )
+                                    })
                                     :
                                     null
                                 }
