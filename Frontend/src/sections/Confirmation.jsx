@@ -60,9 +60,9 @@ export function StripePaymentConfirmation() {
                                     userCart ?
                                     userCart.map((item) => {
                                         return (
-                                            <div className='w-full h-[250px] bg-cover bg-center' style={{ backgroundImage: `url(${userCart.imgurl})`}}>
-                                                <h1>{userCart.name}</h1>
-                                                <h2>{userCart.price}</h2>
+                                            <div className='w-full h-[250px] bg-cover bg-center' style={{ backgroundImage: `url(${item.imgurl})`}}>
+                                                <h1>{item.name}</h1>
+                                                <h2>{item.price}</h2>
                                             </div>
                                         )
                                     })
