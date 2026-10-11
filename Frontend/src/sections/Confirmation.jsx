@@ -28,7 +28,7 @@ export function StripePaymentConfirmation() {
             const resultPaymentIntents = await responsePaymentIntents.json()
             const resultGetCartInfo = await responseGetCartInfo.json()
             const resultDeleteCart = await responseDeleteCart.json()
-            if(!responsePaymentIntents.ok || !responseDeleteCart.ok || responseGetCartInfo.ok) {
+            if(!responsePaymentIntents.ok || !responseDeleteCart.ok || !responseGetCartInfo.ok) {
                 setUserPaymentIntents("Cannot get user payment info.")
                 return
             }
