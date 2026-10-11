@@ -54,7 +54,7 @@ export function StripePaymentConfirmation() {
                     <div className='w-[75%] h-[12%] bg-slate-200 flex justify-center items-center'><h1>Payment Successful</h1></div>
                     <div className='w-[90%] h-[80%] bg-slate-200 flex justify-center items-center gap-3 rounded-[8px]'>
                         <div className='w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
-                            <h1 className='h-[15%]'>Order</h1>
+                            <h1 className='h-[15%]'>Order()</h1>
                             <div className='w-[92%] h-[60%] grid grid-rows-auto grid-cols-1 justify-items-center items-around grid-flow-row overflow-scroll gap-5 relative top-6 scrollbar-thin overflow-x-hidden'>
                                 {
                                     userCart ?
@@ -70,7 +70,8 @@ export function StripePaymentConfirmation() {
                                     null
                                 }
                             </div>
-                    <Link to='/' className='text-[34px] font-medium h-[15%]'>Home</Link>
+                    <Link to='/' className='text-[26px] font-medium h-[15%] absolute left-2 bottom-2'>Total:{}</Link>
+                    <h2 className='text-[34px] font-thin h-[15%]'>Total:{}</h2>
                         </div>
                         <div className='w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
                             <h1 className='h-[15%]'>Package delivrery</h1>

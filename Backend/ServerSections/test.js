@@ -1,6 +1,6 @@
 import {Shippo} from "shippo"
 
-const shippo = new Shippo({apiKeyHeader: 'shippo_live_6c3b8a0b9cfafa52abc899689edf578f570b79f6'})
+const shippo = new Shippo({apiKeyHeader: })
 const addressFrom = {
     name: "Shawn Ippotle",
     street1: "215 Clayton St.",
@@ -48,10 +48,16 @@ console.log(shipment)
 
 const rates = shipment.rates
 
-const bestRate = Math.min(Number(rates.amount))
+const mapRates = rates.map((rate) => Number(rate.amount))
+
+const bestRate = Math.min(...mapRates)
+
+console.log(bestRate)
+
+const bestRateObject = rates.find((rate) => rate.amount = bestRate.toString)
 
 const transaction = await shippo.transactions.create({
-    rate: bestRate?.objectId
+    rate: bestRateObject?.objectId
 })
 
 console.log(transaction)
