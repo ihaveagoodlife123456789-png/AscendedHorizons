@@ -22,13 +22,13 @@ export function StripePaymentConfirmation() {
             const responseGetCartInfo = await fetch('/api/cart', {
                 method: 'GET'
             })
+            const resultGetCartInfo = await responseGetCartInfo.json()
             setUserCart(resultGetCartInfo)
             console.log(resultGetCartInfo)
             const responseDeleteCart = await fetch('/api/cart/deleteAll', {
                 method: 'DELETE'
                 })
             const resultPaymentIntents = await responsePaymentIntents.json()
-            const resultGetCartInfo = await responseGetCartInfo.json()
             const resultDeleteCart = await responseDeleteCart.json()
             if(!responsePaymentIntents.ok || !responseDeleteCart.ok) {
                 setUserPaymentIntents("Cannot get user payment info.")
