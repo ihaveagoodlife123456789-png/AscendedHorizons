@@ -79,7 +79,7 @@ cartRouter.get('/', async (req, res) => {
         const userId = req.user.id
         const userCart = await pool.query(queryUserCart, [userId])
         if(!userCart.rows[0].items > 0) {
-            return res.status(400).json({ message: 'Your cart is empty. :(' })            
+            return res.status(400).json({ message: 'Your cart is empty. :(' })         
         }
         const items = userCart.rows[0].items
         const getCartItems = await Promise.all(

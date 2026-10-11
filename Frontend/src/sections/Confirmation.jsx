@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 
 export function StripePaymentConfirmation() {
     const [searchParams] = useSearchParams()
-    const [ userPaymentIntents,  setUserPaymentIntents] = useState(null)
+    const [ userPaymentIntents, setUserPaymentIntents] = useState(null)
+    const [ userCart, setUserCart ] = useState(null)
     useEffect(() => {
         async function getPaymentIntentsInfo() {
             const getUserPaymentIntentsId = searchParams.get('payment_intent')
@@ -18,15 +19,20 @@ export function StripePaymentConfirmation() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ paymentIntentId: getUserPaymentIntentsId })
             })
+            const responseGetCartInfo = await fetch('/api/cart', {
+                method: 'GET'
+            })
             const responseDeleteCart = await fetch('/api/cart/deleteAll', {
                 method: 'DELETE'
                 })
             const resultPaymentIntents = await responsePaymentIntents.json()
+            const resultGetCartInfo = await responseGetCartInfo.json()
             const resultDeleteCart = await responseDeleteCart.json()
-            if(!responsePaymentIntents.ok || !responseDeleteCart.ok) {
+            if(!responsePaymentIntents.ok || !responseDeleteCart.ok || responseGetCartInfo.ok) {
                 setUserPaymentIntents("Cannot get user payment info.")
                 return
             }
+            setUserCart(resultGetCartInfo)
             setUserPaymentIntents(resultPaymentIntents.client_paymentIntents)
         } catch (error) {
             console.log(error.message)
@@ -48,8 +54,16 @@ export function StripePaymentConfirmation() {
                     <div className='w-[90%] h-[80%] bg-slate-200 flex justify-center items-center gap-3 rounded-[8px]'>
                         <div className='w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
                             <h1 className='h-[15%]'>Order</h1>
-                            <div className='w-[92%] h-[60%]'>
-
+                            <div className='w-[92%] h-[60%] grid grid-rows-auto grid-cols-1 justify-items-center items-around grid-flow-row overflow-scroll gap-5 relative top-6 scrollbar-thin overflow-x-hidden'>
+                                {
+                                    userCart ?
+                                    <div className='w-full h-[250px] bg-slate-500 bg-cover bg-center' style={{ backgroundImage: `url(${userCart.imgurl})`}}>
+                                        <h1>{userCart.name}</h1>
+                                        <h2>{userCart.price}</h2>
+                                    </div>
+                                    :
+                                    null
+                                }
                             </div>
                     <Link to='/' className='text-[34px] font-medium h-[15%]'>Home</Link>
                         </div>
