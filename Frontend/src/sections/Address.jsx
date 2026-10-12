@@ -26,7 +26,7 @@ function UserAddressForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ shipping: value })
     })
-    if(!createUserInfo.ok) {
+    if(createUserInfo.ok) {
         navigate('/cart/checkout')
     }
   };

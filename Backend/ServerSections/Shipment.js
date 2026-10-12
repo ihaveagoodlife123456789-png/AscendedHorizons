@@ -16,4 +16,12 @@ shipmentRouter.post('/', (req, res) => {
   }
 })
 
+shipmentRouter.get('/', (req, res) => {
+  try {
+
+  } catch (error) {
+    
+  }
+})
+
 //Shippo apiTestKey = process.env.SHIPPO_TEST_KEY
