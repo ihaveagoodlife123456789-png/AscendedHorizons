@@ -41,7 +41,7 @@ shipmentRouter.get('/', async (req, res) => {
     if(!rows[0].address) {
       return res.status(400).json({ message: 'Please enter address info first.'})
     }
-    res.status(400)
+    res.status(400).json({ message: 'Success!'})
   } catch (error) {
 
   }
