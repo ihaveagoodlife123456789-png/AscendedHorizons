@@ -39,12 +39,12 @@ shipmentRouter.get('/', async (req, res) => {
       return res.status(400).json({ message: 'Please login first.'})
     }
     const { rows } = await pool.query(`SELECT address FROM userinfo WHERE id = $1`, [ req.user.id ])
-    if(!rows[0].address) {
+    if(rows[0].address === null) {
       return res.status(400).json({ message: 'Please enter address info first.'})
     }
-    res.status(200)
+    res.status(200).json({ message: 'Success!'})
   } catch (error) {
-
+    res.status(400).json({ message: 'Server Error.'})
   }
 })
 
@@ -54,6 +54,10 @@ shipmentRouter.post('/create', async (req, res) => {
       return res.status(400).json({ message: 'Please login first.'})
     }
     const { rows } = await pool.query(`SELECT * FROM userinfo WHERE id = $1`, [ req.user.id ])
+    if(rows[0].address === null) {
+      return res.status(400).json({ message: 'Please enter address info first.'})
+    }
+
     const addressFrom = {
       name: "Montrealer",
       street1: "Rue Saint-Jacques",
@@ -63,12 +67,12 @@ shipmentRouter.post('/create', async (req, res) => {
       country: "CA"
     }
     const addressTo = {
-    name: "Bob",
-    street1: "Sainte-Catherine Street",
-    city: "Montreal",
-    state: "QC",
-    zip: "H3B1B2",
-    country: "CA"
+    name: rows[0].name,
+    street1: rows[0].address,
+    //city: rows[0].city,
+    state: rows[0].state,
+    zip: rows[0].postal_code,
+    country: rows[0].country
 };
   } catch {
     
