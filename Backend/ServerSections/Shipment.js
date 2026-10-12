@@ -41,7 +41,7 @@ shipmentRouter.get('/', async (req, res) => {
     if(!rows[0].address) {
       return res.status(400).json({ message: 'Please enter address info first.'})
     }
-    res.status(400).json({ message: 'Success!'})
+    res.status(200)
   } catch (error) {
 
   }
@@ -49,7 +49,23 @@ shipmentRouter.get('/', async (req, res) => {
 
 shipmentRouter.post('/create', async (req, res) => {
   try {
-
+    const getUserAddress = await pool.query(``)
+    const addressFrom = {
+      name: "Montrealer",
+      street1: "Rue Saint-Jacques",
+      city: "Montreal",
+      state: "QC",
+      zip: "H3C1A3",
+      country: "CA"
+    }
+    const addressTo = {
+    name: "Bob",
+    street1: "Sainte-Catherine Street",
+    city: "Montreal",
+    state: "QC",
+    zip: "H3B1B2",
+    country: "CA"
+};
   } catch {
     
   }
