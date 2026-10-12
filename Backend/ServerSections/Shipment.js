@@ -1,5 +1,5 @@
 import express from 'express'
-import pool from '../index'
+import { pool } from '../index.js'
 
 export const shipmentRouter = express.Router()
 
