@@ -42,7 +42,7 @@ paymentRouter.post('/', async (req, res) => {
             res.status(200).json({
                 id: existingPaymentId.id,
                 client_secret: existingPaymentId.client_secret,
-                total: paymentIntent.amount
+                total: existingPaymentId.amount
             })
             return;
             }
