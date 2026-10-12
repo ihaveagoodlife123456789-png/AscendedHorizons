@@ -1,22 +1,23 @@
 import {Shippo} from "shippo"
 
-const shippo = new Shippo({apiKeyHeader: ''})
+const shippo = new Shippo({apiKeyHeader: })
+
 const addressFrom = {
-    name: "Shawn Ippotle",
-    street1: "215 Clayton St.",
-    city: "San Francisco",
-    state: "CA",
-    zip: "94117",
-    country: "US"
+    name: "Montrealer",
+    street1: "Rue Saint-Jacques",
+    city: "Montreal",
+    state: "QC",
+    zip: "H3C1A3",
+    country: "CA"
 };
 
 const addressTo = {
-    name: "Mr Hippo",
-    street1: "Broadway 1",
-    city: "New York",
-    state: "NY",
-    zip: "10007",
-    country: "US",
+    name: "Bob",
+    street1: "Sainte-Catherine Street",
+    city: "Montreal",
+    state: "QC",
+    zip: "H3B1B2",
+    country: "CA"
 };
 
 const parcel = {
@@ -61,5 +62,10 @@ const transaction = await shippo.transactions.create({
 })
 
 console.log(transaction)
+
+/*const getShippo = await shippo.shipments.get('9c8ba1127a6b44889bd1bb7fad860c2a')
+console.log(getShippo)*/
+
+//Shippo refunds
 
 //process.env.SHIPPO_TEST_KEY
