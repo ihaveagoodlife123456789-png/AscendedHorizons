@@ -1,6 +1,7 @@
 import express from 'express'
 import Stripe from 'stripe'
 import { pool } from '../index.js'
+import { Shippo } from 'shippo'
 
 export const paymentRouter = express.Router()
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
