@@ -58,7 +58,12 @@ shipmentRouter.post('/create', async (req, res) => {
     if(rows[0].address === null) {
       return res.status(400).json({ message: 'Please enter address info first.'})
     }
-
+    const { rows: shipmentRow } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
+    if(shipmentRow[0].shipment !== 0) {
+      const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
+      res.status(200).json(getShippo)
+      return
+    }
     const addressFrom = {
       name: "Montrealer",
       street1: "Rue Saint-Jacques",
@@ -74,9 +79,27 @@ shipmentRouter.post('/create', async (req, res) => {
     state: rows[0].state,
     zip: rows[0].postal_code,
     country: rows[0].country
-};
+    };
+    const parcel = {
+      length: "15",
+      width: "10",
+      height: "7",
+      distanceUnit: "cm",
+      weight: "0.8",
+      massUnit: "kg"
+    }
+    const shipment = await shippo.shipments.create({
+      addressFrom: addressFrom,
+      addressTo: addressTo,
+      parcels: [parcel]
+    })
+    const rates = shipment.rates
+    const mapRates = rates.map((rate) => Number(rate.amount))
+    const bestRate = Math.min(...mapRates)
+    const pushUserShipment = await pool.query(`UPDATE usershipmentdetails SET shipment = 1$ WHERE id = $2`, [ shipment, req.user.id ])
+    res.status(200).json(bestRate)
   } catch {
-    
+    res.status(500).json({ message: "Server Error."})
   }
 })
 

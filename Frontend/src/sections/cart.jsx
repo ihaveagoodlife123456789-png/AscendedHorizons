@@ -152,13 +152,10 @@ export function ShopCart() {
     async function checkout() {
         setUserInfo(true)
         try {
-            console.log('hi')
             const response = await fetch('/api/shipment', {
                 method: 'GET'
             })
-            console.log('hi')
             const result = await response.json()
-            console.log('hi')
             if(!response.ok) {
                 setUserInfo(false)
                 toast.error("Please enter address", { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
@@ -166,7 +163,6 @@ export function ShopCart() {
             } else {
                 navigate('/cart/checkout')
             }
-            console.log('hi')
         } catch (error) {
             setUserInfo(false)
         }
@@ -237,7 +233,7 @@ export function ShopCart() {
                             </div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
                                 <h2 className='font-medium text-[18px]'>Shipping</h2>
-                                <motion.div variants={variants} initial={{ scale: 1, color: 'black' }} animate={ userInfo ? 'on' : 'off'}><Link to="/cart/address">Enter adress</Link></motion.div>
+                                <motion.div variants={variants} initial={{ scale: 1, color: 'black' }} animate={ userInfo ? 'on' : 'off'}>{!shipmentDetails ? <Link to="/cart/address">Enter adress</Link> : <h2>{shipmentDetails}</h2>}</motion.div>
                             </div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
                                 <h2 className='font-medium text-[18px]'>Tax</h2>
