@@ -21,31 +21,40 @@ paymentRouter.post('/', async (req, res) => {
         }
         const cartArray = rows[0].items
         console.log(cartArray)
-        const totalCost = cartArray.reduce((previous, current) => {
+        const subtotal = cartArray.reduce((previous, current) => {
             return previous + current
         }, 0)
+        const { rows: shipmentRow } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
+              const shipmentStatus = shipmentRow[0].shipment
+              const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
+              const rates = getShippo.rates
+              const mapRates = rates.map((rate) => Number(rate.amount))
+              const bestRate = Math.min(...mapRates)
+        const total = subtotal + bestRate
         const { rows: orderRows } = await pool.query(`SELECT orders FROM orders WHERE id = $1`, [req.user.id])
         const latestIntentId = orderRows[0]?.orders?.at(-1)
         if(latestIntentId) {
             const existingPaymentId = await stripe.paymentIntents.retrieve(latestIntentId)
             const paymentStatusReusable = ['requires_payment_method', 'requires_confirmation'].includes(existingPaymentId.status)
             if(paymentStatusReusable) {
-              await stripe.paymentIntents.update(existingPaymentId.id, { amount: Math.round(totalCost * 100) })
+              await stripe.paymentIntents.update(existingPaymentId.id, { amount: Math.round(total * 100) })
             res.status(200).json({
                 id: existingPaymentId.id,
-                client_secret: existingPaymentId.client_secret
+                client_secret: existingPaymentId.client_secret,
+                total: paymentIntent.amount
             })
             return;
             }
         }
         const paymentIntent = await stripe.paymentIntents.create({
-          amount: Math.round(totalCost * 100),
+          amount: Math.round(total * 100),
           currency: 'cad'
         })
         const pushOrderTodatabase = await pool.query(`UPDATE orders SET orders = array_append(orders, $1) WHERE id = $2`, [paymentIntent.id, req.user.id])
     res.json({
         id: paymentIntent.id,
-        client_secret: paymentIntent.client_secret
+        client_secret: paymentIntent.client_secret,
+        total: paymentIntent.amount
     })
     } catch (error) {
         console.log(error)

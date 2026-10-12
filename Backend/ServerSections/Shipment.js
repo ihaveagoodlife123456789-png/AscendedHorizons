@@ -66,7 +66,10 @@ shipmentRouter.post('/create', async (req, res) => {
     const shipmentStatus = shipmentRow[0].shipment
     if(shipmentStatus !== null) {
       const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
-      return res.status(200).json(getShippo)
+      const rates = getShippo.rates
+      const mapRates = rates.map((rate) => Number(rate.amount))
+      const bestRate = Math.min(...mapRates)
+      return res.status(200).json(bestRate)
     }
     console.log(shipmentRow[0].shipment)
     const addressFrom = {
