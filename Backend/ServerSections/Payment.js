@@ -4,6 +4,7 @@ import { pool } from '../index.js'
 
 export const paymentRouter = express.Router()
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+const shippo = new Shippo({apiKeyHeader: process.env.SHIPPO_TEST_KEY })
 
 /*const domain = await stripe.paymentMethodDomains.create({
     domain_name: 'ascendedhorizons.com'
