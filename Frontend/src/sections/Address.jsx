@@ -27,7 +27,7 @@ function UserAddressForm() {
         body: JSON.stringify({ shipping: value })
     })
     if(createUserInfo.ok) {
-        navigate('/cart/checkout')
+        navigate('/cart')
     }
   };
 return (
