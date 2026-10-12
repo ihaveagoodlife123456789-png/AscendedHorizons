@@ -54,15 +54,20 @@ shipmentRouter.post('/create', async (req, res) => {
     if(!req.user) {
       return res.status(400).json({ message: 'Please login first.'})
     }
+    console.log(req.user)
     const { rows } = await pool.query(`SELECT * FROM userinfo WHERE id = $1`, [ req.user.id ])
+    console.log(rows)
     if(rows[0].address === null) {
       return res.status(400).json({ message: 'Please enter address info first.'})
     }
+    console.log(rows[0].address)
     const { rows: shipmentRow } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
+    console.log(shipmentRow)
     if(shipmentRow[0].shipment !== 0) {
       const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
       return res.status(200).json(getShippo)
     }
+    console.log(shipmentRow[0].shipment)
     const addressFrom = {
       name: "Montrealer",
       street1: "Rue Saint-Jacques",
@@ -92,6 +97,7 @@ shipmentRouter.post('/create', async (req, res) => {
       addressTo: addressTo,
       parcels: [parcel]
     })
+    console.log(shipment)
     const rates = shipment.rates
     const mapRates = rates.map((rate) => Number(rate.amount))
     const bestRate = Math.min(...mapRates)
