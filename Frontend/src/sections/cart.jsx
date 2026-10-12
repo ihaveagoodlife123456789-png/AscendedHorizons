@@ -40,7 +40,7 @@ export function ShopCart() {
     const [ disabled, setDisabled ] = useState(null)
     const [ userInfo, setUserInfo ] = useState(null)
     const navigate = useNavigate()
-    const [ shipmentDetails, getShipmentDetails ] = useState(null)
+    const [ shipmentDetails, setShipmentDetails ] = useState(null)
 
 
     const getUserCart = useCallback(async () => {
@@ -81,7 +81,7 @@ export function ShopCart() {
                     toast.error("Please enter address again.", { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
                     return
                 }
-                getShipmentDetails(shipmentResult)
+                setShipmentDetails(shipmentResult)
             } catch (error) {
                 setCart(null)
             }

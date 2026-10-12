@@ -98,8 +98,8 @@ shipmentRouter.post('/create', async (req, res) => {
     const bestRate = Math.min(...mapRates)
     const pushUserShipment = await pool.query(`UPDATE usershipmentdetails SET shipment = $1 WHERE id = $2`, [ shipment.objectId, req.user.id ])
     res.status(200).json(bestRate)
-  } catch {
-    res.status(500).json({ message: "Server Error."})
+  } catch (error) {
+    return res.status(500).json({ message: "Server Error."})
   }
 })
 

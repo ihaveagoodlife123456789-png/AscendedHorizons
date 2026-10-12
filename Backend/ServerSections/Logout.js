@@ -12,7 +12,7 @@ logoutRouter.post('/', (req, res, next) => {
         }
         req.session.destroy((err) => {
             if (err) {
-                return res.status(500).json({ message: 'Could not log out, please trye again later.' })
+                return res.status(500).json({ message: 'Could not log out, please try again later.' })
             }
             res.clearCookie('session_cookie')
             return res.status(200).json({ message: 'Logged out successfully' });
