@@ -16,6 +16,7 @@ import { logoutRouter } from "./ServerSections/Logout.js"
 import { itemsRouter } from "./ServerSections/Items.js"
 import { cartRouter } from "./ServerSections/Cart.js"
 import { paymentRouter } from "./ServerSections/Payment.js"
+import { shipmentRouter } from "./ServerSections/Shipment.js"
 
 const app = express();
 app.use(express.json());
@@ -97,6 +98,7 @@ app.use('/api/logout', logoutRouter)
 app.use('/api/items', itemsRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/cart/checkout', paymentRouter)
+app.use('/api/shipment', shipmentRouter)
 
 
 const distPath = path.join(__dirname, '../Frontend/dist');

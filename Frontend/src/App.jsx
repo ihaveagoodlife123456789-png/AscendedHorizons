@@ -9,6 +9,7 @@ import { ShopCart } from './sections/cart'
 import { StripePayment } from './sections/Payment'
 import { StripePaymentConfirmation } from './sections/Confirmation'
 import { UserParcelTracking } from './sections/Tracking'
+import { UserAddress } from './sections/Address'
 
 export function Lobby() {
   return (
@@ -63,5 +64,11 @@ export function Confirmation() {
 export function Tracking() {
   return (
     <UserParcelTracking />
+  )
+}
+
+export function Address() {
+  return (
+    <UserAddress />
   )
 }

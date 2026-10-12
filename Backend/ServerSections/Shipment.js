@@ -1,9 +1,10 @@
 import express from 'express'
 import pool from '../index'
 
-const shipmentRouter = express.Router()
+export const shipmentRouter = express.Router()
 
-shipmentRouter.get('/', (req, res) => {
+shipmentRouter.post('/', (req, res) => {
+  const { shipping } = req.body
   try {
     
   } catch (error) {

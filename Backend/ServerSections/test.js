@@ -1,6 +1,6 @@
 import {Shippo} from "shippo"
 
-const shippo = new Shippo({apiKeyHeader: })
+const shippo = new Shippo({apiKeyHeader: 'shippo_test_5fe9ac57d4e0e42b5a888ef602552b1c2d7ec327' })
 
 const addressFrom = {
     name: "Montrealer",
@@ -67,5 +67,6 @@ console.log(transaction)
 console.log(getShippo)*/
 
 //Shippo refunds
+//https://docs.goshippo.com/api-reference
 
 //process.env.SHIPPO_TEST_KEY
