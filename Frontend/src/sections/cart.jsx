@@ -141,6 +141,7 @@ export function ShopCart() {
         }
     }
     async function checkout() {
+        setUserInfo(true)
         try {
             const response = await fetch('/api/shipment', {
                 method: 'GET'
@@ -157,7 +158,7 @@ export function ShopCart() {
         }
     }
     const variants = {
-        off: { scale: 1.08, color: 'red' },
+        off: { scale: 1.2, color: 'red' },
         on: { scale: 1, color: 'black' }
     }
     return (
