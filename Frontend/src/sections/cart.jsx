@@ -152,10 +152,13 @@ export function ShopCart() {
     async function checkout() {
         setUserInfo(true)
         try {
+            console.log('hi')
             const response = await fetch('/api/shipment', {
                 method: 'GET'
             })
+            console.log('hi')
             const result = await response.json()
+            console.log('hi')
             if(!response.ok) {
                 setUserInfo(false)
                 toast.error("Please enter address", { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})

@@ -3,6 +3,8 @@ import { pool } from '../index.js'
 
 export const shipmentRouter = express.Router()
 
+const shippo = new Shippo({apiKeyHeader: process.env.SHIPPO_TEST_KEY })
+
 shipmentRouter.post('/', async (req, res) => {
   const { shipping } = req.body
   try {
@@ -53,4 +55,4 @@ shipmentRouter.post('/create', async (req, res) => {
   }
 })
 
-//Shippo apiTestKey = process.env.SHIPPO_TEST_KEY
+//Shippo apiTestKey = process.env.SHIPPO_TEST_KEY, SHIPPO_LIVE_KEY
