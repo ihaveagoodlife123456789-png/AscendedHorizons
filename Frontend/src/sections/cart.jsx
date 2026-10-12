@@ -199,7 +199,7 @@ export function ShopCart() {
                             </div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
                                 <h2 className='font-medium text-[18px]'>Shipping</h2>
-                                <h2>Enter adress</h2>
+                                <Link to="/cart/address">Enter adress</Link>
                             </div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
                                 <h2 className='font-medium text-[18px]'>Tax</h2>
