@@ -40,6 +40,7 @@ export function ShopCart() {
     const [ disabled, setDisabled ] = useState(null)
     const [ userInfo, setUserInfo ] = useState(null)
     const navigate = useNavigate()
+    const [ shipmentDetails, getShipmentDetails ] = useState(null)
 
 
     const getUserCart = useCallback(async () => {
@@ -69,10 +70,18 @@ export function ShopCart() {
                 const totalItemsCount =  totalItems.reduce((x, y) => {
                     return x + y.quantity
                 }, 0)
-
                 setTotalItemCount(totalItemsCount)
                 setTotalItem(totalItems)
                 setTotalPrice(total)
+                const createUserShipment = await fetch('/api/shipment/create', {
+                    method: 'POST'
+                })
+                const shipmentResult = await createUserShipment.json()
+                if(!createUserShipment.ok) {
+                    toast.error("Please enter address again.", { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
+                    return
+                }
+                getShipmentDetails(shipmentResult)
             } catch (error) {
                 setCart(null)
             }
@@ -151,8 +160,10 @@ export function ShopCart() {
                 setUserInfo(false)
                 toast.error("Please enter address", { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
                 return
+            } else {
+                navigate('/cart/checkout')
             }
-            navigate('/cart/checkout')
+            console.log('hi')
         } catch (error) {
             setUserInfo(false)
         }
