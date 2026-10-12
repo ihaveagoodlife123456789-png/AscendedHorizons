@@ -63,7 +63,8 @@ shipmentRouter.post('/create', async (req, res) => {
     console.log(rows[0].address)
     const { rows: shipmentRow } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
     console.log(shipmentRow)
-    if(shipmentRow[0].shipment !== null) {
+    const shipmentStatus = shipmentRow[0].shipment
+    if(shipmentStatus !== null) {
       const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
       return res.status(200).json(getShippo)
     }
