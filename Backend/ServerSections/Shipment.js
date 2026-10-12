@@ -1,5 +1,6 @@
 import express from 'express'
 import { pool } from '../index.js'
+import { Shippo } from 'shippo'
 
 export const shipmentRouter = express.Router()
 
@@ -49,7 +50,10 @@ shipmentRouter.get('/', async (req, res) => {
 
 shipmentRouter.post('/create', async (req, res) => {
   try {
-    const getUserAddress = await pool.query(``)
+    if(!req.user) {
+      return res.status(400).json({ message: 'Please login first.'})
+    }
+    const { rows } = await pool.query(`SELECT * FROM userinfo WHERE id = $1`, [ req.user.id ])
     const addressFrom = {
       name: "Montrealer",
       street1: "Rue Saint-Jacques",
