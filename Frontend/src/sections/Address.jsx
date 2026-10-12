@@ -28,7 +28,9 @@ function UserAddressForm() {
     })
     if(createUserInfo.ok) {
         navigate('/cart')
+        return
     }
+    setLoading(false)
   };
 return (
     <form onSubmit={handleSubmit} className="size-[80%] p-4">
