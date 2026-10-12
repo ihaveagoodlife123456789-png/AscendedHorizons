@@ -21,13 +21,14 @@ function UserAddressForm() {
       setLoading(false);
       return;
     }
-    await fetch('/api/shipment', {
+    const createUserInfo = await fetch('/api/shipment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ shipping: value })
     })
-    navigate('/cart/checkout')
-    setLoading(false);
+    if(!createUserInfo.ok) {
+        navigate('/cart/checkout')
+    }
   };
 return (
     <form onSubmit={handleSubmit} className="size-[80%] p-4">
