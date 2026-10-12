@@ -26,7 +26,6 @@ paymentRouter.post('/', async (req, res) => {
             return previous + current
         }, 0)
         const { rows: shipmentRow } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
-              const shipmentStatus = shipmentRow[0].shipment
               const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
               const rates = getShippo.rates
               const mapRates = rates.map((rate) => Number(rate.amount))
