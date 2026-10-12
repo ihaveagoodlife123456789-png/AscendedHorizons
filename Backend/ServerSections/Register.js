@@ -36,7 +36,7 @@ registerRouter.post('/', async (req, res) => {
         const userCartId = await pool.query(`SELECT cart FROM users WHERE email = $1`, [ validEmail ])
         const newCartId = await pool.query(`INSERT INTO carts (id, items) VALUES ($1, $2) RETURNING *`, [userCartId.rows[0].cart, []])
         const createUserPaymentIntents = await pool.query(`INSERT INTO orders (id, orders) VALUES ($1, $2) RETURNING *`, [userCartId.rows[0].cart, []])
-        const createUserShipment = await pool.query(`INSERT INTO orders (id, orders) VALUES ($1, $2) RETURNING *`, [userCartId.rows[0].cart, []])  
+        const createUserShipment = await pool.query(`INSERT INTO shipmentdetails (id, details) VALUES ($1, $2) RETURNING *`, [userCartId.rows[0].cart, []])  
         const createUserInfo = await pool.query(`INSERT INTO userinfo (id) VALUES ($1) RETURNING *`, [userCartId.rows[0].cart])
         return res.status(201).json({ message: 'User registered successfully.', user: result.rows[0] });
     } catch (error) {
