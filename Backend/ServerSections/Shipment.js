@@ -15,11 +15,12 @@ shipmentRouter.post('/', async (req, res) => {
     console.log(req.user)
     const insertUserInfo = await pool.query(
   `UPDATE userinfo 
-   SET country = $1, state = $2, postal_code = $3, address = $4, name = $5 
-   WHERE id = $6`, 
+   SET country = $1, state = $2, city = $3, postal_code = $4, address = $5, name = $6 
+   WHERE id = $7`, 
   [
     shipping.address.country, 
-    shipping.address.state, 
+    shipping.address.state,
+    shipping.address.city,
     shipping.address.postal_code, 
     shipping.address.line1, 
     shipping.name, 
@@ -69,7 +70,7 @@ shipmentRouter.post('/create', async (req, res) => {
     const addressTo = {
     name: rows[0].name,
     street1: rows[0].address,
-    //city: rows[0].city,
+    city: rows[0].city,
     state: rows[0].state,
     zip: rows[0].postal_code,
     country: rows[0].country
