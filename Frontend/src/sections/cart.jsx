@@ -242,7 +242,7 @@ export function ShopCart() {
                             <div className="bg-slate-500 w-[88%] h-[2px]"></div>
                             <div className="text-[26px] font-medium flex gap-10">
                                 <h2>Total</h2>
-                                <h2>{totalPrice ? ` $${totalPrice}` : 'No items yet'}</h2>
+                                <h2>{totalPrice ? ` $${totalPrice + (shipmentDetails ? shipmentDetails : 0)}` : 'No items yet'}</h2>
                             </div>
                             <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-bold px-3 hover:bg-white" onClick={() => checkout()}>Checkout</button>
                             <div><img src="/icons8-leaf-50.png" className='size-[25px]'/><div className='font-light text-[18px]'>2% of sales will be donated to the <span className='font-normal text-green-700'>environment</span></div></div>
