@@ -6,9 +6,9 @@ export const shipmentRouter = express.Router()
 shipmentRouter.post('/', (req, res) => {
   const { shipping } = req.body
   try {
-    
+    console.log(shipping)
   } catch (error) {
-    
+    res.status(500).json({ message: 'Internal Server Error.'})
   }
 })
 

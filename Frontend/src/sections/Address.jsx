@@ -1,10 +1,12 @@
 import { Elements, useStripe, useElements, PaymentElement, AddressElement } from '@stripe/react-stripe-js';
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import { useNavigate } from 'react-router-dom';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 
 function UserAddressForm() {
+    const navigate = useNavigate()
     const elements = useElements();
     const [loading, setLoading] = useState(false);
 
@@ -24,12 +26,9 @@ function UserAddressForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ shipping: value })
     })
+    navigate('/cart/checkout')
     setLoading(false);
   };
-  const appearance = { 
-        theme: 'stripe',
-        variables: { colorText: '#111827', colorBackground: '#ffffff' }
-     }
 return (
     <form onSubmit={handleSubmit} className="size-[80%] p-4">
       <AddressElement options={{mode: 'shipping'}} />
@@ -45,6 +44,10 @@ return (
 }
 
 export function UserAddress() {
+      const appearance = { 
+        theme: 'stripe',
+        variables: { colorText: '#111827', colorBackground: '#ffffff' }
+     }
     return (
         <Elements stripe={stripePromise} options={{ appearance }}>
             <UserAddressForm />
