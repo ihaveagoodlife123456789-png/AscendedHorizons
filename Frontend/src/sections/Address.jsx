@@ -49,7 +49,7 @@ export function UserAddress() {
         variables: { colorText: '#111827', colorBackground: '#ffffff' }
      }
     return (
-        <Elements stripe options={{ appearance }}>
+        <Elements stripe={stripePromise} options={{ appearance }}>
             <UserAddressForm />
         </Elements>
     )
