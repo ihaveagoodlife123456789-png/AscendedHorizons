@@ -1,8 +1,9 @@
 import { Toaster, toast } from 'sonner'
 import { Navigation } from './components/Navigation'
 import { useState, useEffect } from 'react'
-import { useCallback } from 'react'
+import { useCallback, useNavigate } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'motion/react'
 
 const mockitems = [
     {
@@ -37,6 +38,8 @@ export function ShopCart() {
     const [ totalItem, setTotalItem ] = useState(null)
     const [ totalItemCount, setTotalItemCount ] = useState(null)
     const [ disabled, setDisabled ] = useState(null)
+    const [ userInfo, setUserInfo ] = useState(null)
+    const navigate = useNavigate()
 
 
     const getUserCart = useCallback(async () => {
@@ -137,6 +140,25 @@ export function ShopCart() {
             toast.error(error.message, { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
         }
     }
+    async function checkout() {
+        try {
+            const response = await fetch('/api/shipment', {
+                method: 'GET'
+            })
+            const result = await response.json()
+            if(!response.ok) {
+                setUserInfo(false)
+                return
+            }
+            navigate('/cart/checkout')
+        } catch (error) {
+            setUserInfo(false)
+        }
+    }
+    const variants = {
+        off: { scale: 1.08, color: 'red' },
+        on: { scale: 1, color: 'black' }
+    }
     return (
         <div className="size-full">
             <Navigation />
@@ -199,7 +221,7 @@ export function ShopCart() {
                             </div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
                                 <h2 className='font-medium text-[18px]'>Shipping</h2>
-                                <Link to="/cart/address">Enter adress</Link>
+                                <motion.div variants={variants} initial={{ scale: 1, color: 'black' }} animate={ userInfo ? 'on' : 'off'}><Link to="/cart/address">Enter adress</Link></motion.div>
                             </div>
                             <div className="flex gap-10 font-[26px] justify-center items-center">
                                 <h2 className='font-medium text-[18px]'>Tax</h2>
@@ -210,7 +232,7 @@ export function ShopCart() {
                                 <h2>Total</h2>
                                 <h2>{totalPrice ? ` $${totalPrice}` : 'No items yet'}</h2>
                             </div>
-                            <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-bold px-3 hover:bg-white"><Link to="/cart/checkout">Checkout</Link></button>
+                            <button className="bg-green-500 border-green-700 border-2 rounded-[6px] text-[24px] font-bold px-3 hover:bg-white" onClick={() => checkout()}>Checkout</button>
                             <div><img src="/icons8-leaf-50.png" className='size-[25px]'/><div className='font-light text-[18px]'>2% of sales will be donated to the <span className='font-normal text-green-700'>environment</span></div></div>
                         </div>
                     </div>
