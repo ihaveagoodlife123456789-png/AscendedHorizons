@@ -61,8 +61,7 @@ shipmentRouter.post('/create', async (req, res) => {
     const { rows: shipmentRow } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
     if(shipmentRow[0].shipment !== 0) {
       const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
-      res.status(200).json(getShippo)
-      return
+      return res.status(200).json(getShippo)
     }
     const addressFrom = {
       name: "Montrealer",
