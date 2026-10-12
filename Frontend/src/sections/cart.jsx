@@ -148,6 +148,7 @@ export function ShopCart() {
             const result = await response.json()
             if(!response.ok) {
                 setUserInfo(false)
+                toast.error("Please enter address", { style: { color: 'red', position: 'relative', left: '100px', width: '200px' }})
                 return
             }
             navigate('/cart/checkout')
