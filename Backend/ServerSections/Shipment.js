@@ -117,7 +117,7 @@ shipmentRouter.post('/transaction', async (req, res) => {
     await shippo.transactions.create({
       rate: bestRateObject?.objectId
     })
-    res.status(200).json({})
+    res.status(200).json({ message: 'Shipment created!' })
   } catch (error) {
     return res.status(400).json({ message: 'Server Error.'})
   }
