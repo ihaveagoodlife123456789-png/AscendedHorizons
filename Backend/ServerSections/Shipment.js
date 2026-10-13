@@ -123,4 +123,15 @@ shipmentRouter.post('/transaction', async (req, res) => {
   }
 })
 
+shipmentRouter.get('/transaction', async (req, res) => {
+  try {
+    const { rows } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
+      const getShippo = await shippo.transactions.get(rows[0].shipment)
+      console.log(getShippo)
+      return res.status(200).json(getShippo)
+  } catch (error) {
+    return res.status(400).json({ message: 'Server Error.'})
+  }
+})
+
 //Shippo apiTestKey = process.env.SHIPPO_TEST_KEY, SHIPPO_LIVE_KEY

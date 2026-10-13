@@ -6,6 +6,7 @@ export function StripePaymentConfirmation() {
     const [searchParams] = useSearchParams()
     const [ userPaymentIntents, setUserPaymentIntents] = useState(null)
     const [ userCart, setUserCart ] = useState(null)
+    const [ shipping, setShipping ] = useState(null)
     useEffect(() => {
         async function getPaymentIntentsInfo() {
             const getUserPaymentIntentsId = searchParams.get('payment_intent')
@@ -25,8 +26,12 @@ export function StripePaymentConfirmation() {
             const responseCreateTransaction = await fetch('/api/shipment/transaction', {
                 method: 'POST'
             })
-            const resultCreateTransaction = await responseCreateTransaction.json()
+            const responseGetTransaction = await fetch('/api/shipment/transaction', {
+                method: 'GET'
+            })
+            const resultGetTransaction = await responseGetTransaction.json()
             const resultGetCartInfo = await responseGetCartInfo.json()
+            setShipping(resultGetTransaction)
             setUserCart(resultGetCartInfo)
             console.log(resultGetCartInfo)
             const responseDeleteCart = await fetch('/api/cart/deleteAll', {
@@ -80,7 +85,12 @@ export function StripePaymentConfirmation() {
                         <div className='w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
                             <h1 className='h-[15%]'>Package delivrery</h1>
                             <div className='w-[92%] h-[50%]'>
-
+                                {
+                                    shipping ?
+                                    <div>hi</div>
+                                    :
+                                    null
+                                }
                             </div>
                             <div className='font-light text-[32px] h-[15%]'>Track Package</div>
                         </div>
