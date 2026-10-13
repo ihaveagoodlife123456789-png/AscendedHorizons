@@ -61,7 +61,7 @@ cartRouter.delete('/deleteAll', async (req, res) => {
         const getUser = [req.user.id] 
         const { rows } = await pool.query(queryCarts, getUser)
         if (!rows[0].items.length > 0) {
-            return res.status(400).json({ message: 'Basket is already empty.'})
+            return res.status(200).json({ message: 'Basket is already empty.'})
         }
         const deleteCart = await pool.query(`UPDATE carts SET items = $1 WHERE id = $2`, [[], req.user.id])
         res.status(200).json({ message: 'All items removed successfully.'})
