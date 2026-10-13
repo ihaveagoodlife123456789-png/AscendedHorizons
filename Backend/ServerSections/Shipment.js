@@ -114,9 +114,11 @@ shipmentRouter.post('/transaction', async (req, res) => {
       const bestRate = Math.min(...mapRates)
       const bestRateObject = rates.find((rate) => rate.amount = bestRate.toString)
 
-    await shippo.transactions.create({
+    const transaction = await shippo.transactions.create({
       rate: bestRateObject?.objectId
     })
+    const updateShipmentDetails = await pool.query(`UPDATE usershipmentdetails SET shipment = $2 WHERE id = $1`, ['null', req.user.id])
+    const updateShipmentTransactionsDetails = await pool.query(`UPDATE usershipmentdetails SET transactions = array_append(transactions, $1) WHERE id = $2 RETURNING *`, [transaction.objectId, req.user.id])
     res.status(200).json({ message: 'Shipment created!' })
   } catch (error) {
     return res.status(400).json({ message: 'Server Error.'})
@@ -131,8 +133,6 @@ shipmentRouter.get('/transaction', async (req, res) => {
     const userTransaction = rows[0].shipment
       const getShippo = await shippo.transactions.get(userTransaction)
       console.log(getShippo)
-      const updateShipmentDetails = await pool.query(`UPDATE usershipmentdetails SET shipment = $2 WHERE id = $1`, ['null', req.user.id])
-      const updateShipmentTransactionsDetails = await pool.query(`UPDATE usershipmentdetails SET transactions = array_append(transactions, $1) WHERE id = $2 RETURNING *`, [getShippo.objectId, req.user.id])
       return res.status(200).json(getShippo)
   } catch (error) {
     return res.status(400).json({ message: 'Server Error.'})
