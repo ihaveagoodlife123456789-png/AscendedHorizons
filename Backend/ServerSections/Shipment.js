@@ -126,6 +126,8 @@ shipmentRouter.post('/transaction', async (req, res) => {
 shipmentRouter.get('/transaction', async (req, res) => {
   try {
     const { rows } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
+    console.log(rows)
+    console.log(rows[0].shipment)
       const getShippo = await shippo.transactions.get(rows[0].shipment)
       console.log(getShippo)
       const updateShipmentDetails = await pool.query(`UPDATE usershipmentdetails SET shipment = null WHERE id = $1`, [ req.user.id ])
