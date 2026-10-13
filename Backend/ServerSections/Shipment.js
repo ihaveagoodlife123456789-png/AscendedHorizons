@@ -128,7 +128,8 @@ shipmentRouter.get('/transaction', async (req, res) => {
     const { rows } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
     console.log(rows)
     console.log(rows[0].shipment)
-      const getShippo = await shippo.transactions.get(rows[0].shipment)
+    const userTransaction = rows[0].shipment
+      const getShippo = await shippo.transactions.get(userTransaction)
       console.log(getShippo)
       const updateShipmentDetails = await pool.query(`UPDATE usershipmentdetails SET shipment = null WHERE id = $1`, [ req.user.id ])
       const updateShipmentTransactionsDetails = await pool.query(`UPDATE usershipmentdetails SET transactions = array_append(transactions, $1) WHERE id = $2 RETURNING *`, [ getShippo.objectId, req.user.id ])
