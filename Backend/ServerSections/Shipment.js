@@ -158,4 +158,23 @@ console.log(rows)
   }
 })
 
+shipmentRouter.get('/items', async (req, res) => {
+  try {
+const { rows } = await pool.query(`SELECT orders FROM orders WHERE id = $1`, [req.user.id])
+console.log(rows)
+        const latestTransactionIdPlacement = rows[0].orders.length - 1
+        const latestTransactionId = rows[0].orders[latestTransactionIdPlacement]
+        const { rows: getCartItemsInfo } = await pool.query(`SELECT details FROM orderdetails WHERE id = $1`, [latestTransactionId])
+        console.log(getCartItemsInfo)
+        const cartItems = getCartItemsInfo[0].details
+        const total = cartItems.reduce((x, y) => {
+            return x + y
+        }, 0)
+        console.log(total)
+        res.status(200).json(cartItems)
+  } catch (error) {
+    return res.status(400).json({ message: 'Server Error.'})
+  }
+})
+
 //Shippo apiTestKey = process.env.SHIPPO_TEST_KEY, SHIPPO_LIVE_KEY
