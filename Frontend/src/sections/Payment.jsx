@@ -34,7 +34,7 @@ export function StripePayment() {
                 return;
             }
             setClientSecret(resultPayment.client_secret)
-            setTotal(resultPayment.amount)
+            setTotal(resultPayment.total)
             console.log(resultPayment)
             setUserCart(resultCart)
         } catch (error) {
