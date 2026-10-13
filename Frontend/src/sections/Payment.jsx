@@ -35,6 +35,7 @@ export function StripePayment() {
             }
             setClientSecret(resultPayment.client_secret)
             setTotal(resultPayment.amount)
+            console.log(resultPayment)
             setUserCart(resultCart)
         } catch (error) {
             setPaymentIntentMessage(true)
@@ -70,7 +71,7 @@ export function StripePayment() {
                                 userCart ?
                                 userCart.map((item) => {
                                     return (
-                                        <div className='flex flex-col justify-center items-center w-[93%] h-[200px] border-blue-800 border-2 rounded-[8px] bg-center bg-cover' style={{ backgroundImage: `url(${item.imgurl})` }}>
+                                        <div key={item.id} className='flex flex-col justify-center items-center w-[93%] h-[200px] border-blue-800 border-2 rounded-[8px] bg-center bg-cover' style={{ backgroundImage: `url(${item.imgurl})` }}>
                                             <div className='w-full h-[70%] bg-slate-950/70'>
                                                 <h1 className='text-[32px] font-bold text-orange-500'>{item.name}</h1>
                                             <h1 className='text-[30px] font-medium text-green-700'>${item.price}</h1>
