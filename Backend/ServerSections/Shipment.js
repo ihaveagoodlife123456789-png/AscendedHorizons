@@ -58,7 +58,7 @@ shipmentRouter.post('/create', async (req, res) => {
     }
     const { rows: shipmentRow } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
     const shipmentStatus = shipmentRow[0].shipment
-    if(shipmentStatus !== 0) {
+    if(shipmentStatus !== null) {
       const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
       const rates = getShippo.rates
       const mapRates = rates.map((rate) => Number(rate.amount))
@@ -108,7 +108,7 @@ shipmentRouter.post('/create', async (req, res) => {
 shipmentRouter.post('/transaction', async (req, res) => {
   try {
     const { rows } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
-    if(rows[0].shipment === 0) {
+    if(rows[0].shipment === null) {
       return res.status.json({ message: 'Shipment already created.'})
     }
       const getShippo = await shippo.shipments.get(rows[0].shipment)
