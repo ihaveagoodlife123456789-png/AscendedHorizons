@@ -79,8 +79,8 @@ export function StripePaymentConfirmation() {
                                     null
                                 }
                             </div>
-                    <Link to='/' className='text-[26px] font-medium h-[15%] absolute left-2 bottom-2'>Home</Link>
-                    <h2 className='text-[34px] font-thin h-[15%]'>Total:{}</h2>
+                    <Link to='/' className='text-[26px] font-medium h-[15%] absolute left-0 bottom-0'>Home</Link>
+                    <h2 className='text-[34px] font-thin h-[15%]'>{}</h2>
                         </div>
                         <div className='w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
                             <h1 className='h-[15%]'>Package delivrery</h1>
