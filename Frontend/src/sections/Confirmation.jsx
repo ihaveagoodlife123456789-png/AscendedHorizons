@@ -37,6 +37,7 @@ export function StripePaymentConfirmation() {
                 method: 'DELETE'
             })
             const resultGetTransaction = await responseGetTransaction.json()
+            console.log(resultGetTransaction)
             const resultGetCartInfo = await responseGetCartInfo.json()
             const resultPaymentIntents = await responsePaymentIntents.json()
             const resultDeleteCart = await responseDeleteCart.json()
