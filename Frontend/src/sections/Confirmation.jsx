@@ -71,7 +71,7 @@ export function StripePaymentConfirmation() {
                                         return (
                                             <div className='relative w-full h-[250px] bg-cover bg-center' style={{ backgroundImage: `url(${item.imgurl})`}}>
                                                 <h1 className='font-bold txet-blue-800'>{item.name}</h1>
-                                                <h2 className='absolute right-0 bottom-0 font-light text-green-800'>{item.price}</h2>
+                                                <h2 className='absolute right-5 bottom-5 font-extrabold text-green-800'>{item.price}$</h2>
                                             </div>
                                         )
                                     })
