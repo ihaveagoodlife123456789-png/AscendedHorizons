@@ -11,7 +11,6 @@ import { Shop } from './App.jsx';
 import { Cart } from './App.jsx'
 import { Payment } from './App.jsx'
 import { Confirmation } from './App.jsx'
-import { Tracking } from './App.jsx'
 import { Address } from './App.jsx'
 
 const AppRouter = createBrowserRouter([
