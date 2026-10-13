@@ -26,6 +26,10 @@ export function StripePaymentConfirmation() {
             const responseCreateTransaction = await fetch('/api/shipment/transaction', {
                 method: 'POST'
             })
+            if(!responseCreateTransaction) {
+                setUserPaymentIntents('Could not create shipment.')
+                return
+            }
             const responseGetTransaction = await fetch('/api/shipment/transaction', {
                 method: 'GET'
             })

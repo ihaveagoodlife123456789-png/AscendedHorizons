@@ -55,7 +55,7 @@ const bestRate = Math.min(...mapRates)
 
 console.log(bestRate)
 
-const bestRateObject = rates.find((rate) => rate.amount = bestRate.toString)
+const bestRateObject = rates.find((rate) => rate.amount = bestRate.toString())
 
 const transaction = await shippo.transactions.create({
     rate: bestRateObject?.objectId
