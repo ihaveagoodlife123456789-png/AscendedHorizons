@@ -107,19 +107,18 @@ shipmentRouter.post('/create', async (req, res) => {
 shipmentRouter.post('/transaction', async (req, res) => {
   try {
     const { rows } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
-
+    if(rows[0].shipment === null) {
+      return res.status.json({ message: 'Shipment already created.'})
+    }
       const getShippo = await shippo.shipments.get(rows[0].shipment)
       const rates = getShippo.rates
       const mapRates = rates.map((rate) => Number(rate.amount))
       const bestRate = Math.min(...mapRates)
       const bestRateObject = rates.find((rate) => rate.amount === bestRate.toString())
-    console.log('hi')
     const transaction = await shippo.transactions.create({
       rate: bestRateObject?.objectId
     })
-    console.log('hi')
     const updateShipmentDetails = await pool.query(`UPDATE usershipmentdetails SET shipment = NULL, transactions = array_append(transactions, $1) WHERE id = $2`, [transaction.objectId, req.user.id])
-    console.log('hi')
     res.status(200).json({ message: 'Shipment created!' })
   } catch (error) {
     return res.status(400).json({ message: 'Server Error.'})
