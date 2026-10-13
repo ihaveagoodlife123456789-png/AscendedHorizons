@@ -29,8 +29,8 @@ export function StripePaymentConfirmation() {
             const responseGetTransaction = await fetch('/api/shipment/transaction', {
                 method: 'GET'
             })
-            console.log(responseGetTransaction.json())
             const resultGetTransaction = await responseGetTransaction.json()
+            console.log(resultGetTransaction)
             const resultGetCartInfo = await responseGetCartInfo.json()
             setShipping(resultGetTransaction)
             setUserCart(resultGetCartInfo)
