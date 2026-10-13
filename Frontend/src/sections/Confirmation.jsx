@@ -29,32 +29,26 @@ export function StripePaymentConfirmation() {
             const responseGetTransaction = await fetch('/api/shipment/transaction', {
                 method: 'GET'
             })
-            const resultGetTransaction = await responseGetTransaction.json()
-            console.log(resultGetTransaction)
-            const resultGetCartInfo = await responseGetCartInfo.json()
-            setShipping(resultGetTransaction)
-            setUserCart(resultGetCartInfo)
-            console.log(resultGetCartInfo)
             const responseDeleteCart = await fetch('/api/cart/deleteAll', {
                 method: 'DELETE'
-                })
+            })
+            const resultGetTransaction = await responseGetTransaction.json()
+            const resultGetCartInfo = await responseGetCartInfo.json()
             const resultPaymentIntents = await responsePaymentIntents.json()
             const resultDeleteCart = await responseDeleteCart.json()
-            if(!responsePaymentIntents.ok || !responseDeleteCart.ok) {
+            if(!responsePaymentIntents.ok || !responseDeleteCart.ok || !responseGetCartInfo.ok || !responseCreateTransaction.ok || !responseGetTransaction.ok) {
                 setUserPaymentIntents("Cannot get user payment info.")
                 return
             }
+            setShipping(resultGetTransaction)
+            setUserCart(resultGetCartInfo)
             setUserPaymentIntents(resultPaymentIntents.client_paymentIntents)
         } catch (error) {
             console.log(error.message)
         }
         }
         getPaymentIntentsInfo()
-    }, [searchParams])
-
-    useEffect(() => {
-  console.log(userPaymentIntents)
-}, [userPaymentIntents])
+    }, [])
     return (
         <div className='size-full'>
             <Navigation />
