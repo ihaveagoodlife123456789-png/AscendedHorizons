@@ -48,10 +48,6 @@ const AppRouter = createBrowserRouter([
     element: <Confirmation />
   },
   {
-    path: '/cart/checkout/confirmation/tracking',
-    element: <Tracking />
-  },
-  {
     path: '/cart/address',
     element: <Address />
   },

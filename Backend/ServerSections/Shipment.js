@@ -104,4 +104,23 @@ shipmentRouter.post('/create', async (req, res) => {
   }
 })
 
+shipmentRouter.post('/transaction', async (req, res) => {
+  try {
+    const { rows } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
+
+      const getShippo = await shippo.shipments.get(rows[0].shipment)
+      const rates = getShippo.rates
+      const mapRates = rates.map((rate) => Number(rate.amount))
+      const bestRate = Math.min(...mapRates)
+      const bestRateObject = rates.find((rate) => rate.amount = bestRate.toString)
+
+    await shippo.transactions.create({
+      rate: bestRateObject?.objectId
+    })
+    res.status(200).json({})
+  } catch (error) {
+    return res.status(400).json({ message: 'Server Error.'})
+  }
+})
+
 //Shippo apiTestKey = process.env.SHIPPO_TEST_KEY, SHIPPO_LIVE_KEY

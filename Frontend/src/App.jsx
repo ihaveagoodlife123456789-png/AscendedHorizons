@@ -8,7 +8,6 @@ import { DroneShop } from './sections/shop'
 import { ShopCart } from './sections/cart'
 import { StripePayment } from './sections/Payment'
 import { StripePaymentConfirmation } from './sections/Confirmation'
-import { UserParcelTracking } from './sections/Tracking'
 import { UserAddress } from './sections/Address'
 
 export function Lobby() {
@@ -58,12 +57,6 @@ export function Payment() {
 export function Confirmation() {
   return (
     <StripePaymentConfirmation />
-  )
-}
-
-export function Tracking() {
-  return (
-    <UserParcelTracking />
   )
 }
 

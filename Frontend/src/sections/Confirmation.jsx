@@ -78,7 +78,7 @@ export function StripePaymentConfirmation() {
                             <div className='w-[92%] h-[50%]'>
 
                             </div>
-                            <Link to='/cart/checkout/confirmation/tracking' className='font-light text-[32px] h-[15%]'>Track Package</Link>
+                            <div className='font-light text-[32px] h-[15%]'>Track Package</div>
                         </div>
                     </div>
                 </div>
