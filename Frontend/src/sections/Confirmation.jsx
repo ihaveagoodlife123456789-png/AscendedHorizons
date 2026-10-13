@@ -86,7 +86,12 @@ export function StripePaymentConfirmation() {
                             <div className='w-[92%] h-[50%]'>
                                 {
                                     shipping ?
-                                    <div>hi</div>
+                                    <div>
+                                        <h2>{shipping.message.source}</h2>
+                                        <h2>{shipping.trackingNumber}</h2>
+                                        <h2>{shipping.trackingUrlProvider}</h2>
+                                        <h2>{shipping.labelUrl}</h2>
+                                    </div>
                                     :
                                     null
                                 }

@@ -128,8 +128,6 @@ shipmentRouter.post('/transaction', async (req, res) => {
 shipmentRouter.get('/transaction', async (req, res) => {
   try {
     const { rows } = await pool.query(`SELECT transactions FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
-    console.log(rows)
-    console.log(rows[0].transactions)
     const lastIndex = rows[0].transactions.length - 1
     const userTransaction = rows[0].transactions[lastIndex]
       const getShippo = await shippo.transactions.get(userTransaction)
