@@ -75,18 +75,6 @@ cartRouter.get('/', async (req, res) => {
         if(!req.user) {
             return res.status(401).json({ message: 'Please login first' })
         }
-        const { rows } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [req.user.id])
-        if(rows[0].shipment === 0) {
-            const { rows } = await pool.query(`SELECT orders FROM orders WHERE id = $1`, [req.user.id])
-        const latestTransactionIdPlacement = rows[0].orders.length - 1
-        const latestTransactionId = rows[0].orders[latestTransactionIdPlacement]
-        const { rows: getCartItemsInfo } = await pool.query(`SELECT details FROM orderdetails WHERE id = $1`, [latestTransactionId])
-        const cartItems = getCartItemsInfo[0].details
-        const total = cartItems.reduce((x, y) => {
-            return x + y
-        }, 0)
-        return res.status(200).json(cartItems)
-        }
         const queryUserCart = `SELECT items FROM carts WHERE id = $1`
         const userId = req.user.id
         const userCart = await pool.query(queryUserCart, [userId])

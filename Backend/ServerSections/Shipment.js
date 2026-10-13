@@ -52,15 +52,12 @@ shipmentRouter.post('/create', async (req, res) => {
     if(!req.user) {
       return res.status(400).json({ message: 'Please login first.'})
     }
-    console.log('hi')
     const { rows } = await pool.query(`SELECT * FROM userinfo WHERE id = $1`, [ req.user.id ])
     if(rows[0].address === null) {
       return res.status(400).json({ message: 'Please enter address info first.'})
     }
-    console.log('hi')
     const { rows: shipmentRow } = await pool.query(`SELECT shipment FROM usershipmentdetails WHERE id = $1`, [ req.user.id ])
     const shipmentStatus = shipmentRow[0].shipment
-    console.log('hi')
     if(shipmentStatus !== 0) {
       const getShippo = await shippo.shipments.get(shipmentRow[0].shipment)
       const rates = getShippo.rates
@@ -68,7 +65,7 @@ shipmentRouter.post('/create', async (req, res) => {
       const bestRate = Math.min(...mapRates)
       return res.status(200).json(bestRate)
     }
-    console.log('hi')
+
     const addressFrom = {
       name: "Montrealer",
       street1: "Rue Saint-Jacques",
@@ -98,13 +95,10 @@ shipmentRouter.post('/create', async (req, res) => {
       addressTo: addressTo,
       parcels: [parcel]
     })
-    console.log('h')
     const rates = shipment.rates
     const mapRates = rates.map((rate) => Number(rate.amount))
     const bestRate = Math.min(...mapRates)
-    console.log('hi')
     const pushUserShipment = await pool.query(`UPDATE usershipmentdetails SET shipment = $1 WHERE id = $2`, [ shipment.objectId, req.user.id ])
-    console.log('hii')
     res.status(200).json(bestRate)
   } catch (error) {
     return res.status(500).json({ message: "Server Error."})
