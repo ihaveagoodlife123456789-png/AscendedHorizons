@@ -58,7 +58,7 @@ export function StripePayment() {
         <div className='size-full'>
             <Navigation />
             <div className='relative w-full h-[90%] bg-white'>
-                <div className='z-2 w-full h-[8%] bg-slate-500 absolute top-0 text-[42px] font-bold flex justify-start items-center gap-15'><h1 className='relative left-[3%]'>Checkout</h1><h2 className='text-[32px] font-light'>{total ? `${total/100}$` : null}</h2></div>
+                <div className='z-2 w-full h-[8%] bg-slate-500 absolute top-0 text-[42px] font-bold flex justify-start items-center gap-15'><h1 className='relative left-[3%]'>Checkout</h1><h2 className='text-[32px] font-normal'>{total ? `${total/100}$` : null}</h2></div>
                 <div className='w-full h-[86%] flex overflow-hidden'>
                     <div className='w-[65%] h-full flex justify-center items-center overflow-scroll'>
                         <Elements stripe={stripePromise} options={{ clientSecret, appearance}}>
