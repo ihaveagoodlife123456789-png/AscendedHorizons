@@ -93,7 +93,7 @@ export function StripePaymentConfirmation() {
                             <div className='w-[92%] h-[50%]'>
                                 {
                                     shipping ?
-                                    <div>Transaction created<div>
+                                    <div>Transaction created</div>
                                     :
                                     null
                                 }
