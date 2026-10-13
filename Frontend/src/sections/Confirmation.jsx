@@ -92,7 +92,7 @@ export function StripePaymentConfirmation() {
                                     null
                                 }
                             </div>
-                            <div className='font-light text-[32px] h-[15%]'>Track Package</div>
+                            <div className='font-light text-[32px] h-[15%]'>Track Package:<div></div></div>
                         </div>
                     </div>
                 </div>
