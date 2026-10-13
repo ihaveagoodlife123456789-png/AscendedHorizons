@@ -7,6 +7,7 @@ export function StripePaymentConfirmation() {
     const [ userPaymentIntents, setUserPaymentIntents] = useState(null)
     const [ userCart, setUserCart ] = useState(null)
     const [ shipping, setShipping ] = useState(null)
+    const [ total, setTotal ] = useState(null)
     useEffect(() => {
         async function getPaymentIntentsInfo() {
             const getUserPaymentIntentsId = searchParams.get('payment_intent')
@@ -33,6 +34,9 @@ export function StripePaymentConfirmation() {
             const responseGetTransaction = await fetch('/api/shipment/transaction', {
                 method: 'GET'
             })
+            const responseGetTransactionTotal = await fetch('/api/shipment/total', {
+                method: 'GET'
+            })
             const responseDeleteCart = await fetch('/api/cart/deleteAll', {
                 method: 'DELETE'
             })
@@ -41,10 +45,12 @@ export function StripePaymentConfirmation() {
             const resultGetCartInfo = await responseGetCartInfo.json()
             const resultPaymentIntents = await responsePaymentIntents.json()
             const resultDeleteCart = await responseDeleteCart.json()
+            const resultGetTotal = await responseGetTransactionTotal.json()
             if(!responsePaymentIntents.ok || !responseDeleteCart.ok || !responseGetCartInfo.ok || !responseCreateTransaction.ok || !responseGetTransaction.ok) {
                 setUserPaymentIntents("Cannot get user payment info.")
                 return
             }
+            setTotal(resultGetTotal)
             setShipping(resultGetTransaction)
             setUserCart(resultGetCartInfo)
             setUserPaymentIntents(resultPaymentIntents.client_paymentIntents)
@@ -80,7 +86,7 @@ export function StripePaymentConfirmation() {
                                 }
                             </div>
                     <Link to='/' className='text-[26px] font-medium absolute left-1 bottom-1'>Home</Link>
-                    <h2 className='text-[34px] font-thin h-[15%]'>Total</h2>
+                    <div className='text-[34px] font-thin h-[15%]'>Total:<h3 className='text-green font-medium'>{ total ? total : null}</h3></div>
                         </div>
                         <div className='w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
                             <h1 className='h-[15%]'>Package delivrery</h1>
