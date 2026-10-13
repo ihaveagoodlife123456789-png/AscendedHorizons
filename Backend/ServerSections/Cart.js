@@ -85,7 +85,7 @@ cartRouter.get('/', async (req, res) => {
         const total = cartItems.reduce((x, y) => {
             return x + y
         }, 0)
-        res.status(200).json(cartItems)
+        return res.status(200).json(cartItems)
         }
         const queryUserCart = `SELECT items FROM carts WHERE id = $1`
         const userId = req.user.id
