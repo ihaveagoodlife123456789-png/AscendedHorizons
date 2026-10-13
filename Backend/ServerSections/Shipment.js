@@ -113,12 +113,15 @@ shipmentRouter.post('/transaction', async (req, res) => {
       const mapRates = rates.map((rate) => Number(rate.amount))
       const bestRate = Math.min(...mapRates)
       const bestRateObject = rates.find((rate) => rate.amount === bestRate.toString)
-
+console.log('hi')
     const transaction = await shippo.transactions.create({
       rate: bestRateObject?.objectId
     })
+    console.log('hi')
     const updateShipmentDetails = await pool.query(`UPDATE usershipmentdetails SET shipment = $1 WHERE id = $2`, ['null', req.user.id])
+    console.log('hi')
     const updateShipmentTransactionsDetails = await pool.query(`UPDATE usershipmentdetails SET transactions = array_append(transactions, $1) WHERE id = $2 RETURNING *`, [transaction.objectId, req.user.id])
+    console.log('hi')
     res.status(200).json({ message: 'Shipment created!' })
   } catch (error) {
     return res.status(400).json({ message: 'Server Error.'})
