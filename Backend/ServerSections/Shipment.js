@@ -131,8 +131,8 @@ shipmentRouter.get('/transaction', async (req, res) => {
     const userTransaction = rows[0].shipment
       const getShippo = await shippo.transactions.get(userTransaction)
       console.log(getShippo)
-      const updateShipmentDetails = await pool.query(`UPDATE usershipmentdetails SET shipment = null WHERE id = $1`, [ req.user.id ])
-      const updateShipmentTransactionsDetails = await pool.query(`UPDATE usershipmentdetails SET transactions = array_append(transactions, $1) WHERE id = $2 RETURNING *`, [ getShippo.objectId, req.user.id ])
+      const updateShipmentDetails = await pool.query(`UPDATE usershipmentdetails SET shipment = $2 WHERE id = $1`, ['null', req.user.id])
+      const updateShipmentTransactionsDetails = await pool.query(`UPDATE usershipmentdetails SET transactions = array_append(transactions, $1) WHERE id = $2 RETURNING *`, [getShippo.objectId, req.user.id])
       return res.status(200).json(getShippo)
   } catch (error) {
     return res.status(400).json({ message: 'Server Error.'})
