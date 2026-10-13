@@ -29,6 +29,7 @@ export function StripePaymentConfirmation() {
             const responseGetTransaction = await fetch('/api/shipment/transaction', {
                 method: 'GET'
             })
+            console.log(responseGetTransaction.json())
             const resultGetTransaction = await responseGetTransaction.json()
             const resultGetCartInfo = await responseGetCartInfo.json()
             setShipping(resultGetTransaction)
@@ -69,7 +70,7 @@ export function StripePaymentConfirmation() {
                                     userCart ?
                                     userCart.map((item) => {
                                         return (
-                                            <div className='relative w-full h-[250px] bg-cover bg-center' style={{ backgroundImage: `url(${item.imgurl})`}}>
+                                            <div key={item.id} className='relative w-full h-[250px] bg-cover bg-center' style={{ backgroundImage: `url(${item.imgurl})`}}>
                                                 <h1 className='font-bold txet-blue-800'>{item.name}</h1>
                                                 <h2 className='absolute right-5 bottom-5 font-extrabold text-green-800'>{item.price}$</h2>
                                             </div>
@@ -80,7 +81,7 @@ export function StripePaymentConfirmation() {
                                 }
                             </div>
                     <Link to='/' className='text-[26px] font-medium absolute left-1 bottom-1'>Home</Link>
-                    <h2 className='text-[34px] font-thin h-[15%]'>{}</h2>
+                    <h2 className='text-[34px] font-thin h-[15%]'>{Total}</h2>
                         </div>
                         <div className='w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
                             <h1 className='h-[15%]'>Package delivrery</h1>
