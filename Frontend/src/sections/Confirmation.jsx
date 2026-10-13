@@ -22,6 +22,10 @@ export function StripePaymentConfirmation() {
             const responseGetCartInfo = await fetch('/api/cart', {
                 method: 'GET'
             })
+            const responseCreateTransaction = await fetch('/api/shipment/transaction', {
+                method: 'POST'
+            })
+            const resultCreateTransaction = await responseCreateTransaction.json()
             const resultGetCartInfo = await responseGetCartInfo.json()
             setUserCart(resultGetCartInfo)
             console.log(resultGetCartInfo)
@@ -53,9 +57,9 @@ export function StripePaymentConfirmation() {
                 <div className='w-full h-[86%] bg-white flex text-[42px] font-bold flex flex-col justify-center items-center gap-2'>
                     <div className='w-[75%] h-[12%] bg-slate-200 flex justify-center items-center'><h1>Payment Successful</h1></div>
                     <div className='w-[90%] h-[80%] bg-slate-200 flex justify-center items-center gap-3 rounded-[8px]'>
-                        <div className='w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
+                        <div className='relative w-[46%] h-[92%] flex flex-col justify-center items-center bg-slate-100'>
                             <h1 className='h-[15%]'>Order</h1>
-                            <div className='relative w-[92%] h-[60%] grid grid-rows-auto grid-cols-1 justify-items-center items-around grid-flow-row overflow-scroll gap-5 relative top-6 scrollbar-thin overflow-x-hidden'>
+                            <div className='w-[92%] h-[60%] grid grid-rows-auto grid-cols-1 justify-items-center items-around grid-flow-row overflow-scroll gap-5 relative top-6 scrollbar-thin overflow-x-hidden'>
                                 {
                                     userCart ?
                                     userCart.map((item) => {
