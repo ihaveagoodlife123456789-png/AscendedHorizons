@@ -45,7 +45,7 @@ const shipment = await shippo.shipments.create({
     async: false
 });
 
-console.log(shipment)
+/*console.log(shipment)
 
 const rates = shipment.rates
 
@@ -61,7 +61,11 @@ const transaction = await shippo.transactions.create({
     rate: bestRateObject?.objectId
 })
 
-console.log(transaction)
+const getTransaction = await shippo.transactions.get(transaction.objectId)
+console.log(getTransaction.objectId)
+console.log(getTransaction)*/
+const getRealTransaction = await shippo.transactions.get('57ff32d9d3af44d989bd72bc133cfc49')
+console.log(getRealTransaction)
 
 /*const getShippo = await shippo.shipments.get('9c8ba1127a6b44889bd1bb7fad860c2a')
 console.log(getShippo)*/
